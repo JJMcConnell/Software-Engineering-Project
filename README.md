@@ -7,7 +7,7 @@ Team Composition:
 <p>Joseph McConnell - jjmcconnell17</p>
 <p>Danny Sepler - dsepler</p>
 <p>Diandra D'Achille - ddachille</p>
-<p>Clarence Hwang - </p>
+<p>Clarence Hwang - clarence.hwang</p>
 <p>Trevor Owens - trevorkowens</p>
 <p>Yanina Yegorova - yanayeg</p>
 
