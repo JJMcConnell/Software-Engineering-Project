@@ -1,8 +1,13 @@
 Software-Engineering-Project
 ============================
-Team Composition:
+# Table of Contents
+[Team Composition](#team-composition)<br/>
+[Project Description](#project-description)<br/>
+[Documentation](#documentation)<br/>
+[How to Run](#how-to-run)<br/>
 
-(add your gatorlink IDs!)
+
+# Team Composition:
 
 <p>Joseph McConnell - jjmcconnell17</p>
 <p>Danny Sepler - dsepler</p>
@@ -11,22 +16,30 @@ Team Composition:
 <p>Trevor Owens - trevorkowens</p>
 <p>Yanina Yegorova - yanayeg</p>
 
-Project description: 
-An online calendar application, as requested by Dr. Pickeral, the director of operations of the UF School of Music. The web application should be able to show a schedule of all music department functions for any given day, and faculty members should be able to request a block on the schedule. Each request should go to Dr. Pickeral for his approval, and if approved it should be added to the schedule.
+# Project Description: 
+##### an interactive scheduler for Charles Pickeral and UF's School of Music (SOM). We will be creating functionality for students to request certain rooms for use. Administrators of the SOM will be able to allow and reject those requests for the rooms, based on availability.
 
 
-Instructions if you're using terminal:
+# Documentation:
+
+### How to find elements:
+If you're using Sublime, then Dobra says to use the Global Search. You do this by Ctrl-Shift-F. 
+
+# How to Run (if you're using terminal):
 
 TO DOWNLOAD (if using terminal):
-	- go to directory where you want it
-	- git clone https://github.com/JJMcConnell/Software-Engineering-Project.git
+<pre><code>
+1. go to directory where you want it<br/>
+2. git clone https://github.com/JJMcConnell/Software-Engineering-Project.git
+</code></pre><br/>
 
 FIRST TIME RUNNING:
-	- go into "Software-Engineering-Project" folder
-	- npm install
-	- npm install nodemon
+<pre><code>
+1. go into "Software-Engineering-Project" folder
+2. npm install
+</code></pre><br/>
 
 TO RUN:
-	- (while in the "Software-Engineering-Project" folder)
-	- nodemon app.js
-	- (if that doesnt work, then node app.js)
+<pre><code>
+1. node server.js
+</code></pre><br/>
