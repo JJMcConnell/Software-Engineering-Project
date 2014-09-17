@@ -17,7 +17,7 @@ Software-Engineering-Project
 <p>Yanina Yegorova - yanayeg</p>
 
 # Project Description: 
-##### an interactive scheduler for Charles Pickeral and UF's School of Music (SOM). We will be creating functionality for students to request certain rooms for use. Administrators of the SOM will be able to allow and reject those requests for the rooms, based on availability.
+##### An online calendar application, as requested by Dr. Pickeral, the director of operations of the UF School of Music. The web application should be able to show a schedule of all music department functions for any given day, and faculty members should be able to request a block on the schedule. Each request should go to Dr. Pickeral for his approval, and if approved it should be added to the schedule.
 
 
 # Documentation:
