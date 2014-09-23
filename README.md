@@ -41,5 +41,6 @@ FIRST TIME RUNNING:
 
 TO RUN:
 <pre><code>
-1. node server.js
+1. (in mongodb bin folder) mongod
+1. (in project folder in seperate terminal) node server.js
 </code></pre><br/>
