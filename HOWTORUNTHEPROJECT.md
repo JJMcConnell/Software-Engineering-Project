@@ -4,8 +4,9 @@ Software-Engineering-Project
 FIRST TIME RUNNING
 1. Open command prompt
 2. Go to mean-master
-2. In command prompt, type npm install nodemon -g
-3. Hit enter (when it is done you may close command prompt)
+3. In command prompt, type npm install nodemon -g
+4. 
+5. Hit enter (when it is done you may close command prompt)
 6. Follow the instructions below
 
 TO RUN THE PROJECT
