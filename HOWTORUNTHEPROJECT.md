@@ -4,10 +4,9 @@ Software-Engineering-Project
 FIRST TIME RUNNING
 1. Open command prompt
 2. Go to mean-master
-3. In command prompt, type npm install nodemon -g
-4. npm install -g grunt-cli
-5. Hit enter (when it is done you may close command prompt)
-6. Follow the instructions below
+3. In command prompt, type npm install nodemon -g (Hit enter)
+4. npm install -g grunt-cli (Hit enter, when it is done you may close command prompt)
+5. Follow the instructions below
 
 TO RUN THE PROJECT
 1. Open an instance of command prompt (must be command prompt, not power shell or git bash)
