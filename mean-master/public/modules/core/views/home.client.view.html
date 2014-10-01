@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Band Schedule App</a>
+                <a class="navbar-brand" href="#">App Home</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -111,12 +111,106 @@
             </div>
             <div class="modal-body">
                 <ul>
-                    <form>
-                    Name: <input type="text" name="username"><br>
+                
+                    <!-- Request Information is here -->
+                    <form class="form-horizontal" role="form">
+                    
+                      <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-addon">@</div>
+                                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="inputNumber" class="col-sm-2 control-label">Phone</label>
+                        <div class="col-sm-10">
+                          <input type="tel" class="form-control" id="inputNumber" placeholder="Phone Number">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="inputSponsor" class="col-sm-2 control-label">Sponsor</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputSponsor" placeholder="Sponsor/Organization Name">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="inputDesc" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control" id="inputDesc" placeholder="Describe the reason for requesting a room." rows="2"></textarea>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="inputDate" class="col-sm-2 control-label">Date</label>
+                        <div class="col-sm-10">
+                          <input type="date" class="form-control" id="inputDate" placeholder="Date">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="inputRoom" class="col-sm-2 control-label">Room</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-addon">#</div>
+                                 <select class="form-control" id="inputRoom">
+                                    <option>106B</option>
+                                    <option>120</option>
+                                    <option>121</option>
+                                    <option>142</option>
+                                    <option>143</option>
+                                    <option>144</option>
+                                    <option>145</option>
+                                    <option>146</option>
+                                    <option>147</option>
+                                    <option>232</option>
+                                    <option>232A</option>
+                                    </select>
+                            </div>
+                        </div>
+                      </div>
+                      
+                       <div class="form-group">
+                        <label for="inputPeriod" class="col-sm-2 control-label">Period</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-addon">#</div>
+                                 <select class="form-control" id="inputPeriod">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>E1</option>
+                                    <option>E2</option>
+                                    <option>E3</option>
+                                    </select>
+                            </div>
+                        </div>
+                      </div>
+                      
                     </form>
-                    <form>
-                    Description: <input type="text" name="eventdesc">
-                    </form>
+                    <br>
+                    <!-- Request Information module ends here -->
+                    <li>Testing stuff here pls ignore</li>
                     <li ng-repeat="item in items">
                         <a ng-click="selected.item = item">{{ item }}</a>
                     </li>
@@ -124,7 +218,7 @@
                 Selected: <b>{{ selected.item }}</b>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                <button class="btn btn-primary" ng-click="ok()">Submit</button>
                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </script>
@@ -132,7 +226,6 @@
         <button class="btn btn-default" ng-click="open()">Request</button>
         <div ng-show="selected">Selection from a modal: {{ selected }}</div>
     </div>
-    
 
     <!-- jQuery Version 1.11.0 -->
     <script src="js/jquery-1.11.0.js"></script>
