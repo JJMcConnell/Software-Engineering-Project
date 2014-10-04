@@ -1,9 +1,6 @@
 Software-Engineering-Project
 ============================
 
-[front end people](front-end-people:)
-[back end people](back-end-people:)
-
 ![Schedule](http://freethoughtalliance.org/fta/wp-content/uploads/2012/01/schedule.jpg)
 ### FRONT END PEOPLE:
 All your stuff is in mean-master/public/modules/core
@@ -25,8 +22,11 @@ Easy! Add a route to set up the address for both pages (two routes), and then on
   Controllers are basically just containers of java methods. Any html page can reference any controller, and it will have access to all the methods inside that controller. Many pages can have one controller, or one page can have mutiple controllers. Which controllers are referenced by which page does not affect how they work, it is just organizational.
 
 ##### P.S
-You should get an html editor of some kind. Microsoft Web Developer works. You can create individual pages just for graphics, and then once you are ready to put them in meanjs and use javascript just copy them into the views folder. (Also Sublime is a godsend! - Danny)
+You should get an html editor of some kind. Microsoft Web Developer works. You can create individual pages just for graphics, and then once you are ready to put them in meanjs and use javascript just copy them into the views folder. (Also [Sublime](http://www.sublimetext.com/) is a godsend! - Danny)
   
+
+![another schedule pic](http://www.valpo.k12.in.us/cms/lib4/IN01001455/Centricity/Domain/415/schedule.jpg) 
+
 ###  BACK END PEOPLE:
 All of your stuff is in the app folder!
 
