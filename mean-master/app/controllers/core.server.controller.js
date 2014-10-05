@@ -5,19 +5,19 @@
  */
 var _ = require('lodash'),
 	mongoose = require('mongoose'),
-	passport = require('passport'),
-    EventSchema = require('./../models/article.server.model'),
-    Event = mongoose.model('Event');
+	passport = require('passport');
+    //Event = mongoose.model('Event');
 
+//EventSchema = require('./../models/article.server.model.js'),
 
 
 
 
 exports.index = function(req, res) {
     res.render('index');
-    console.log("index");
+    console.log('index');
 };
-
+/*
 exports.addevent = function (req, res) {
     //get is req.query
     //post is req.body
@@ -57,3 +57,4 @@ exports.addevent = function (req, res) {
     res.redirect('/');
     console.log("Done Adding to Database");
 };
+*/
