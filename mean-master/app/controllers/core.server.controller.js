@@ -42,6 +42,21 @@ exports.test = function (req, res) {
     console.log(roomNumber);
     //res.json(the array) or something returns result
 
+    Event.find({ "title": 'Test' }, function (err, doc) {
+
+        //happens later - too late to return stuff, function has ran already
+
+        if (err) {
+            //callback(err);
+            return;
+        }
+        //callback(doc);
+        console.log("THE DOCUMENT");
+        console.log(doc);
+
+        //res.jsonp(doc);
+    })
+
 
     //THIS IS IMPORTANT because
     res.redirect('/');
@@ -67,7 +82,7 @@ exports.addevent = function (req, res) {
         if (err) return console.error(err);
     });
     
-    Event.find({ "title": 'Trevor' }, function (err, doc) {
+    Event.find({ "title": 'potluck' }, function (err, doc) {
 
         //happens later - too late to return stuff, function has ran already
 
@@ -76,6 +91,7 @@ exports.addevent = function (req, res) {
             return;
         }
         //callback(doc);
+        console.log("THE DOCUMENT");
         console.log(doc);
 
         //res.jsonp(doc);
