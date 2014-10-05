@@ -6,6 +6,7 @@
 var _ = require('lodash'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
+    EventSchema = require('./../models/article.server.model'),
     Event = mongoose.model('Event');
 
 
