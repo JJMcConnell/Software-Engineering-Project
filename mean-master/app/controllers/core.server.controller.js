@@ -5,8 +5,9 @@
  */
 var _ = require('lodash'),
 	mongoose = require('mongoose'),
-	passport = require('passport');
-    //Event = mongoose.model('Event');
+	passport = require('passport'),
+    EventSchema = require('./../models/article.server.model.js'),
+    Event = mongoose.model('Event');
 
 //EventSchema = require('./../models/article.server.model.js'),
 
@@ -17,17 +18,23 @@ exports.index = function(req, res) {
     res.render('index');
     console.log('index');
 };
-/*
+
+exports.getAvailableRooms = function (req, res) {
+
+    
+}
+
+
 exports.addevent = function (req, res) {
     //get is req.query
     //post is req.body
     //dont ask me why, its just how it is
     var name = req.body.name;
 
-
+    console.log("asdf");
     var testEvent = new Event({
-        title: name,
-        sponsor: name,
+        title: "Test",
+        sponsor: "Test",
         contactEmail: 'trevorkowens@gmail.com',
         room: '121',
         date: new Date(2014, 10, 10),
@@ -57,4 +64,3 @@ exports.addevent = function (req, res) {
     res.redirect('/');
     console.log("Done Adding to Database");
 };
-*/
