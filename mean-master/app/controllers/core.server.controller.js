@@ -14,6 +14,7 @@ var _ = require('lodash'),
 
 
 
+
 exports.index = function(req, res) {
     res.render('index');
     console.log('index');
@@ -41,8 +42,8 @@ exports.test = function (req, res) {
 
     console.log(roomNumber);
     //res.json(the array) or something returns result
-
-    Event.find({ "title": 'Test' }, function (err, doc) {
+    // "title": 'Test' 
+    Event.find({}, function (err, doc) {
 
         //happens later - too late to return stuff, function has ran already
 
@@ -81,7 +82,9 @@ exports.addevent = function (req, res) {
     testEvent.save(function (err) {
         if (err) return console.error(err);
     });
-    
+    //{ "title": 'potluck' }, 
+
+    //var Events = mongoose.collection('Event');
     Event.find({ "title": 'potluck' }, function (err, doc) {
 
         //happens later - too late to return stuff, function has ran already
@@ -97,7 +100,7 @@ exports.addevent = function (req, res) {
         //res.jsonp(doc);
     })
 
-    console.log(name);
+    //console.log(name);
     res.redirect('/');
     console.log("Done Adding to Database");
 };
