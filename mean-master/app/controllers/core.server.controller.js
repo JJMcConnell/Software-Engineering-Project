@@ -55,12 +55,14 @@ exports.test = function (req, res) {
         console.log("THE DOCUMENT");
         console.log(doc);
 
-        //res.jsonp(doc);
+        // res.jsonp(doc);
+        // res.send(doc);
+        res.render('../../public/modules/core/views/list.client.view.html', {docs: doc});
     })
 
 
     //THIS IS IMPORTANT because
-    res.redirect('/');
+    //res.redirect('/');
 }
 
 exports.addevent = function (req, res) {
