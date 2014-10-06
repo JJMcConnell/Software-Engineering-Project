@@ -42,7 +42,7 @@ exports.test = function (req, res) {
     console.log(roomNumber);
     //res.json(the array) or something returns result
     // "title": 'Test' 
-    Event.find({"room": roomNumber}, function (err, doc) {
+    Event.find({/*"room": roomNumber*/}, function (err, doc) {
 
         //happens later - too late to return stuff, function has ran already
 
@@ -52,16 +52,17 @@ exports.test = function (req, res) {
         }
         //callback(doc);
         console.log("THE DOCUMENT");
-       /* console.log("Periods that are NOT available with this room number:");
+        /* console.log("Periods that are NOT available with this room number:");
         Event.findOne({ 'room': roomNumber }, 'time_period', function (err, event) {
                 if (err) return handleError(err);
             console.log('%s', event.time_period);
         })*/
+        doc = JSON.stringify( doc );
         console.log(doc);
 
         // res.jsonp(doc);
         // res.send(doc);
-        res.render('../../public/modules/core/views/list.client.view.html', {docs: doc});
+        res.render('list', {docs: doc });
     })
 
 
