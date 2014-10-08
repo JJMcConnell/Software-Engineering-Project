@@ -17,7 +17,7 @@ var _ = require('lodash'),
 
 exports.index = function(req, res) {
     res.render('index');
-    console.log('index');
+    //console.log('index');
 };
 
 exports.getAvailableRooms = function (req, res) {
@@ -34,35 +34,25 @@ exports.test = function (req, res) {
 
 
 
-    var roomNumber = 121;
-    var date = new Date(2014, 10, 10);
+    var roomNumber = req.query.roomNumber;
+    var date = req.query.date;
     //var roomNumber = "121";
     //Takes a date, and a roomNumber, and returns an array of which periods are/aren't available
 
     console.log(roomNumber);
     //res.json(the array) or something returns result
 
-
-    Event.find({ "room": roomNumber }, function (err, doc) {
-
-        //happens later - too late to return stuff, function has ran already
-
-        if (err) {
-            //callback(err);
-            return;
-        }
         //callback(doc);
         console.log("THE DOCUMENT");
         console.log("Periods that are NOT available with this room number:");
-        Event.findOne({ 'room': roomNumber }, 'time_period', function (err, event) {
+        Event.find({ 'room': roomNumber , 'date': date }, 'time_period', function (err, events) {
                 if (err) return handleError(err);
-            console.log('%s', event.time_period);
+                var i;
+             for(i = 0; i < events.length; i++){   
+                console.log('%s', events[i].time_period);
+            }
         })
-        console.log(doc);
-
-        //res.jsonp(doc);
-    })
-
+        
 
     //THIS IS IMPORTANT because
     res.redirect('/');
