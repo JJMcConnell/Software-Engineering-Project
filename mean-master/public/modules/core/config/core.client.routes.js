@@ -14,11 +14,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		});
 
 		// Home state routing
-		$stateProvider.
-		state('room', {
-			url: '/room/:tagId',
-			templateUrl: 'modules/core/views/room.client.view.html'
-		});
+
 	}
 
 

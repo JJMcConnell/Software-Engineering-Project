@@ -13,7 +13,11 @@ var _ = require('lodash'),
 
 
 
-
+exports.ThisRoom = function(req,res) {
+    if (req.param('tagId') != "")
+        console.log("~~~\n"+req.param('tagId')+"\n~~~")
+    res.render('ThisRoom');
+}
 
 exports.index = function(req, res) {
     res.render('index');
