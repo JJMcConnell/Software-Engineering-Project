@@ -61,13 +61,12 @@ exports.test = function (req, res) {
 }
 
 exports.roomnumber = function (req, res) {
-    
-    console.log(req.param('tagId'));
-    Event.find({ 'room': req.param("tagId") }, function (err, events) {
+    res.render('room');
+    /*Event.find({ 'room': req.param("tagId") }, function (err, events) {
         if (err) return handleError(err);
         else if (events != "") res.json(events);
         else res.send("No events in this room");
-    })
+    })*/
 }
 
 exports.addevent = function (req, res) {
