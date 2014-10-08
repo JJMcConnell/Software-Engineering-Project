@@ -48,8 +48,8 @@ var EventSchema = new Schema({
         required: 'Must be a valid number'
     },
     date: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: '',
         required: 'Must be a valid date'
     },
     time_period: {
