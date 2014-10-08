@@ -48,14 +48,16 @@ exports.test = function (req, res) {
         Event.find({ 'room': roomNumber , 'date': date }, 'time_period', function (err, events) {
                 if (err) return handleError(err);
                 var i;
-             for(i = 0; i < events.length; i++){   
-                console.log('%s', events[i].time_period);
-            }
+                for (i = 0; i < events.length; i++) {
+                    console.log('%s', events[i].time_period);
+                }
+                 
+
+                res.json(events);
         })
-        
 
     //THIS IS IMPORTANT because
-    res.redirect('/');
+        //res.redirect('/');
 }
 
 exports.addevent = function (req, res) {
