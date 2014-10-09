@@ -8,9 +8,29 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 		if ($scope.authentication.user) $location.path('/');
 
 		// Submit forgotten password account id
-		$scope.askForPasswordReset = function() {
+		$scope.askForPasswordReset = function () {
+		    console.log("yay");
 			$scope.success = $scope.error = null;
-
+			
+			/*
+			mailer.send(
+              {
+                  host: "smtp.mandrillapp.com"
+              , port: 587
+              , to: "trevorkowens@gmail.com"
+              , from: "trevorkowens@gmail.com"
+              , subject: "Mandrill knows Javascript!"
+              , body: "Reset your password using this link! \n www.link.com"
+              , authentication: "login"
+              , username: username
+              , password: password
+              }, function (err, result) {
+                  if (err) {
+                      console.log(err);
+                  }
+              }
+            );
+            */
 			$http.post('/auth/forgot', $scope.credentials).success(function(response) {
 				// Show user success message and clear form
 				$scope.credentials = null;
