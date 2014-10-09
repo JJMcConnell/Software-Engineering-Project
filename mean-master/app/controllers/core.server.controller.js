@@ -13,7 +13,11 @@ var _ = require('lodash'),
 
 
 
-
+exports.ThisRoom = function(req,res) {
+    if (req.param('tagId') != "")
+        console.log("~~~\n"+req.param('tagId')+"\n~~~")
+    res.render('ThisRoom');
+}
 
 exports.index = function(req, res) {
     res.render('index');
@@ -58,6 +62,15 @@ exports.test = function (req, res) {
 
     //THIS IS IMPORTANT because
         //res.redirect('/');
+}
+
+exports.roomnumber = function (req, res) {
+    res.render('room');
+    /*Event.find({ 'room': req.param("tagId") }, function (err, events) {
+        if (err) return handleError(err);
+        else if (events != "") res.json(events);
+        else res.send("No events in this room");
+    })*/
 }
 
 exports.addevent = function (req, res) {
