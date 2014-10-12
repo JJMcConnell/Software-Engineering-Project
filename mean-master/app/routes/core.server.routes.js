@@ -7,6 +7,7 @@ module.exports = function(app) {
     app.route('/requestevent').get(core.addevent);
 	//Makes http://localhost:3000/test go to method core.test as defined in controllers/core.server.controller
     app.route('/test').get(core.test);
+    	//test is what shows periods that are not available based on room number and date
     
     app.route('/roomlookup/:tagId').get(core.ThisRoom);
     	// this doesn't work, just prints blank html page
