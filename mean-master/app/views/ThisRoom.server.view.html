@@ -3,12 +3,24 @@
 {% block content %}
 	<section data-ng-include="'/modules/core/views/room.client.view.html'">
 		<div class="container" data-ng-controller="HeaderController">
+			
 			<h1>Hello, and welcome to room {{ roomNo }} </h1>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						
+						<th>Date</th>
+						<th>Time Period</th>
+						<th>Contact</th>
+					</tr>
+				<tbody>
 			{% for reservation in reservations %}
-		  		<li{% if loop.first %} class="first"{% endif %}>
-		    		Reservation on {{ reservation.date }}, period {{ reservation.time_period}}. Contact {{ reservation.contactEmail}}
-		  		</li>
+		  		<tr>
+		    		<td> {{ reservation.date }} </td> <td> {{ reservation.time_period}} </td> <td> {{ reservation.contactEmail}} </td>
+		  		</tr>
 			{% endfor %}
+			</tbody>
+		</table>
 		</div>
 	</section>
 {% endblock %}
