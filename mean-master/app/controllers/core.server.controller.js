@@ -14,8 +14,14 @@ var _ = require('lodash'),
 
 
 exports.ThisRoom = function(req,res) {
-    if (req.param('tagId') != "")
-        console.log("~~~\n"+req.param('tagId')+"\n~~~")
+    if (req.param('tagId') != "") {
+        Event.find({ 'room': req.param('tagId') }, function (err, events) {
+            if (err) return handleError(err);
+            else if (events != "") res.render('ThisRoom');
+            else res.render('ThisRoom');
+        })
+    }
+    
     res.render('ThisRoom');
 }
 
