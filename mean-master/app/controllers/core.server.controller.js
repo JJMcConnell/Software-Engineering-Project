@@ -18,7 +18,13 @@ exports.ThisRoom = function(req,res) {
     if (req.param('tagId') != "") {
         Event.find({ 'room': req.param('tagId') }, function (err, events) {
             if (err) return handleError(err);
-            else if (events != "") res.render('ThisRoom', { reservations: "no reservations", roomNo: req.param('tagId')} );
+            else if (events.length == 0) {
+                console.log(events);
+
+                res.render('NoReservations', 
+                    {roomNo: req.param('tagId')}
+                );
+            }
             else {
                 console.log(events);
                 res.render('ThisRoom', { 
