@@ -87,7 +87,8 @@ exports.addevent = function (req, res) {
     var roomNumber = req.query.roomNumber;
     var period = req.query.period;
     
-    console.log("asdf"+date.toString());
+    var noRoomConflicts = false;
+
     var testEvent = new Event({
         title: name,
         sponsor: sponsor,
@@ -97,28 +98,22 @@ exports.addevent = function (req, res) {
         time_period: period
     });
 
-    testEvent.save(function (err) {
-        if (err) return console.error(err);
-    });
-    //{ "title": 'potluck' }, 
-
-    //var Events = mongoose.collection('Event');
-    Event.find({ "title": 'potluck' }, function (err, doc) {
-
-        //happens later - too late to return stuff, function has ran already
-
-        if (err) {
-            //callback(err);
-            return;
+    console.log("Periods that are NOT available with this room number:");
+    Event.find({ 'room': roomNumber, 'date': date, 'time_period': period }, 'time_period', function (err, events) {
+        if (err) return handleError(err);
+        
+        for (var i = 0; i < events.length; i++) {
+            console.log('%s', events[i].time_period);
         }
-        //callback(doc);
-        console.log("THE DOCUMENT");
-        console.log(doc);
+        if (events.length == 0)
+            testEvent.save(function (err) {
+                if (err) return console.error(err);
+            });
 
-        //res.jsonp(doc);
     })
 
-    //console.log(name);
+ 
+    
     res.redirect('/');
     console.log("Done Adding to Database");
 };
