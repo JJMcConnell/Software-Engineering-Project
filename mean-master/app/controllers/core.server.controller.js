@@ -7,7 +7,8 @@ var _ = require('lodash'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
     EventSchema = require('./../models/article.server.model.js'),
-    Event = mongoose.model('Event');
+    Event = mongoose.model('Event'),
+    swig = require('swig');
 
 //EventSchema = require('./../models/article.server.model.js'),
 
@@ -17,8 +18,14 @@ exports.ThisRoom = function(req,res) {
     if (req.param('tagId') != "") {
         Event.find({ 'room': req.param('tagId') }, function (err, events) {
             if (err) return handleError(err);
-            else if (events != "") res.render('ThisRoom');
-            else res.render('ThisRoom');
+            else if (events != "") res.render('ThisRoom', { reservations: "no reservations", roomNo: req.param('tagId')} );
+            else {
+                console.log(events);
+                res.render('ThisRoom', { 
+                reservations: events, 
+                roomNo: req.param('tagId')
+                });
+            }
         })
     }
 }
