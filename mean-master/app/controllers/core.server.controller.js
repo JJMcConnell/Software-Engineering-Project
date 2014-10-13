@@ -21,7 +21,7 @@ exports.ThisRoom = function(req,res) {
             else res.render('ThisRoom');
         })
     }
-    
+}
 
 exports.index = function (req, res) {
     res.render('index');
