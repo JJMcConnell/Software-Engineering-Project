@@ -65,7 +65,6 @@ describe('Event Model Unit Tests:', function() {
 	});
 
 	afterEach(function(done) {
-		Event.remove().exec();
 		done();
 	});
 });

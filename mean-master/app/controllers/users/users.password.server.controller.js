@@ -12,7 +12,10 @@ var _ = require('lodash'),
 	nodemailer = require('nodemailer'),
 	crypto = require('crypto'),
 	async = require('async'),
-	crypto = require('crypto');
+	crypto = require('crypto'),
+	mailer = require("mailer")
+    , username = "trevorkowens@gmail.com"
+    , password = "WD6Av_7xpEyY_rgoRzFNGg"
 
 /**
  * Forgot for reset password (forgot POST)
@@ -73,6 +76,7 @@ exports.forgot = function(req, res, next) {
 				subject: 'Password Reset',
 				html: emailHTML
 			};
+            /*
 			smtpTransport.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.send({
@@ -82,6 +86,26 @@ exports.forgot = function(req, res, next) {
 
 				done(err);
 			});
+            */
+			console.log(user.email);
+			mailer.send(
+              {
+                  host: "smtp.mandrillapp.com"
+              , port: 587
+              , to: user.email
+              , from: "trevorkowens@gmail.com"
+              , subject: "Administrator Password Reset"
+              , html: emailHTML
+              , authentication: "login"
+              , username: username
+              , password: password
+              }, function (err, result) {
+                  if (err) {
+                      console.log(err);
+                  }
+                  done(err);
+              }
+            );
 		}
 	], function(err) {
 		if (err) return next(err);
@@ -91,7 +115,8 @@ exports.forgot = function(req, res, next) {
 /**
  * Reset password GET from email token
  */
-exports.validateResetToken = function(req, res) {
+exports.validateResetToken = function (req, res) {
+    console.log(req.params.token);
 	User.findOne({
 		resetPasswordToken: req.params.token,
 		resetPasswordExpires: {
