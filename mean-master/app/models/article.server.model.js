@@ -57,6 +57,14 @@ var EventSchema = new Schema({
         default: '',
         trim: true,
         required: 'Must be specified to a period on the UF schedule'
+    },
+    admin_viewed: {
+        type: Boolean,
+        default: false
+    },
+    admin_approved: {
+        type: Boolean,
+        default: false
     }
 });
 

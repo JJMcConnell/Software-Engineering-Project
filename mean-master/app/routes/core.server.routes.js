@@ -5,9 +5,18 @@ module.exports = function(app) {
     var core = require('../../app/controllers/core');
     app.route('/').get(core.index);
     app.route('/requestevent').get(core.addevent);
-	//Makes http://localhost:3000/test go to method core.test as defined in controllers/core.server.controller
-    app.route('/test').get(core.test);
     
-    app.route('/room/:tagId').get(core.ThisRoom);
-    app.route('/room/?:tagId').get(core.ThisRoom);
+
+    // ROOMS
+    app.route('/roomall/:tagId').get(core.ThisRoomAll);
+    app.route('/roomall/?:tagId').get(core.ThisRoomAll);
+
+    app.route('/room/:tagId').get(core.ThisRoomApproved);
+    app.route('/room/?:tagId').get(core.ThisRoomApproved);
+
+    app.route('/rejectedroom/:tagId').get(core.ThisRoomRejected);
+    app.route('/rejectedroom/?:tagId').get(core.ThisRoomRejected);
+
+
+    //app.route('/adminview').get(core.adminview);
 };

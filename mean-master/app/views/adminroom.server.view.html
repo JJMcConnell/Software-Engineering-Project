@@ -1,0 +1,35 @@
+{% extends 'layout.server.view.html' %}
+
+{% block content %}
+	<section data-ng-include="'/modules/core/views/room.client.view.html'">
+		<div class="container" data-ng-controller="HeaderController">
+			
+			<h1>Hello, and welcome to room {{ roomNo }} </h1>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						
+						<th>Date</th>
+						<th>Time Period</th>
+						<th>Contact</th>
+						<th>Approve?</th>
+					</tr>
+				<tbody>
+			{% for reservation in reservations %}
+		  		<tr>
+		    		<td> {{ reservation.date }} </td> 
+		    		<td> {{ reservation.time_period}} </td> 
+		    		<td> {{ reservation.contactEmail}} </td>
+		    		<td> 
+		    			<form action='/approveroom' method='post'>
+		    				<input type='submit' id='approve' class='btn btn-primary' value='approve'>
+		    				<input type='submit' class='btn btn-danger' value='deny'>
+		    			</form>
+		    		</td>
+		  		</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+		</div>
+	</section>
+{% endblock %}
