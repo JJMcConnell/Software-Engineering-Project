@@ -1,0 +1,8 @@
+<div class="container" data-ng-controller="HeaderController">
+	<h1>Hello, and welcome to room {{ roomNo }} </h1>
+	{% for reservation in reservations %}
+  		<li{% if loop.first %} class="first"{% endif %}>
+    		{{ reservation }}
+  		</li>
+	{% endfor %}
+</div>
