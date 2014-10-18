@@ -13,6 +13,27 @@ var _ = require('lodash'),
 
 
 
+exports.ThisRoom = function (req, res) {
+    if (req.param('tagId') != "") {
+        Event.find({ 'room': req.param('tagId') }, function (err, events) {
+            if (err) return handleError(err);
+            else if (events.length == 0) {
+                console.log(events);
+                console.log("NONE!!");
+                res.render('NoReservations',
+                    { roomNo: req.param('tagId') }
+                );
+            }
+            else {
+                console.log(events);
+                res.render('ThisRoom', {
+                    reservations: events,
+                    roomNo: req.param('tagId')
+                });
+            }
+        })
+    }
+}
 
 exports.index = function(req, res) {
     res.render('index');

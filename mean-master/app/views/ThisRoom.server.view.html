@@ -1,0 +1,14 @@
+{% extends 'layout.server.view.html' %}
+
+{% block content %}
+<section data-ng-include="'/modules/core/views/room.client.view.html'">
+    <div class="container" data-ng-controller="HeaderController">
+        <h1>Hello, and welcome to room {{ roomNo }} </h1>
+        {% for reservation in reservations %}
+        <li{% if loop.first %} class="first" {% endif %}>
+            Reservation on {{ reservation.date }}, period {{ reservation.time_period}}. Contact {{ reservation.contactEmail}}
+            </li>
+            {% endfor %}
+    </div>
+</section>
+{% endblock %}

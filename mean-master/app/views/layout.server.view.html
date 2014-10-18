@@ -2,9 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-
-
-	<title>The University of Florida Department of Music Presents: Room Scheduler</title>
+	<title>{{title}}</title>
 
 	<!-- General META -->
 	<meta charset="utf-8">
@@ -45,26 +43,25 @@
 </head>
 
 <body class="ng-cloak">
+    <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+    <section class="content">
+        <section class="container">
+            {% block content %}{% endblock %}
+        </section>
+    </section>
+    <!--Embedding The User Object-->
+    <script type="text/javascript">
+        var user = {{ user | json | safe }};
+    </script>
+    <!--Application JavaScript Files-->
+    {% for jsFile in jsFiles %}
+    <script type="text/javascript" src="{{jsFile}}"></script>
+    {% endfor %}
 
-	<section class="content">
-		<section class="container">
-			{% block content %}{% endblock %}
-		</section>
-	</section>
-
-	<!--Application JavaScript Files-->
-	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>
-	{% endfor %} 
-
-	{% if process.env.NODE_ENV === 'development' %}
-	<!--Livereload script rendered -->
-	<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
-
-	{% endif %}
-
-
-
-
+    {% if process.env.NODE_ENV === 'development' %}
+    <!--Livereload script rendered -->
+    <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+    {% endif %}
 </body>
 
 </html>
