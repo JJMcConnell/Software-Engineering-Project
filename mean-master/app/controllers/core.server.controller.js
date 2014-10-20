@@ -25,27 +25,28 @@ exports.index = function (req, res) {
 };
 
 exports.eventsByDay = function (req, res) {
-    var month = request.query.month;
-    var day = request.query.day;
-    var year = request.query.year;
+    var month = req.query.month;
+    var day = req.query.day;
+    var year = req.query.year;
 
     Event.find({'month': month, 'day': day, 'year': year}, function (err, events){
         if (err) return handleError(err);
 
-        res.json(events);
-
+        res.jsonp(events);
+        console.log(events);
 
     })
+    //res.render('index');
 
 }
 
 exports.eventsByYear = function (req, res) {
-    var year = request.query.year;
+    var year = req.query.year;
 
     Event.find({'year': year}, function (err, events){
         if (err) return handleError(err);
 
-        res.json(events);
+        res.jsonp(events);
 
 
     })
@@ -53,13 +54,13 @@ exports.eventsByYear = function (req, res) {
 }
 
 exports.eventsByMonth = function (req, res) {
-    var month = request.query.month;
-    var year = request.query.year;
+    var month = req.query.month;
+    var year = req.query.year;
 
     Event.find({'month': month, 'year': year}, function (err, events){
         if (err) return handleError(err);
 
-        res.json(events);
+        res.jsonp(events);
 
 
     })
@@ -125,38 +126,38 @@ exports.addevent = function (req, res) {
     var roomNumber = req.query.roomNumber;
     var period = req.query.period;
 
-    console.log("asdf" + date.toString());
+    var year = date.substring(0, 4);
+    var month = date.substring(5, 7);
+    var day = date.substring(8, 10);
+    console.log(date.toString());
+    console.log("day: " + day);
+    console.log("month: " + month);
+    console.log("year: " + year);
     var testEvent = new Event({
         title: name,
         sponsor: sponsor,
         contactEmail: email,
         room: roomNumber,
-        date: date,
+        day: day,
+        month: month,
+        year: year,
         time_period: period
     });
-
+    
     testEvent.save(function (err) {
         if (err) return console.error(err);
     });
-    //{ "title": 'potluck' }, 
+    
 
-    //var Events = mongoose.collection('Event');
     Event.find({ "title": 'potluck' }, function (err, doc) {
 
-        //happens later - too late to return stuff, function has ran already
-
         if (err) {
-            //callback(err);
             return;
         }
-        //callback(doc);
         console.log("THE DOCUMENT");
         console.log(doc);
-
-        //res.jsonp(doc);
     })
 
-    //console.log(name);
     res.redirect('/');
     console.log("Done Adding to Database");
 };
