@@ -48,15 +48,15 @@ var EventSchema = new Schema({
         required: 'Must be a valid number'
     },
     month: {
-        type: Integer,
+        type: String,
         required: 'Must be a valid month'
     },
     day: {
-        type: Integer,
+        type: String,
         required: 'Must be a valid day'
     },
     year: {
-        type: Integer,
+        type: String,
         required: 'Must be a valid year'
     }
     ,
