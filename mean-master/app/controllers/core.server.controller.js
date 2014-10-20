@@ -24,8 +24,45 @@ exports.index = function (req, res) {
     //console.log('index');
 };
 
-exports.getAvailableRooms = function (req, res) {
+exports.eventsByDay = function (req, res) {
+    var month = request.query.month;
+    var day = request.query.day;
+    var year = request.query.year;
 
+    Event.find({'month': month, 'day': day, 'year': year}, function (err, events){
+        if (err) return handleError(err);
+
+        res.json(events);
+
+
+    })
+
+}
+
+exports.eventsByYear = function (req, res) {
+    var year = request.query.year;
+
+    Event.find({'year': year}, function (err, events){
+        if (err) return handleError(err);
+
+        res.json(events);
+
+
+    })
+
+}
+
+exports.eventsByMonth = function (req, res) {
+    var month = request.query.month;
+    var year = request.query.year;
+
+    Event.find({'month': month, 'year': year}, function (err, events){
+        if (err) return handleError(err);
+
+        res.json(events);
+
+
+    })
 
 }
 
