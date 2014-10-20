@@ -12,4 +12,6 @@ module.exports = function (app) {
     app.route('/room/?:tagId').get(core.ThisRoom);
 
     app.route('/calendarDay').get(core.eventsByDay);
+    app.route('/calendarYear').get(core.eventsByYear);
+    app.route('/calendarMonth').get(core.eventsByMonth);
 };

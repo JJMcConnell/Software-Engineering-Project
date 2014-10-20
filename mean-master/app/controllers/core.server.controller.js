@@ -125,6 +125,7 @@ exports.addevent = function (req, res) {
     var date = req.query.date;
     var roomNumber = req.query.roomNumber;
     var period = req.query.period;
+    var description = req.query.description;
 
     var year = date.substring(0, 4);
     var month = date.substring(5, 7);
@@ -134,6 +135,7 @@ exports.addevent = function (req, res) {
     console.log("month: " + month);
     console.log("year: " + year);
     var testEvent = new Event({
+        description: description,
         title: name,
         sponsor: sponsor,
         contactEmail: email,

@@ -6,7 +6,7 @@ angular.module('users').config(['$httpProvider',
 		// Set the httpProvider "not authorized" interceptor
 		$httpProvider.interceptors.push(['$q', '$location', 'Authentication',
 			function($q, $location, Authentication) {
-				return {
+			    return {
 					responseError: function(rejection) {
 						switch (rejection.status) {
 							case 401:
@@ -20,7 +20,7 @@ angular.module('users').config(['$httpProvider',
 								// Add unauthorized behaviour 
 								break;
 						}
-
+						$location.path('/calendar');
 						return $q.reject(rejection);
 					}
 				};
