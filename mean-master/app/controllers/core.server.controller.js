@@ -139,6 +139,7 @@ exports.addevent = function (req, res) {
         title: name,
         sponsor: sponsor,
         contactEmail: email,
+        contactPhone: telephone,
         room: roomNumber,
         day: day,
         month: month,
