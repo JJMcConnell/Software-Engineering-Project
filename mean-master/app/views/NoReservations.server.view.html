@@ -2,9 +2,12 @@
 
 {% block content %}
 	<section data-ng-include="'/modules/core/views/room.client.view.html'">
-		<div class="container" data-ng-controller="HeaderController">
-			<h1>Hello, and welcome to room {{ roomNo }} </h1>
-			<p>It looks like we do not have any reservations here. Want to <a href='/'>make one?</a></p>
+		<div class="jumbotron" data-ng-controller="HeaderController">
+			<div class="container" align="center">
+
+			<h1>Welcome to Room {{ roomNo }} </h1>
+			<p>There are currently no reservations. Want to <a href='/'>make one?</a></p>
 		</div>
+	</div>
 	</section>
 {% endblock %}
