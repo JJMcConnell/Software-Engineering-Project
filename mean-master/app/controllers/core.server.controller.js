@@ -78,12 +78,21 @@ exports.index = function (req, res) {
 };
 
 exports.approveroom = function(req, res) {
-    console.log("~~~ ID is "+req.query.id);
-    res.send('hey');
+    var newid = req.query.id.slice(1);
+    var newerid = newid.slice(1);
 
-    Event.find({ '_id': { '$oid': req.query.id } }, function (err, events) {
-        if (err) res.send('error!');
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"+
+                "Running \"Approve Room\" Function\n"+
+                "- ID is "+req.query.id+"\n"+
+                "- Sliced off first char "+newid+"\n");
+                "- Sliced off second char "+newerid+"\n");
+
+    Event.find({ _id: { $oid: newid } }, function (err, events) {
+        console.log("- Ran Event.find() function\n");
+        if (err) res.send('error!!!');
         else {
+            console.log("- Found events without error\n"+
+                        "- found: "+events+"\n");
             events.admin_viewed = true;
             events.admin_approved = true;
 
@@ -92,6 +101,9 @@ exports.approveroom = function(req, res) {
             });
         }
     })
+
+   console.log("- Redirecting to adminview\n" +
+                "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
     res.redirect('/adminview');
 };

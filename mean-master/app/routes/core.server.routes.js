@@ -21,7 +21,4 @@ module.exports = function(app) {
 
     app.route('/rejectedroom/:tagId').get(core.ThisRoomRejected);
     app.route('/rejectedroom/?:tagId').get(core.ThisRoomRejected);
-
-
-    //app.route('/adminview').get(core.adminview);
 };
