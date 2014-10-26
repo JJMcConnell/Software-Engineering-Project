@@ -90,8 +90,11 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     };
     /* config object */
     $scope.uiConfig = {
-      calendar:{
-        height: 450,
+        calendar: {
+            slotDuration: '01:05:00',
+            minTime: '07:25:00',
+            maxTime: '24:00:00',
+        height: 500,
         editable: true,
         header:{
           left: 'title',
