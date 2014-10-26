@@ -22,7 +22,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
-            //url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
             className: 'gcal-event',           // an option!
             currentTimezone: 'America/Chicago' // an option!
     };
@@ -102,11 +102,23 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 //console.log(response[event].year);
                 //console.log(response[event].month);
                 console.log(m);
+                var hour = 6;
+                var minute = 20;
+                var period = parseInt(response[event].time_period);
+                if (period < 12) {
+                    hour += period;
+                    minute += period * 5;
+                } else
+                {
+                    hour = 7 + (period - 12);
+                    minute = 20;
+                }
+                console.log(hour);
                 $scope.events.push({
                     title: response[event].title,
                     // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
-                    start: new Date(response[event].year, response[event].month - 1, response[event].day, 8),
-                    end: new Date(response[event].year, response[event].month-1, response[event].day, 9)
+                    start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                    end: new Date(response[event].year, response[event].month-1, response[event].day, hour+1, minute)
                 });
             }
 
