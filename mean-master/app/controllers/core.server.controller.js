@@ -24,6 +24,22 @@ exports.index = function (req, res) {
     //console.log('index');
 };
 
+exports.fetchEvents = function (req, res) {
+    var month = req.query.month;
+    var day = req.query.day;
+    var year = req.query.year;
+
+    Event.find({}, function (err, events) {
+        if (err) return handleError(err);
+
+        res.jsonp(events);
+        console.log(events);
+
+    })
+    //res.render('index');
+
+}
+
 exports.eventsByDay = function (req, res) {
     var month = req.query.month;
     var day = req.query.day;

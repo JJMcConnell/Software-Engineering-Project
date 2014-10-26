@@ -59,10 +59,9 @@
                         </div>
                     </div>
                     
-                    <div class="span8 calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
-                    <div ng-show="fullCalendar"></div>
 
-                    
+                    <div ng-init="fetchEvents()" class="span8 calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+                   
                     <!-- Alert Message 
                     <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
                         <h4>{{alertMessage}}</h4>
@@ -88,7 +87,8 @@
         </div>
         <!-- /.container -->
 
-
+        <br>
+        <br>
     </body>
 
 </html>

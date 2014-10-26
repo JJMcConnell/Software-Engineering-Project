@@ -1,13 +1,24 @@
 'use strict';
 
-angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$location', 'Authentication',
-    function ($scope, $stateParams, $location, Authentication ) {
+angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$location', '$http', 'Authentication',
+    function ($scope, $stateParams, $location, $http, Authentication ) {
 
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-    
+
+        // This is a global variable for events. This will contain every event.
+        // The scope is changed every time you go to a new month, so $scope.events will be reset.
+        // We can either do it this way, storing every event ever at once, or another way to do
+        // it would be to reload the events each time you chose a different month. Maybe that's 
+        // better, but this works and I didn't feel like changing it.
+    var events = [];
+
+    console.log("REINIT GO> PROGRAM EXECUTE >>> % DOLLAR SIGN 5?");
+
+    console.log("SYSTEm Errr0r. what . th3fu%^&* just ^^^^^^^^ happened  .. ?");
+
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
@@ -15,22 +26,25 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             className: 'gcal-event',           // an option!
             currentTimezone: 'America/Chicago' // an option!
     };
-    /* event source that contains custom events on the scope */
-    $scope.events = [
-      {title: 'All Day Event',start: new Date(y, m, 1)},
-      {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-      {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-      {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-    ];
+        /* event source that contains custom events on the scope */
+        // Reinitialize the events when the scope is changed
+
+    $scope.events = [];/*
+      { title: 'All Day Event', start: new Date(y, m, 1) },
+      { title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2) },
+      { id: 999, title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false },
+      { id: 999, title: 'Repeating Event', start: new Date(y, m, d + 4, 16, 0), allDay: false },
+      { title: 'Birthday Party', start: new Date(y, m, d + 1, 19, 0), end: new Date(y, m, d + 1, 22, 30), allDay: false },
+      { title: 'Click for Google', start: new Date(y, m, 28), end: new Date(y, m, 29), url: 'http://google.com/' }
+    ];*/
+
     /* event source that calls a function on every view switch */
     $scope.eventsF = function (start, end, callback) {
       var s = new Date(start).getTime() / 1000;
       var e = new Date(end).getTime() / 1000;
       var m = new Date(start).getMonth();
-      ///var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-      //callback(events);
+      //var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+        //callback(events);
     };
 
     $scope.calEventsExt = {
@@ -75,18 +89,50 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         end: new Date(y, m, 29),
         className: ['openSesame']
       });
+
+
     };
+
+    $scope.fetchEvents = function () {
+        $http.get('/fetchEvents', $scope.credentials).success(function (response) {
+            // If successful we assign the response to the global user model
+            console.log(response);
+
+            for (var event in response) {
+                //console.log(response[event].year);
+                //console.log(response[event].month);
+                console.log(m);
+                $scope.events.push({
+                    title: response[event].title,
+                    // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                    start: new Date(response[event].year, response[event].month - 1, response[event].day, 8),
+                    end: new Date(response[event].year, response[event].month-1, response[event].day, 9)
+                });
+            }
+
+            // And redirect to the index page
+            $location.path('/calendar');
+        }).error(function (response) {
+            $scope.error = response.message;
+        });
+    };
+
+
     /* remove event */
     $scope.remove = function(index) {
       $scope.events.splice(index,1);
     };
     /* Change View */
     $scope.changeView = function(view,calendar) {
-      calendar.fullCalendar('changeView',view);
+        calendar.fullCalendar('changeView', view);
+
+        console.log("SYSTEm Errr0r. what . th3fu%^&* just ^^^^^^^^ happened  .. ?");
     };
     /* Change View */
     $scope.renderCalender = function(calendar) {
-      calendar.fullCalendar('render');
+        calendar.fullCalendar('render');
+
+        console.log("SYSTEm Errr0r. what . th3fu%^&* just ^^^^^^^^ happened  .. ?");
     };
     /* config object */
     $scope.uiConfig = {
@@ -120,7 +166,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     };
     /* event sources array*/
     $scope.eventSources = [$scope.events];
-    $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
+    //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
 /* EOF */
         
