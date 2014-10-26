@@ -10130,17 +10130,17 @@ function ensureSafeObject(obj, fullExpression) {
       throw $parseMinErr('isecwindow',
           'Referencing the Window in Angular expressions is disallowed! Expression: {0}',
           fullExpression);
-    } else if (// isElement(obj)
+    }/* else if (// isElement(obj)
         obj.children && (obj.nodeName || (obj.prop && obj.attr && obj.find))) {
       throw $parseMinErr('isecdom',
           'Referencing DOM nodes in Angular expressions is disallowed! Expression: {0}',
           fullExpression);
-    } else if (// block Object so that we can't get hold of dangerous Object.* methods
-        obj === Object) {
-      throw $parseMinErr('isecobj',
-          'Referencing Object in Angular expressions is disallowed! Expression: {0}',
-          fullExpression);
-    }
+    }*/// else if (// block Object so that we can't get hold of dangerous Object.* methods
+    //    obj === Object) {
+    //  throw $parseMinErr('isecobj',
+    //      'Referencing Object in Angular expressions is disallowed! Expression: {0}',
+    //      fullExpression);
+   // }
   }
   return obj;
 }

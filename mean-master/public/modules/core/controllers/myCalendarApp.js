@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$location', 'Authentication', 'Admins',
-    function ($scope, $stateParams, $location, Authentication, Admins ) {
+angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$location', 'Authentication',
+    function ($scope, $stateParams, $location, Authentication ) {
 
     var date = new Date();
     var d = date.getDate();
@@ -11,7 +11,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+            //url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
             className: 'gcal-event',           // an option!
             currentTimezone: 'America/Chicago' // an option!
     };
@@ -29,8 +29,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
       var s = new Date(start).getTime() / 1000;
       var e = new Date(end).getTime() / 1000;
       var m = new Date(start).getMonth();
-      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-      callback(events);
+      ///var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+      //callback(events);
     };
 
     $scope.calEventsExt = {
@@ -116,7 +116,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
       }
     };
     /* event sources array*/
-    $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
+    $scope.eventSources = [$scope.events];
     $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
 /* EOF */
