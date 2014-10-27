@@ -9,6 +9,7 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
+						<th>Room</th>
 						<th>Date</th>
 						<th>Time Period</th>
 						<th>Contact</th>
@@ -19,8 +20,9 @@
 				<tbody>
 			{% for reservation in reservations %}
 		  		<tr>
-		    		<td> {{ reservation.day }} {{ reservation.month }}, {{ reservation.year }} </td> 
-		    		<td> {{ reservation.time_period}} </td> 
+		  			<td> {{ room }} </td>
+		    		<td> {{ reservation.day }}-{{ reservation.month }}-{{ reservation.year }}</td> 
+		    		<td> {{ reservation.period }} </td> 
 		    		<td> {{ reservation.contactEmail}} </td>
 		    		<td> {{ reservation.id }} </td>
 		    		<td> 
