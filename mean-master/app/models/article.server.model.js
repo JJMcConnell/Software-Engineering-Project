@@ -47,22 +47,29 @@ var EventSchema = new Schema({
         trim: true,
         required: 'Must be a valid number'
     },
-    date: {
+    month: {
         type: String,
-        default: '',
-        required: 'Must be a valid date'
+        required: 'Must be a valid month'
     },
-    time_period: {
+    day: {
         type: String,
-        default: '',
+        required: 'Must be a valid day'
+    },
+    year: {
+        type: String,
+        required: 'Must be a valid year'
+    },
+    period: {
+        type: Number,
+        default: 1,
         trim: true,
         required: 'Must be specified to a period on the UF schedule'
     },
-    admin_viewed: {
+    viewed: {
         type: Boolean,
         default: false
     },
-    admin_approved: {
+    approved: {
         type: Boolean,
         default: false
     }

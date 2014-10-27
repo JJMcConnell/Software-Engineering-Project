@@ -16,7 +16,7 @@ var _ = require('lodash'),
 
 exports.ThisRoomApproved = function(req,res) {
     if (req.param('tagId') != "") {
-        Event.find({ 'room': req.param('tagId'), 'admin_approved': true }, function (err, events) {
+        Event.find({ 'room': req.param('tagId'), 'approved': true }, function (err, events) {
             if (err) return handleError(err);
             else if (events.length == 0) {
                 console.log(events);
@@ -37,7 +37,7 @@ exports.ThisRoomApproved = function(req,res) {
 }
 
 exports.adminview = function(req,res) {
-    Event.find({ 'admin_viewed': false }, function (err, events) {
+    Event.find({ 'viewed': false }, function (err, events) {
         if (err) {
             res.send('error!');
             return handleError(err);
@@ -52,7 +52,7 @@ exports.adminview = function(req,res) {
 
 exports.ThisRoomRejected = function(req,res) {
     if (req.param('tagId') != "") {
-        Event.find({ 'room': req.param('tagId'), 'admin_approved': false, 'admin_viewed': true }, function (err, events) {
+        Event.find({ 'room': req.param('tagId'), 'approved': false, 'viewed': true }, function (err, events) {
             if (err) return handleError(err);
             else if (events.length == 0) {
                 console.log(events);
@@ -80,54 +80,23 @@ exports.index = function (req, res) {
 };
 
 exports.approveroom = function(req, res) {
-    var newid = req.query.id.slice(1);
-    var newerid = newid.slice(1);
+    var id = req.query.id.slice(1);
 
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"+
-                "Running \"Approve Room\" Function\n"+
-                "- ID is "+req.query.id+"\n"+
-                "- Sliced off first char "+newid+"\n"+
-                "- Sliced off second char "+newerid+"\n");
-
-    Event.find({ '_id.$oid': newid }, function (err, events) {
-        console.log("- Ran Event.find() function\n");
-        if (err) res.send('error!!!');
-        else {
-            console.log("- Found events without error\n"+
-                        "- found: "+events+"\n");
-            events.admin_viewed = true;
-            events.admin_approved = true;
-
-            events.save(function (err) {
-                if (err) return console.error(err);
-            });
-        }
-    })
-
-   console.log("- Redirecting to adminview\n" +
-                "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    Event.findByIdAndUpdate( id, 
+        { 'viewed': true, 'approved': true }, 
+        function(err, events) {}
+    );
 
     res.redirect('/adminview');
 };
 
 exports.denyroom = function(req, res) {
-    console.log("~~~ ID is "+req.query.id);
+    var id = req.query.id.slice(1);
 
-
-
-    Event.find({ '_id.$oid': req.query.id }, function (err, events) {
-        if (err) return handleError(err);
-        else if (events == "[]" )
-            res.send('no events');
-        else {
-            console.log("ELSE STATEMENT REACHED");
-            console.log("event title is " + events.title);
-
-            events.save(function (err) {
-                if (err) return console.error(err);
-            });
-        }
-    });  
+    Event.findByIdAndUpdate( id, 
+        { 'viewed': true, 'approved': false }, 
+        function(err, events) {}
+    );
 
     res.redirect('/adminview');
 };
@@ -153,9 +122,9 @@ exports.addevent = function (req, res) {
         contactEmail: email,
         room: roomNumber,
         date: date,
-        time_period: period,
-        admin_viewed: false,
-        admin_approved: false
+        period: period,
+        viewed: false,
+        approved: false
     });
 
     testEvent.save(function (err) {
