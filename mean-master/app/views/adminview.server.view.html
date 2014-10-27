@@ -4,8 +4,8 @@
 	<section data-ng-include="'/modules/core/views/room.client.view.html'">
 		<div class="container" data-ng-controller="HeaderController">
 			
-			<h1>Hello, admin!</h1>
-			<p>It's wonderful to see you.</p>
+			<center><h1>Requested Rooms</h1></center>
+		
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -13,12 +13,13 @@
 						<th>Time Period</th>
 						<th>Contact</th>
 						<th>Room ID</th>
-						<th>Approve/Deny</th>
+						<th>Approve</th>
+						<th>Deny</th>
 					</tr>
 				<tbody>
 			{% for reservation in reservations %}
 		  		<tr>
-		    		<td> {{ reservation.date }} </td> 
+		    		<td> {{ reservation.day }} {{ reservation.month }}, {{ reservation.year }} </td> 
 		    		<td> {{ reservation.time_period}} </td> 
 		    		<td> {{ reservation.contactEmail}} </td>
 		    		<td> {{ reservation.id }} </td>
@@ -32,11 +33,17 @@
 
 		    			<form action='approveroom'>
 		    				<input type='hidden' name='id' value=" {{ reservation.id }}"> 
-		    				<input type='submit' id='approve' class='btn btn-primary' value='approve'>
+		    				<Button type='submit' id='approve' class='btn btn-success' value=''>
+		    				<span class="glyphicon glyphicon-ok"></span>
+		    				</Button>
 		    			</form>
+		    		</td>
+		    		<td>
 		    			<form action='denyroom'>
 		    				<input type='hidden' name='id' value=" {{ reservation.id }}"> 
-    						<input type='submit' class='btn btn-danger' value='deny'>
+    						<Button type='submit' class='btn btn-danger' value='deny'>
+    						<span class="glyphicon glyphicon-remove"></span>
+    						</Button>
 		    			</form>				    
 		    		</td>
 		  		</tr>

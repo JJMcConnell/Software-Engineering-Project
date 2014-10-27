@@ -26,7 +26,7 @@ exports.ThisRoomApproved = function(req,res) {
                 );
             }
             else {
-                console.log(events);
+                // console.log(events);
                 res.render('ThisRoom', { 
                 reservations: events, 
                 roomNo: req.param('tagId')
@@ -73,7 +73,9 @@ exports.ThisRoomRejected = function(req,res) {
 }
 
 exports.index = function (req, res) {
-    res.render('index');
+    res.render('index', {
+        data: "this is data"
+    });
     //console.log('index');
 };
 
@@ -84,10 +86,10 @@ exports.approveroom = function(req, res) {
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"+
                 "Running \"Approve Room\" Function\n"+
                 "- ID is "+req.query.id+"\n"+
-                "- Sliced off first char "+newid+"\n");
+                "- Sliced off first char "+newid+"\n"+
                 "- Sliced off second char "+newerid+"\n");
 
-    Event.find({ _id: { $oid: newid } }, function (err, events) {
+    Event.find({ '_id.$oid': newid }, function (err, events) {
         console.log("- Ran Event.find() function\n");
         if (err) res.send('error!!!');
         else {
@@ -113,25 +115,15 @@ exports.denyroom = function(req, res) {
 
 
 
-    Event.find({ '_id': { '$oid': req.query.id } }, function (err, events) {
+    Event.find({ '_id.$oid': req.query.id }, function (err, events) {
         if (err) return handleError(err);
         else if (events == "[]" )
             res.send('no events');
         else {
             console.log("ELSE STATEMENT REACHED");
             console.log("event title is " + events.title);
-            var newEvent = new Event({
-                title: events.title,
-                sponsor: events.sponsor,
-                contactEmail: events.contactEmail,
-                room: events.room,
-                date: events.date,
-                time_period: events.time_period,
-                admin_viewed: true,
-                admin_approved: false
-            });
 
-            newEvent.save(function (err) {
+            events.save(function (err) {
                 if (err) return console.error(err);
             });
         }
