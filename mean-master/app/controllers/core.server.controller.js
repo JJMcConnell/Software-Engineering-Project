@@ -16,7 +16,7 @@ var _ = require('lodash'),
 exports.ThisRoomApproved = function (req, res) {
     console.log(req.param('tagId'));
     if (req.param('tagId') != "") {
-        Event.find({ 'room': req.param('tagId'), 'admin_approved': false }, function (err, events) {
+        Event.find({ 'room': req.param('tagId'), 'approved': false }, function (err, events) {
             if (err) return handleError(err);
             else if (events.length == 0) {
                 console.log(events);
@@ -45,7 +45,7 @@ exports.fetchEvents = function (req, res) {
     var day = req.query.day;
     var year = req.query.year;
 
-    Event.find({}, function (err, events) {
+    Event.find({'approved': true}, function (err, events) {
         if (err) return handleError(err);
 
         res.jsonp(events);
@@ -60,7 +60,7 @@ exports.fetchEvents = function (req, res) {
 exports.fetchEventsFromRoom = function (req, res) {
     var room = req.query.room;
 
-    Event.find({'room' : room}, function (err, events) {
+    Event.find({'room' : room, 'approved': true}, function (err, events) {
         if (err) return handleError(err);
 
         res.jsonp(events);
@@ -76,7 +76,7 @@ exports.eventsByDay = function (req, res) {
     var day = req.query.day;
     var year = req.query.year;
 
-    Event.find({'month': month, 'day': day, 'year': year}, function (err, events){
+    Event.find({ 'month': month, 'day': day, 'year': year, 'approved': true }, function (err, events) {
         if (err) return handleError(err);
 
         res.jsonp(events);
@@ -115,6 +115,7 @@ exports.eventsByMonth = function (req, res) {
 }
 
 
+//THIS METHOD IS NOT UP TO DATE. IT USES THE OLD MODEL
 
 //http://localhost:3000/test takes you to this method
 //add http://localhost:3000/test?roomNumber=yournumberhere, will fetch results for that #
@@ -135,12 +136,12 @@ exports.test = function (req, res) {
     console.log("THE DOCUMENT");
     console.log("Periods that are NOT available with this room number:");
     var eventPeriods = new Array();
-    Event.find({ 'room': roomNumber, 'date': date }, 'time_period', function (err, events) {
+    Event.find({ 'room': roomNumber, 'date': date }, 'period', function (err, events) {
         if (err) return handleError(err);
         var i;
         for (i = 0; i < events.length; i++) {
-            console.log('%s', events[i].time_period);
-            eventPeriods[i] = events[i].time_period;
+            console.log('%s', events[i].period);
+            eventPeriods[i] = events[i].period;
         }
 
         res.json(eventPeriods);
@@ -192,7 +193,7 @@ exports.addevent = function (req, res) {
         day: day,
         month: month,
         year: year,
-        time_period: period
+        period: period
     });
     
     testEvent.save(function (err) {

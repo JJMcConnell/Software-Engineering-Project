@@ -29,7 +29,7 @@ describe('Event Model Unit Tests:', function () {
             year: '2014',
             month: '12',
             day: '10',
-            time_period: '5'
+            period: '5'
         });
         done();
     });
@@ -79,7 +79,7 @@ describe('Event Model Unit Tests:', function () {
         });
 
         it('should find events by day and room number', function (done) {
-            Event.find({ 'room': '121', 'year': '2014', 'day':'10', month:'12' }, 'time_period', function (err, events) {
+            Event.find({ 'room': '121', 'year': '2014', 'day':'10', month:'12' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
@@ -87,7 +87,7 @@ describe('Event Model Unit Tests:', function () {
         });
 
         it('should find events by day and period', function (done) {
-            Event.find({ 'room': '121', 'time_period': '5' }, 'time_period', function (err, events) {
+            Event.find({ 'room': '121', 'period': '5' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
@@ -95,7 +95,7 @@ describe('Event Model Unit Tests:', function () {
         });
 
         it('should find events by period only', function (done) {
-            Event.find({ 'time_period': '5' }, 'time_period', function (err, events) {
+            Event.find({ 'period': '5' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
@@ -103,21 +103,21 @@ describe('Event Model Unit Tests:', function () {
         });
 
         it('should find events by room number', function (done) {
-            Event.find({ 'room': '121' }, 'time_period', function (err, events) {
+            Event.find({ 'room': '121' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
             });
         });
         it('should find events by day', function (done) {
-            Event.find({ 'day': '10', 'month':'12', 'year': '2014' }, 'time_period', function (err, events) {
+            Event.find({ 'day': '10', 'month':'12', 'year': '2014' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
             });
         });
         it('should find events by month', function (done) {
-            Event.find({'month': '12', 'year': '2014' }, 'time_period', function (err, events) {
+            Event.find({'month': '12', 'year': '2014' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
@@ -125,7 +125,7 @@ describe('Event Model Unit Tests:', function () {
         });
 
         it('should find events by year', function (done) {
-            Event.find({ 'month': '12', 'year': '2014' }, 'time_period', function (err, events) {
+            Event.find({ 'month': '12', 'year': '2014' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
@@ -135,7 +135,7 @@ describe('Event Model Unit Tests:', function () {
 
     describe('Where no events should be found', function () {
         it('should not find events in date w/ no events', function (done) {
-            Event.find({ 'day': '40', 'month':'12', 'year':'2014' }, 'time_period', function (err, events) {
+            Event.find({ 'day': '40', 'month':'12', 'year':'2014' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length == 0)
                     done();
@@ -144,7 +144,7 @@ describe('Event Model Unit Tests:', function () {
 
 
         it('should not find events in room w/ no events', function (done) {
-            Event.find({ 'room': '123' }, 'time_period', function (err, events) {
+            Event.find({ 'room': '123' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length == 0)
                     done();
@@ -152,7 +152,7 @@ describe('Event Model Unit Tests:', function () {
         });
 
         it('should not find events at room with no period', function (done) {
-            Event.find({ 'room': '123', 'time_period': '5' }, 'time_period', function (err, events) {
+            Event.find({ 'room': '123', 'period': '5' }, 'period', function (err, events) {
                 should.not.exist(err);
                 if (events.length == 0)
                     done();

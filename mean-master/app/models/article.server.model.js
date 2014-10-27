@@ -60,17 +60,17 @@ var EventSchema = new Schema({
         required: 'Must be a valid year'
     }
     ,
-    time_period: {
-        type: String,
-        default: '',
+    period: {
+        type: Number,
+        default: 1,
         trim: true,
         required: 'Must be specified to a period on the UF schedule'
     },
-    approved: {
+    viewed: {
         type: Boolean,
         default: false
     },
-    rejected: {
+    approved: {
         type: Boolean,
         default: false
     }
