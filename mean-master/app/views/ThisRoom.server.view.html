@@ -1,7 +1,7 @@
 {% extends 'layout.server.view.html' %}
 
-{% block content %}
-<section data-ng-include="'/modules/core/views/room.client.view.html'">
+{% block content %
+<section data-ng-include="'/modules/core/views/roomCalendar.client.view.html'">
     <div class="container" data-ng-controller="HeaderController">
         <h1>Hello, and welcome to room {{ roomNo }} </h1>
         {% for reservation in reservations %}

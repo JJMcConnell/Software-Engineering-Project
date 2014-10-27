@@ -15,10 +15,6 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         // better, but this works and I didn't feel like changing it.
     var events = [];
 
-    console.log("REINIT GO> PROGRAM EXECUTE >>> % DOLLAR SIGN 5?");
-
-    console.log("SYSTEm Errr0r. what . th3fu%^&* just ^^^^^^^^ happened  .. ?");
-
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
@@ -128,7 +124,44 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             $scope.error = response.message;
         });
     };
+    $scope.fetchRoomEvents = function (roomNumber) {
+        
+        console.log(roomNumber);
+        $http.get('/fetchEventsFromRoom?room='+roomNumber).success(function (response) {
+            // If successful we assign the response to the global user model
+            console.log(response);
 
+            for (var event in response) {
+                //console.log(response[event].year);
+                //console.log(response[event].month);
+                console.log(m);
+                var hour = 6;
+                var minute = 20;
+                var period = parseInt(response[event].time_period);
+                if (period < 12) {
+                    hour += period;
+                    minute += period * 5;
+                } else {
+                    hour = 7 + (period - 12);
+                    minute = 20;
+                }
+                console.log(hour);
+                $scope.events.push({
+                    title: response[event].title,
+                    // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                    start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                    end: new Date(response[event].year, response[event].month - 1, response[event].day, hour + 1, minute)
+                });
+            }
+            
+            // And redirect to the index page
+            $location.path('/roomCalendar');
+        }).error(function (response) {
+            
+            $scope.error = response.message;
+            $location.path('/roomCalendar');
+        });
+    };
 
     /* remove event */
     $scope.remove = function(index) {
@@ -138,13 +171,13 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     $scope.changeView = function(view,calendar) {
         calendar.fullCalendar('changeView', view);
 
-        console.log("SYSTEm Errr0r. what . th3fu%^&* just ^^^^^^^^ happened  .. ?");
+        
     };
     /* Change View */
     $scope.renderCalender = function(calendar) {
         calendar.fullCalendar('render');
 
-        console.log("SYSTEm Errr0r. what . th3fu%^&* just ^^^^^^^^ happened  .. ?");
+        
     };
     /* config object */
     $scope.uiConfig = {
@@ -180,7 +213,10 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     $scope.eventSources = [$scope.events];
     //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
+
 /* EOF */
+     
         
+
     }
 ]);

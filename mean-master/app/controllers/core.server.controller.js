@@ -13,12 +13,28 @@ var _ = require('lodash'),
 
 
 
-exports.ThisRoom = function (req, res) {
-    if (req.param('tagId') != "")
-        console.log("~~~\n" + req.param('tagId') + "\n~~~")
-    res.render('ThisRoom');
-}
+exports.ThisRoomApproved = function (req, res) {
+    console.log(req.param('tagId'));
+    if (req.param('tagId') != "") {
+        Event.find({ 'room': req.param('tagId'), 'admin_approved': false }, function (err, events) {
+            if (err) return handleError(err);
+            else if (events.length == 0) {
+                console.log(events);
 
+                res.render('NoReservations',
+                    { roomNo: req.param('tagId') }
+                );
+            }
+            else {
+                console.log(events);
+                res.render('ThisRoom', {
+                    reservations: events,
+                    roomNo: req.param('tagId')
+                });
+            }
+        })
+    }
+}
 exports.index = function (req, res) {
     res.render('index');
     //console.log('index');
@@ -30,6 +46,21 @@ exports.fetchEvents = function (req, res) {
     var year = req.query.year;
 
     Event.find({}, function (err, events) {
+        if (err) return handleError(err);
+
+        res.jsonp(events);
+        console.log(events);
+
+    })
+    //res.render('index');
+
+}
+
+
+exports.fetchEventsFromRoom = function (req, res) {
+    var room = req.query.room;
+
+    Event.find({'room' : room}, function (err, events) {
         if (err) return handleError(err);
 
         res.jsonp(events);
@@ -120,12 +151,13 @@ exports.test = function (req, res) {
 }
 
 exports.roomnumber = function (req, res) {
+    console.log(req.param("tagId"));
     res.render('room');
-    /*Event.find({ 'room': req.param("tagId") }, function (err, events) {
+    Event.find({ 'room': req.param("tagId") }, function (err, events) {
         if (err) return handleError(err);
         else if (events != "") res.json(events);
         else res.send("No events in this room");
-    })*/
+    })
 }
 
 exports.addevent = function (req, res) {

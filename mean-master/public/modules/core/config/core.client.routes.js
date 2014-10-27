@@ -5,7 +5,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 	function ($stateProvider, $urlRouterProvider) {
 	    // Redirect to home view when route not found
 	    $urlRouterProvider.otherwise('/');
-        /*
+	    /*
 	    $urlRouterProvider
 			.when('/c', {
 			    templateUrl: 'modules/core/views/calendar.client.view.html',
@@ -20,6 +20,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         state('home', {
             url: '/',
             templateUrl: 'modules/core/views/home.client.view.html'
+        }).
+        state('room calendar', {
+            url: '/roomCalendar',
+            templateUrl: 'modules/core/views/roomCalendar.client.view.html'
         });
 
 	    // Home state routing
