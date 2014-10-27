@@ -15,10 +15,7 @@ module.exports = function(app) {
 
     // ROOMS
     app.route('/adminview').get(core.adminview);
-
-    app.route('/room/:tagId').get(core.ThisRoomApproved);
+    app.route('/adminview_room/?:room').get(core.AdminWithRoom);
     app.route('/room/?:tagId').get(core.ThisRoomApproved);
-
-    app.route('/rejectedroom/:tagId').get(core.ThisRoomRejected);
     app.route('/rejectedroom/?:tagId').get(core.ThisRoomRejected);
 };

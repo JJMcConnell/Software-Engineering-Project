@@ -22,14 +22,14 @@ exports.ThisRoomApproved = function(req,res) {
                 console.log(events);
 
                 res.render('NoReservations', 
-                    {roomNo: req.param('tagId')}
+                    {room: req.param('tagId')}
                 );
             }
             else {
                 // console.log(events);
                 res.render('ThisRoom', { 
                 reservations: events, 
-                roomNo: req.param('tagId')
+                room: req.param('tagId')
                 });
             }
         })
@@ -50,6 +50,20 @@ exports.adminview = function(req,res) {
     })
 }
 
+exports.AdminWithRoom = function(req,res) {
+    Event.find({ 'viewed': false, 'room': req.param('room')}, function (err, events) {
+        if (err) {
+            res.send('error!');
+            return handleError(err);
+        }
+        else {
+            res.render('adminview', { 
+                reservations: events
+            });
+        }
+    });
+}
+
 exports.ThisRoomRejected = function(req,res) {
     if (req.param('tagId') != "") {
         Event.find({ 'room': req.param('tagId'), 'approved': false, 'viewed': true }, function (err, events) {
@@ -58,15 +72,16 @@ exports.ThisRoomRejected = function(req,res) {
                 console.log(events);
 
                 res.render('NoReservations', 
-                    {roomNo: req.param('tagId')}
+                    {room: req.param('tagId')}
                 );
             }
             else {
                 console.log(events);
                 res.render('ThisRoom', { 
-                reservations: events, 
-                roomNo: req.param('tagId')
-                });
+                    reservations: events, 
+                    room: req.param('tagId')
+                    }
+                );
             }
         })
     }
@@ -121,7 +136,9 @@ exports.addevent = function (req, res) {
         sponsor: sponsor,
         contactEmail: email,
         room: roomNumber,
-        date: date,
+        month: '11',
+        day: '01',
+        year: '2014',
         period: period,
         viewed: false,
         approved: false

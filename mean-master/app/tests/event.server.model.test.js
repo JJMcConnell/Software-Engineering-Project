@@ -34,11 +34,11 @@ var the_period = Math.floor((Math.random() * 7) + 1);
 
 var rooms = ['101', '106', '120', '121', '142', '143',
 			'144', '145', '146', '147', '232', '233'];
-
+var the_room = rooms[Math.floor(Math.random()*rooms.length)];
 
 console.log('title: '+name1+'\nsponsor: '+name2+
 		  '\nemail: '+email+'\nday: '+the_day+'\nmonth: '+
-		  the_month+'\nperiod: '+the_period);
+		  the_month+'\nperiod: '+the_period+'\nroom: '+the_room);
  
 describe('Event Model Unit Tests:', function() {
 	beforeEach(function(done) {
@@ -47,7 +47,7 @@ describe('Event Model Unit Tests:', function() {
 	        title: name1,
 	        sponsor: name2,
 	        contactEmail: email,
-	        room: '120',
+	        room: the_room,
             day: the_day,
             month: the_month,
             year: 2014,

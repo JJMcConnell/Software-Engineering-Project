@@ -20,7 +20,7 @@
 				<tbody>
 			{% for reservation in reservations %}
 		  		<tr>
-		  			<td> {{ room }} </td>
+		  			<td> {{ reservation.room }} </td>
 		    		<td> {{ reservation.day }}-{{ reservation.month }}-{{ reservation.year }}</td> 
 		    		<td> {{ reservation.period }} </td> 
 		    		<td> {{ reservation.contactEmail}} </td>
