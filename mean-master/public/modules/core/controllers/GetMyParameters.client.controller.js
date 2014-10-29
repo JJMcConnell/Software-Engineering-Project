@@ -4,6 +4,12 @@
 angular.module('core').controller('GetMyParameters', ['$scope',
 	function ($scope) {
 
+	    $scope.getTagAfter = function (pageName) {
+	        console.log(window.localStorage);
+	        var prmstr = window.location.pathname.substr(window.location.pathname.indexOf(pageName) + pageName.length);
+	        return prmstr;
+	    }
+
 	    $scope.getParameter = function (parameter) {
 	        return $scope.getSearchParameters()[parameter];
 	    }

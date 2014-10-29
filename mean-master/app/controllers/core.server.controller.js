@@ -15,7 +15,8 @@ var _ = require('lodash'),
 
 exports.ThisRoomApproved = function (req, res) {
     console.log(req.param('tagId'));
-    if (req.param('tagId') != "") {
+    res.render('ThisRoom', { roomNo: req.param('tagId') });
+    /*if (req.param('tagId') != "") {
         Event.find({ 'room': req.param('tagId'), 'approved': false }, function (err, events) {
             if (err) return handleError(err);
             else if (events.length == 0) {
@@ -33,7 +34,7 @@ exports.ThisRoomApproved = function (req, res) {
                 });
             }
         })
-    }
+    }*/
 }
 exports.index = function (req, res) {
     res.render('index');
@@ -59,7 +60,7 @@ exports.fetchEvents = function (req, res) {
 
 exports.fetchEventsFromRoom = function (req, res) {
     var room = req.query.room;
-
+    
     Event.find({'room' : room, 'approved': true}, function (err, events) {
         if (err) return handleError(err);
 
@@ -154,11 +155,12 @@ exports.test = function (req, res) {
 exports.roomnumber = function (req, res) {
     console.log(req.param("tagId"));
     res.render('room');
+    /*
     Event.find({ 'room': req.param("tagId") }, function (err, events) {
         if (err) return handleError(err);
         else if (events != "") res.json(events);
         else res.send("No events in this room");
-    })
+    })*/
 }
 
 exports.addevent = function (req, res) {
