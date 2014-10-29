@@ -58,7 +58,12 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     };
     /* alert on Drop */
      $scope.alertOnDrop = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
-       $scope.alertMessage = ('Event Droped to make dayDelta ' + dayDelta);
+         $scope.alertMessage = ('Event Droped to make dayDelta ' + dayDelta);
+         console.log(minuteDelta);
+         //if(event.start._i<new Date(event.start._i.getYear(), event.start._i.getMonth(),event.start._i.getDay(), 7, 25));
+         //event._start._i = new Date(event._start._i.getYear(), event._start._i.getMonth(), event._start._i.getDay(), 7, 25);
+         
+         console.log(revertFunc);
     };
     /* alert on Resize */
     $scope.alertOnResize = function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
@@ -183,7 +188,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         calendar: {
             slotDuration: '01:05:00',
             minTime: '07:25:00',
-            maxTime: '24:00:00',
+            maxTime: '22:20:00',
         height: 500,
         editable: true,
         header:{

@@ -61,11 +61,11 @@
 
                     <div ng-init="fetchRoomEvents(getTagAfter('room'))" class="span8 calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
 
-                    <!-- Alert Message
+                    <!-- Alert Message -->
         <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
             <h4>{{alertMessage}}</h4>
         </div>
-            -->
+            
                     <!-- List of task for Current Date
         <ul class="unstyled">
             <li ng-repeat="e in events | filter:currentDate">
