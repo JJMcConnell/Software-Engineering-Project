@@ -26,20 +26,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'modules/core/views/roomCalendar.client.view.html'
         });
 
-	    // Home state routing
-
-<<<<<<< HEAD
 		// Home state routing
-		$stateProvider.
-		state('home', {
-			url: '/',
-			templateUrl: 'modules/core/views/home.client.view.html'
-		});
-
-		// Home state routing
-
-=======
->>>>>>> 3bae882d87d195c73aaae43d23a4404cddc33ffd
 	}
 
 

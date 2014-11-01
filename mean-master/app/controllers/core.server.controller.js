@@ -156,7 +156,6 @@ exports.index = function (req, res) {
     res.render('index', {
         data: "this is data"
     });
-    //console.log('index');
 };
 
 exports.approveroom = function(req, res) {
