@@ -100,15 +100,36 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         $http.get('/fetchEvents', $scope.credentials).success(function (response) {
             
             console.log(response);
+            var hour = 6;
+            var minute = 20;
+            for (var period = 1; period < 16; period++) {
 
+                hour = 6 + period;
+                minute = 20 + (period * 5);
+
+                console.log(hour);
+                $scope.events.push({
+                    title: "CLICK TO BOOK",
+                    // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                    start: new Date(2014, 11, 7, hour, minute),
+                    end: new Date(2014, 11, 7, hour + 1, minute - 10),
+                    url: '/'
+                });
+            }
+            $scope.events.push({
+                title: "There are 11 events on this day. Click to expand",
+                // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                start: new Date(2014, 11, 8, 9, 35),
+                end: new Date(2014, 11, 8, 10, 35),
+                url: '/'
+            });
             for (var event in response) {
-                
                 //console.log(response[event].year);
                 //console.log(response[event].month);
                 console.log(m);
                 var hour = 6;
                 var minute = 20;
-                var period = parseInt(response[event].time_period);
+                var period = parseInt(period);
                 if (period < 12) {
                     hour += period;
                     minute += period * 5;
