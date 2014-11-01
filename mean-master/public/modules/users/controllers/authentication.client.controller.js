@@ -3,14 +3,8 @@
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
 	function($scope, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
-
-<<<<<<< HEAD
-		// If user is signed in then redirect back home
-		if ($scope.authentication.user) $location.path('/');
-=======
 		// YEAH!!!
 		if ($scope.authentication.user) $location.path('/calendar');
->>>>>>> 3bae882d87d195c73aaae43d23a4404cddc33ffd
 
 		$scope.signup = function() {
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
@@ -30,11 +24,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$scope.authentication.user = response;
 
 				// And redirect to the index page
-<<<<<<< HEAD
-				$location.path('/');
-=======
 				$location.path('/calendar');
->>>>>>> 3bae882d87d195c73aaae43d23a4404cddc33ffd
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
