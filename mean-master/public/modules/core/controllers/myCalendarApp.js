@@ -83,23 +83,26 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
       }
     };
     /* add custom event*/
-    $scope.addEvent = function() {
+    $scope.addEvent = function () {
+        console.log(y);
+        console.log(m);
       $scope.events.push({
         title: 'Open Sesame',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        className: ['openSesame']
+        start: new Date(y, m, 28, 9),
+        end: new Date(y, m, 28, 10)
       });
-
+      $location.path('calendar');
 
     };
 
     $scope.fetchEvents = function () {
+
         $http.get('/fetchEvents', $scope.credentials).success(function (response) {
-            // If successful we assign the response to the global user model
+            
             console.log(response);
 
             for (var event in response) {
+                
                 //console.log(response[event].year);
                 //console.log(response[event].month);
                 console.log(m);
@@ -119,7 +122,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     title: response[event].title,
                     // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
                     start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
-                    end: new Date(response[event].year, response[event].month-1, response[event].day, hour+1, minute)
+                    //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                    end: new Date(response[event].year, response[event].month-1, response[event].day, hour+1, minute-10)
                 });
             }
 
@@ -128,7 +132,36 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         }).error(function (response) {
             $scope.error = response.message;
         });
+        
     };
+
+    $scope.createPeriodOpenings = function () {
+        var hour = 6;
+        var minute = 20;
+        for (var period = 1; period < 16; period++) {
+
+            hour = 6 + period;
+            minute = 20 + (period * 5);
+
+            console.log(hour);
+            $scope.events.push({
+                title: "CLICK TO BOOK",
+                // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                start: new Date(2014, 11, 7, hour, minute),
+                end: new Date(2014, 11, 7, hour + 1, minute - 10),
+                url: '/'
+            });
+        }
+        $scope.events.push({
+            title: "There are 11 events on this day. Click to expand",
+            // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+            start: new Date(2014, 11, 8, 9, 35),
+            end: new Date(2014, 11, 8, 10, 35),
+            url: '/'
+        });
+    }
+
+
     $scope.fetchRoomEvents = function (roomNumber) {
         
         console.log(roomNumber);
