@@ -74,20 +74,9 @@
                 <div class="col-lg-12 text-center">
                     <h1>Music Room Schedule Application</h1>
                     <p class="lead">For Practice, Meetings, and More</p>
-                    <ul class="nav nav-tabs" role="tablist">
-                      <li class="active"><a href="#">Room Search</a>
-                         by Room Number
-                        </li>
-                      <li><a href="#">Time Period Search</a>
-                         by Time Period</li>
-                      <li><a href="#">Full Calendar Search</a>
-                         by Date</li>
-                    </ul>
-
+                   
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
-
-
 
                     <br>
                     
@@ -206,17 +195,8 @@
 
 
                         <br>
-                        <!--
-                        <!-- Request Information module ends here --><!--
                         <!-- Request Information module ends here -->
-                        <li>Testing stuff here pls ignore</li>
-                        <li ng-repeat="item in items">
-                            <a ng-click="selected.item = item">{{ item }}</a>
-                        </li>
-
-
-                        Selected: <b>{{ selected.item }}</b>-->
-                        Selected: <b>{{ selected.item }}</b>
+                        
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="submit">Submit</button>
                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
@@ -236,8 +216,6 @@
         <div class="modal-footer">
 
         </div>
-        <button class="btn btn-default" ng-click="open()">Request</button>
-
 
 
         <!--Select Room Number and form pops up-->
@@ -275,25 +253,6 @@
     
     </div>
 
-    <div class="btn-group" ng-click="open()" data-toggle="buttons">
-        <button type="button" class="btn btn-default">Room 101</button>
-        <button type="button" class="btn btn-default">Room 106</button>
-        <button type="button" class="btn btn-default">Room 120</button>
-        <button type="button" class="btn btn-default">Room 121</button>
-        <button type="button" class="btn btn-default">Room 142</button>
-        <button type="button" class="btn btn-default">Room 143</button>
-    </div>
-    <br>
-    <br>
-    <div class="btn-group" ng-click="open()" data-toggle="buttons">
-        <button type="button" class="btn btn-default">Room 144</button>
-        <button type="button" class="btn btn-default">Room 145</button>
-        <button type="button" class="btn btn-default">Room 146</button>
-        <button type="button" class="btn btn-default">Room 147</button>
-        <button type="button" class="btn btn-default">Room 232</button>
-        <button type="button" class="btn btn-default">Room 233</button>
-
-    </div>
 <script type='text/javaScript'>
     $('#datePicker').datepaginator();
 </script>
