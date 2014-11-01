@@ -16,19 +16,22 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
                 'public/lib/fullcalendar/dist/fullcalendar.css',
+                'public/lib/bootstrap-datepicker/css/datepicker.css'
 			],
 			js: [
+				'public/lib/jquery/dist/jquery.js',
+				'public/lib/jquery-ui/ui/jquery-ui.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js',
 				'public/lib/angular-animate/angular-animate.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-                'public/lib/jquery/dist/jquery.js',
-				'public/lib/jquery-ui/ui/jquery-ui.js',
 				'public/lib/moment/moment.js',
 				'public/lib/fullcalendar/dist/fullcalendar.js',
 				'public/lib/angular-ui-calendar/src/calendar.js',
+				'public/lib/bootstrap-datepaginator/src/js/bootstrap-datepaginator.js',
+				'public/lib/bootstrap-datepicker/js/bootstrap-datepicker.js'
 			]
 		},
 		css: [
