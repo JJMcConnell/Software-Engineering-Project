@@ -4,7 +4,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 	function($scope, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
 		// YEAH!!!
-		if ($scope.authentication.user) $location.path('/calendar');
+		if ($scope.authentication.user) window.location.replace('adminview');
 
 		$scope.signup = function() {
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
@@ -24,7 +24,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$scope.authentication.user = response;
 
 				// And redirect to the index page
-				$location.path('/calendar');
+				//$location.path('/calendar');
+				window.location.replace('adminview');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
