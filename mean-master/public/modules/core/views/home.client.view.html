@@ -30,6 +30,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+     
+
 </head>
 
 <body>
@@ -49,8 +51,6 @@
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
 
-                    
-                    
                 </div>
             </div>
             <!-- /.row -->
@@ -106,10 +106,19 @@
                             </div>
                         </div>
 
+                        <!--
                         <div class="form-group">
                             <label for="inputDate" class="col-sm-2 control-label">Date</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10"> 
                                 <input type="date" name="date" class="form-control" ng-model="date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" ng-required>
+                            </div>
+                        </div>
+                        -->
+
+                        <div class="form-group">
+                            <label for="inputDate" class="col-sm-2 control-label"> TestDate</label>
+                            <div class="col-sm-10"> 
+                                <input type="text" name="date" class="form-control" id="inputDate">
                             </div>
                         </div>
 
@@ -204,14 +213,25 @@
 
 
     </div>
-    <!-- jQuery Version 1.11.0 -->
-    <script src="js/jquery-1.11.0.js"></script>
+ 
     
     </div>
+
 
 <script type='text/javaScript'>
     $('#datePicker').datepaginator();
 </script>
+
+ <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      altField: "#alternate",
+      altFormat: "DD, d MM, yy"
+    });
+  });
+  </script>
+
+                      <div> <p>Date: <input type="text" id="datepicker">&nbsp;<input type="text" id="alternate" size="30"></p> </div>
 
 
 </body>
