@@ -18,4 +18,12 @@ module.exports = function(app) {
     app.route('/adminview_room/?:room').get(core.AdminWithRoom);
     app.route('/room/?:tagId').get(core.ThisRoomApproved);
     app.route('/rejectedroom/?:tagId').get(core.ThisRoomRejected);
+
+    // CALENDAR
+    app.route('/fetchEvents').get(core.fetchEvents);
+    app.route('/fetchEventsFromRoom').get(core.fetchEventsFromRoom);
+    app.route('/calendarDay').get(core.eventsByDay);
+    app.route('/calendarYear').get(core.eventsByYear);
+    app.route('/calendarMonth').get(core.eventsByMonth);
+
 };

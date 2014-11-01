@@ -106,6 +106,9 @@ exports.forgot = function(req, res, next) {
                   done(err);
               }
             );
+			res.send({
+			    message: 'An email has been sent to ' + user.email + ' with further instructions.'
+			});
 		}
 	], function(err) {
 		if (err) return next(err);

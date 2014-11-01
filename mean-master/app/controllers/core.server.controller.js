@@ -19,17 +19,14 @@ exports.ThisRoomApproved = function(req,res) {
         Event.find({ 'room': req.param('tagId'), 'approved': true }, function (err, events) {
             if (err) return handleError(err);
             else if (events.length == 0) {
-                console.log(events);
-
                 res.render('NoReservations', 
                     {room: req.param('tagId')}
                 );
             }
             else {
-                // console.log(events);
                 res.render('ThisRoom', { 
-                reservations: events, 
-                room: req.param('tagId')
+                    reservations: events, 
+                    room: req.param('tagId')
                 });
             }
         })
@@ -47,6 +44,74 @@ exports.adminview = function(req,res) {
                 reservations: events
             });
         }
+    })
+}
+
+exports.index = function (req, res) {
+    res.render('index');
+    //console.log('index');
+};
+
+exports.fetchEvents = function (req, res) {
+    var month = req.query.month;
+    var day = req.query.day;
+    var year = req.query.year;
+
+    Event.find({'approved': true}, function (err, events) {
+        if (err) return handleError(err);
+
+        res.jsonp(events);
+        console.log(events);
+
+    })
+    //res.render('index');
+}
+
+
+exports.fetchEventsFromRoom = function (req, res) {
+    var room = req.query.room;
+    
+    Event.find({'room' : room, 'approved': true}, function (err, events) {
+        if (err) return handleError(err);
+
+        res.jsonp(events);
+        console.log(events);
+
+    })
+    //res.render('index');
+}
+
+exports.eventsByDay = function (req, res) {
+    var month = req.query.month;
+    var day = req.query.day;
+    var year = req.query.year;
+
+    Event.find({ 'month': month, 'day': day, 'year': year, 'approved': true }, function (err, events) {
+        if (err) return handleError(err);
+
+        res.jsonp(events);
+        console.log(events);
+
+    })
+    //res.render('index');
+}
+
+exports.eventsByYear = function (req, res) {
+    var year = req.query.year;
+
+    Event.find({'year': year}, function (err, events){
+        if (err) return handleError(err);
+        res.jsonp(events);
+    })
+}
+
+exports.eventsByMonth = function (req, res) {
+    var month = req.query.month;
+    var year = req.query.year;
+
+    Event.find({'month': month, 'year': year}, function (err, events){
+        if (err) return handleError(err);
+        res.jsonp(events);
     })
 }
 
@@ -116,6 +181,17 @@ exports.denyroom = function(req, res) {
     res.redirect('/adminview');
 };
 
+exports.roomnumber = function (req, res) {
+    console.log(req.param("tagId"));
+    res.render('room');
+    /*
+    Event.find({ 'room': req.param("tagId") }, function (err, events) {
+        if (err) return handleError(err);
+        else if (events != "") res.json(events);
+        else res.send("No events in this room");
+    })*/
+}
+
 exports.addevent = function (req, res) {
     //get is req.query
     //post is req.body
@@ -129,26 +205,40 @@ exports.addevent = function (req, res) {
     var date = req.query.date;
     var roomNumber = req.query.roomNumber;
     var period = req.query.period;
+    var description = req.query.description;
 
-    // console.log("asdf" + date.toString());
+    var year = date.substring(0, 4);
+    var month = date.substring(5, 7);
+    var day = date.substring(8, 10);
+    console.log(date.toString());
+    console.log("day: " + day);
+    console.log("month: " + month);
+    console.log("year: " + year);
     var testEvent = new Event({
+        description: description,
         title: name,
         sponsor: sponsor,
         contactEmail: email,
+        contactPhone: telephone,
         room: roomNumber,
-        month: '11',
-        day: '01',
-        year: '2014',
-        period: period,
-        viewed: false,
-        approved: false
+        day: day,
+        month: month,
+        year: year,
+        period: period
     });
-
+    
     testEvent.save(function (err) {
         if (err) return console.error(err);
     });
 
-    //console.log(name);
+    Event.find({ "title": 'potluck' }, function (err, doc) {
+        if (err) {
+            return;
+        }
+        console.log("THE DOCUMENT");
+        console.log(doc);
+    })
+
     res.redirect('/');
     console.log("Done Adding to Database");
 };

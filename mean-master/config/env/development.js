@@ -3,7 +3,9 @@
 module.exports = {
 	db: 'mongodb://master:master@ds039850.mongolab.com:39850/projectdb',
 	app: {
-		title: 'MEAN.JS - Development Environment'
+	    title: 'The University of Florida Department of Music Presents: Room Scheduler',
+	    description: 'A Calendar Application for the University of Florida Music Department.',
+	    keywords: 'calendar, application, music, schedule, scheduling, request, event, events'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

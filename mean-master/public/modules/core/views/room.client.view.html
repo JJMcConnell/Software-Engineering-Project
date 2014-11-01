@@ -1,8 +1,17 @@
 <div class="container" data-ng-controller="HeaderController">
+<<<<<<< HEAD
 	<h1>Hello, and welcome to room {{ roomNo }} </h1>
 	{% for reservation in reservations %}
   		<li{% if loop.first %} class="first"{% endif %}>
     		{{ reservation }}
   		</li>
 	{% endfor %}
+=======
+    <h1>Hello, and welcome to room {{ roomNo }} </h1>
+    {% for reservation in reservations %}
+    <li{% if loop.first %} class="first" {% endif %}>
+        {{ reservation }}
+        </li>
+        {% endfor %}
+>>>>>>> 3bae882d87d195c73aaae43d23a4404cddc33ffd
 </div>

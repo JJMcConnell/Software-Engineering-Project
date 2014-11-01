@@ -15,7 +15,11 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 			$scope.isCollapsed = false;
 		});
 
+<<<<<<< HEAD
 		$locationProvider.html5Mode(true);
+=======
+		//$locationProvider.html5Mode(true);
+>>>>>>> 3bae882d87d195c73aaae43d23a4404cddc33ffd
 
 	}
 ]);
