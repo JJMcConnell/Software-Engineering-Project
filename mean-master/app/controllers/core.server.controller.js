@@ -195,13 +195,13 @@ exports.addevent = function (req, res) {
     //get is req.query
     //post is req.body
     //dont ask me why, its just how it is
-
+    console.log(req.query);
     //example request http://localhost:3000/requestevent?name=Trevor+Owens&telephone=1231234123&sponsor=Trevor+is+Awesome&date=1994-01-04&roomNumber=232A&period=10
     var name = req.query.name;
     var email = req.query.email;
     var telephone = req.query.telephone;
     var sponsor = req.query.name;
-    var date = req.query.date;
+    var date = 'asdf';
     var roomNumber = req.query.roomNumber;
     var period = req.query.period;
     var description = req.query.description;
@@ -227,17 +227,14 @@ exports.addevent = function (req, res) {
     });
     
     testEvent.save(function (err) {
-        if (err) return console.error(err);
+        if (err) return res.status(400).send({
+            message: 'Error adding event. Make sure the fields are entered correctly.'
+        });
+
+        else
+            res.redirect('/');
     });
 
-    Event.find({ "title": 'potluck' }, function (err, doc) {
-        if (err) {
-            return;
-        }
-        console.log("THE DOCUMENT");
-        console.log(doc);
-    })
-
-    res.redirect('/');
+    
     console.log("Done Adding to Database");
 };

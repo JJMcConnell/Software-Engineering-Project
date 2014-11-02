@@ -15,9 +15,26 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           $scope.error = response.message;
       });
   }
+    
   $scope.ok = function () {
       
-      $modalInstance.close($scope.selected.item);
+      $scope.error = '';
+      $http.get('/requestevent', $scope.request).success(function (response) {
+          $modalInstance.close($scope.selected.item);
+          // And redirect to the index page
+          $location.path('/');
+
+          //ENTER SUCCESS MESSAGE CODE HERE!!
+          //For example, redirect to a success page $location.path('/success');
+
+      }).error(function (response) {
+          $scope.error = response.message;
+          console.log($scope.error);
+      });
+      console.log($scope.request.name);
+      console.log($scope.request);
+      console.log($scope.request.period);
+      
   };
 
   $scope.cancel = function () {

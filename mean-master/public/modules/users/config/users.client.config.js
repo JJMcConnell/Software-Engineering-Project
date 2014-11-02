@@ -20,7 +20,6 @@ angular.module('users').config(['$httpProvider',
 								// Add unauthorized behaviour 
 								break;
 						}
-						$location.path('/calendar');
 						return $q.reject(rejection);
 					}
 				};
