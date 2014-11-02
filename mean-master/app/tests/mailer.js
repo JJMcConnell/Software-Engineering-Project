@@ -1,3 +1,4 @@
+'use strict';
 
 var mailer = require("mailer")
 , username = "trevorkowens@gmail.com"
