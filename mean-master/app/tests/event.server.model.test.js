@@ -63,7 +63,7 @@ describe('Event Model Unit Tests:', function() {
 	var assert = require('assert'),
     http = require('http');
 
-	describe('/', function () {
+	describe('GENERAL', function () {
 	    it('should connect to localhost', function (done) {
 	        http.get('http://localhost:3000', function (res) {
 	            done();
@@ -72,7 +72,7 @@ describe('Event Model Unit Tests:', function() {
 
 	});
 
-	describe('Method Save', function() {
+	describe('SAVING EVENTS', function() {
 		it("should connect to database", function (done) {
 	        var db = mongoose.connect('mongodb://master:master@ds039850.mongolab.com:39850/projectdb', function (err) {  
 	            if (err)
@@ -92,8 +92,7 @@ describe('Event Model Unit Tests:', function() {
 	    });
 	});
 
-	describe('Where events should be found', function() {
-
+	describe('FINDING EVENTS THAT EXIST', function() {
 	    it('should find events given no parameters', function (done) {
 	        Event.find({ }, 'time_period', function (err, events) {
 	            should.not.exist(err);
@@ -101,24 +100,18 @@ describe('Event Model Unit Tests:', function() {
 	                done();
 	        });
 	    });	
+	});
 
-	    it('should find events by day and room number', function (done) {
-	        Event.find({ 'room': the_room, 'day': the_day, 'month': the_month, 'year': '2014'}, 'time_period', function (err, events) {
-	            should.not.exist(err);
-	            if (events.length > 0)
-	                done();
-	        });
-	    });
+	describe('\t~~ finding events given single parameter', function() {
+        it('by sponsor', function (done) {
+            Event.find({ 'sponsor': 'Michael' }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
 
-	    it('should find events by room and period', function (done) {
-	        Event.find({ 'room': the_room, 'period': the_period }, 'time_period', function (err, events) {
-	            should.not.exist(err);
-	            if (events.length > 0)
-	                done();
-	        });
-	    });
-
-	    it('should find events by period only', function (done) {
+        it('by period', function (done) {
 	        Event.find({ 'period': the_period }, 'time_period', function (err, events) {
 	            should.not.exist(err);
 	            if (events.length > 0)
@@ -126,98 +119,232 @@ describe('Event Model Unit Tests:', function() {
 	        });
 	    });
 
-	    it('should find events by room number', function (done) {
+	    it('by room number', function (done) {
 	        Event.find({ 'room': '121' }, 'period', function (err, events) {
 	            should.not.exist(err);
 	            if (events.length > 0)
 	                done();
 	        });
 	    });	
-	    it('should find events by day', function (done) {
+	    it('by day', function (done) {
 	        Event.find({ 'day': the_day, 'month': the_month, 'year': '2014' }, 'period', function (err, events) {
 	            should.not.exist(err);
 	            if (events.length > 0)
 	                done();
 	        });
 	    });	
-	    it('should find events by month', function (done) {
-            Event.find({'month': the_month, 'year': '2014' }, 'period', function (err, events) {
+	    it('by month', function (done) {
+            Event.find({'month': the_month }, function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
             });
         });	
-        it('should find events by year', function (done) {
-            Event.find({ 'month': the_month, 'year': '2014' }, 'period', function (err, events) {
+        it('by year', function (done) {
+            Event.find({ 'year': '2014' }, function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
             });
         });
+
+        it('by email', function (done) {
+            Event.find({ 'contactEmail': 'Beta@gmail.com' }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
+        it('by approved (false)', function (done) {
+            Event.find({ 'approved': false }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
+        it('by approved (true)', function (done) {
+            Event.find({ 'approved': true }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
+        it('by viewed (true)', function (done) {
+            Event.find({ 'viewed': true }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
+        it('by viewed (false)', function (done) {
+            Event.find({ 'viewed': false }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
 	});
 
-	describe('Where no events should be found', function() {
-   		it('should not find events in date w/ no events', function (done) {
-	        Event.find({ 'day': the_day, 'month': the_month, 'year': '2015' }, 'time_period', function (err, events) {
+	describe('\t~~ finding events given two parameters', function() {
+
+	    it('should find events by day and room number', function (done) {
+	        Event.find({ 'room': the_room, 'day': the_day }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length > 0)
+	                done();
+	        });
+	    });
+
+	    it('should find events by day and period', function (done) {
+	        Event.find({ 'day': the_day, 'period': the_period }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length > 0)
+	                done();
+	        });
+	    });
+
+	    it('should find events by room number and period', function (done) {
+	        Event.find({ 'room': the_room, 'period': the_period }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length > 0)
+	                done();
+	        });
+	    });
+
+	    it('should find events by title and period', function (done) {
+	        Event.find({ 'title': name1, 'period': the_period }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length > 0)
+	                done();
+	        });
+	    });
+
+	    it('should find events by month and room number', function (done) {
+	        Event.find({ 'month': the_month, 'room': the_room }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length > 0)
+	                done();
+	        });
+	    });
+	});
+
+	describe('\t~~ finding events with more than two parameters', function() {
+	    it('should find events by month, room number and period', function (done) {
+	        Event.find({ 'month': the_month, 'room': the_room, 'period': the_period }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length > 0)
+	                done();
+	        });
+	    });
+
+	    /*
+	    it('should find events by day, month, and year', function (done) {
+	        Event.find({ 'day': the_day, 'month': the_month, 'year': the_year }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length > 0)
+	                done();
+	        });
+	    });
+		*/
+
+	    it('should find events by title, sponsor, and email', function (done) {
+	        Event.find({ 'title': name1, 'sponsor': name2, 'contactEmail': email }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length > 0)
+	                done();
+	        });
+	    });		
+	});
+
+
+	describe('NOT FINDING EVENTS THAT DON\'T EXIST', function() {
+   		it('invalid year', function (done) {
+	        Event.find({ 'year': '2015' }, function (err, events) {
 	            should.not.exist(err);
 	            if (events.length == 0)
 	                done();
 	        });
 	    });	
 
-
-   		it('should not find events in room w/ no events', function (done) {
-	        Event.find({ 'room': '123' }, 'time_period', function (err, events) {
+   		it('invalid month', function (done) {
+	        Event.find({ 'month': '13' }, function (err, events) {
 	            should.not.exist(err);
 	            if (events.length == 0)
 	                done();
 	        });
 	    });	
 
-	    it('should not find events at room with no period', function (done) {
-	        Event.find({ 'room': '120', 'period': '54' }, 'time_period', function (err, events) {
+   		it('invalid room', function (done) {
+	        Event.find({ 'room': '123' }, function (err, events) {
+	            should.not.exist(err);
+	            if (events.length == 0)
+	                done();
+	        });
+	    });	
+
+	    it('invalid period', function (done) {
+	        Event.find({ 'room': '120', 'period': '54' }, function (err, events) {
 	            should.not.exist(err);
 	            if (events.length == 0)
 	                done();
 	        });
 	    });
 	});
-
-
-
 	//admin approved test
 	//admin rejected test
 	/*
 	describe('Admin Functions', function() {
 			it("should approve the request", function (done) {
-		        	var id = myEvent.id;
+		        	var id = myEvent._id;
+
+		        	console.log('myEvent._id is ' + myEvent._id);
+		        	console.log('id is: ' + id);
+		        	// var fakeEvent;
 
     				Event.findByIdAndUpdate( id, 
-        				{ 'viewed': true, 'approved': true }, 
-        					function(err, events) {}
+    					{ 'viewed': true, 'approved': true }, 
+    					function(err, events) {
+    						console.log('events is '+events);
+    						console.log('events.approved is '+events.approved);
+    					}
     				);
 
-    				Event.findById( id, 'period', function (err, event) {
+    				Event.findById( id, function (err, event) {
+	            		console.log('find by id runs');
+	            		console.log('the event is '+event);
+	            		console.log('the event\'s title is '+event.title);
 	            		should.not.exist(err);
-	            		if (event.approved == true)
+	            		console.log('after error?');
+	            		if ( event.approved == true ) {
+	                		console.log('i\'m true!');
 	                		done();
+	            		}
+	                	else console.log("woopsie!");
 	        		});
 		        
 			});
 
 
+		    /*
 		    it('should reject the request', function (done) {
 	       	    	return myEvent.save(function (err) {
 		            	should.not.exist(err);
 		           	 done();
 		        	});
 		    });
-	});*/
+			
+	});
+	*/
 
 
 
     afterEach(function (done) {
-        /*
+        /* ._id.$oid
         Event.remove({ _id: myEvent.id }, function (err) {
             if (!err) {
                 done();
