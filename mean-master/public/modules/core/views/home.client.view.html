@@ -18,7 +18,7 @@
     <!-- Custom CSS -->
     <style>
     body {
-        padding-top: 70px;
+        padding-top: 40px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
     </style>
@@ -39,24 +39,14 @@
     <!-- Page Content -->
     <div class="container">
 
-        <!-- Page Content -->
-        <div class="container">
-            <div class="row">
-                <div class="jumbotron">
-                    <h1> HELLO THERE BEAUTIFUL (◕‿◕✿) </h1>
-                    <br>
-                    <br>
-                    
+                <div class="jumbotron text-center" >
+                    <h2> Music Room Schedule Application </h2>
+                    <h3> Step 1 - Choose a date! </h3>
                    
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
 
                 </div>
-            </div>
-            <!-- /.row -->
-    
-        </div>
-        <!-- /.container -->
     
 
     <!-- Request Button is here -->
@@ -188,32 +178,31 @@
 
         <!--Select Room Number and form pops up-->
         <!--Should auto-populate form-->
+      
+        <div class="jumbotron">
+            <h3> Step 2 - Pick a room! </h3>
+            <div class="btn-toolbar" ng-click="open()" data-toggle="buttons">
+                <button type="button" class="btn btn-default">Room 101</button>
+                <button type="button" class="btn btn-default">Room 106</button>
+                <button type="button" class="btn btn-default">Room 120</button>
+                <button type="button" class="btn btn-default">Room 121</button>
+                <button type="button" class="btn btn-default">Room 142</button>
+                <button type="button" class="btn btn-default">Room 143</button>
+            </div>
+                <br>
+            <div class="btn-toolbar" ng-click="open()" data-toggle="buttons">
+                <button type="button" class="btn btn-default">Room 144</button>
+                <button type="button" class="btn btn-default">Room 145</button>
+                <button type="button" class="btn btn-default">Room 146</button>
+                <button type="button" class="btn btn-default">Room 147</button>
+                <button type="button" class="btn btn-default">Room 232</button>
+                <button type="button" class="btn btn-default">Room 233</button>
+                        
+            </div>
 
-        <div class="btn" ng-click="open()" data-toggle="buttons">
-            <button type="button" class="btn btn-default">Room 101</button>
-            <button type="button" class="btn btn-default">Room 106</button>
-            <button type="button" class="btn btn-default">Room 120</button>
-            <button type="button" class="btn btn-default">Room 121</button>
-            <button type="button" class="btn btn-default">Room 142</button>
-            <button type="button" class="btn btn-default">Room 143</button>
         </div>
-            <br>
-            <br>
-        <div class="btn" ng-click="open()" data-toggle="buttons">
-            <button type="button" class="btn btn-default">Room 144</button>
-            <button type="button" class="btn btn-default">Room 145</button>
-            <button type="button" class="btn btn-default">Room 146</button>
-            <button type="button" class="btn btn-default">Room 147</button>
-            <button type="button" class="btn btn-default">Room 232</button>
-            <button type="button" class="btn btn-default">Room 233</button>
-                    
-        </div>
 
-        <br>
-        <br>
-        <br>
-        <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-
+        <!--<div ng-show="selected">Selection from a modal: {{ selected }}</div>-->
 
     </div>
  
@@ -233,9 +222,9 @@
     });
   });
   </script>
-
+<!--
                       <div> <p>Date: <input type="text" id="datepicker">&nbsp;<input type="text" id="alternate" size="30"></p> </div>
-
+-->
 
 </body>
 
