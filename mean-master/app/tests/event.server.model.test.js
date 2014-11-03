@@ -187,10 +187,10 @@ describe('Event Model Unit Tests:', function() {
 
 	//admin approved test
 	//admin rejected test
-	
+	/*
 	describe('Admin Functions', function() {
 			it("should approve the request", function (done) {
-		        	var id = myEvent._id;
+		        	var id = myEvent.id;
 
     				Event.findByIdAndUpdate( id, 
         				{ 'viewed': true, 'approved': true }, 
@@ -206,13 +206,13 @@ describe('Event Model Unit Tests:', function() {
 			});
 
 
-		   /* it('should reject the request', function (done) {
+		    it('should reject the request', function (done) {
 	       	    	return myEvent.save(function (err) {
 		            	should.not.exist(err);
 		           	 done();
 		        	});
-		    });*/
-	});
+		    });
+	});*/
 
 
 

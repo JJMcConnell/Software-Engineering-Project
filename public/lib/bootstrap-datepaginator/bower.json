@@ -1,0 +1,29 @@
+{
+  "name": "bootstrap-datepaginator",
+  "version": "1.1.0",
+  "homepage": "https://github.com/jondmiles/bootstrap-datepaginator",
+  "description": "Date Paginator for Twitter Bootstrap",
+  "main": ["dist/bootstrap-datepaginator.min.js", "dist/bootstrap-datepaginator.min.css"],
+  "keywords": [
+    "Twitter",
+    "Bootstrap",
+    "Date",
+    "Paginator"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.0.3",
+    "jquery": "~2.0.3",
+    "bootstrap-datepicker": "~1.2.0",
+    "moment": "~2.4.0"
+  },
+  "resolutions": {
+    "bootstrap": "~3.0.3"
+  }
+}

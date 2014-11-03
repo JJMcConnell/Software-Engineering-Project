@@ -30,56 +30,27 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+     
+
 </head>
 
 <body>
   <!--<script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script>-->
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">App Home</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#!/calendar">View Events</a>
-                    </li>
-                    <li>
-                        <a href="#!/signin">Admin Page</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact/Options</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
     <!-- Page Content -->
     <div class="container">
 
         <!-- Page Content -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1>Music Room Schedule Application</h1>
-                    <p class="lead">For Practice, Meetings, and More</p>
+                <div class="jumbotron">
+                    <h1> HELLO THERE BEAUTIFUL (◕‿◕✿) </h1>
+                    <br>
+                    <br>
+                    
                    
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
 
-                    <br>
-                    
                 </div>
             </div>
             <!-- /.row -->
@@ -98,47 +69,56 @@
                 <ul>
 
                     <!-- Request Information is here -->
-                    <form class="form-horizontal" role="form" action="requestevent">
+                    <form class="form-horizontal" role="form" data-ng-submit="ok()">
 
                         <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" ng-required>
+                                <input type="text" data-ng-model="request.name" name="name" class="form-control" id="inputName" placeholder="Name" ng-required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10">
-                                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" ng-required>
+                                    <input type="email" data-ng-model="request.email" name="email" class="form-control" id="inputEmail" placeholder="Email" ng-required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputNumber" class="col-sm-2 control-label">Phone</label>
                             <div class="col-sm-10">
-                                <input type="tel" name="telephone" class="form-control" id="inputNumber" placeholder="Phone Number" ng-required>
+                                <input type="tel" data-ng-model="request.telephone" name="telephone" class="form-control" id="inputNumber" placeholder="Phone Number" ng-required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputSponsor" class="col-sm-2 control-label">Sponsor</label>
                             <div class="col-sm-10">
-                                <input type="text" name="sponsor" class="form-control" id="inputSponsor" placeholder="Sponsor/Organization Name" ng-required>
+                                <input type="text" data-ng-model="request.sponsor" name="sponsor" class="form-control" id="inputSponsor" placeholder="Sponsor/Organization Name" ng-required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputDesc" class="col-sm-2 control-label">Description</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="description" id="inputDesc" placeholder="Describe the reason for requesting a room." rows="2"></textarea>
+                                <textarea class="form-control" data-ng-model="request.description" name="description" id="inputDesc" placeholder="Describe the reason for requesting a room." rows="2"></textarea>
                             </div>
                         </div>
 
+                        <!--
                         <div class="form-group">
                             <label for="inputDate" class="col-sm-2 control-label">Date</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10"> 
                                 <input type="date" name="date" class="form-control" ng-model="date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" ng-required>
+                            </div>
+                        </div>
+                        -->
+
+                        <div class="form-group">
+                            <label for="inputDate" class="col-sm-2 control-label"> TestDate</label>
+                            <div class="col-sm-10"> 
+                                <input type="text" data-ng-model="request.date" name="date" class="form-control" id="inputDate">
                             </div>
                         </div>
 
@@ -147,7 +127,7 @@
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-addon">#</div>
-                                    <select class="form-control" name="roomNumber" ng-model="roomNum" ng-click="getUnavailablePeriods(roomNum, date)" id="inputRoom" ng-required>
+                                    <select class="form-control" name="roomNumber" ng-model="roomNum" id="inputRoom" ng-required>
                                         <option>106B</option>
                                         <option>120</option>
                                         <option>121</option>
@@ -188,7 +168,9 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div data-ng-show="error" class="text-center text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
                         <br>
                         <!-- Request Information module ends here -->
                         <!-- On submitform have a success message, on cancel close the big modal-->
@@ -203,20 +185,10 @@
         </script>
 
 
-
-        <div class="modal-footer" style='margin-top:-20px'>
-           
-        </div>
-
-        <div class="modal-footer">
-
-        </div>
-
-
         <!--Select Room Number and form pops up-->
         <!--Should auto-populate form-->
 
-        <div class="btn-group" ng-click="open()" data-toggle="buttons">
+        <div class="btn" ng-click="open()" data-toggle="buttons">
             <button type="button" class="btn btn-default">Room 101</button>
             <button type="button" class="btn btn-default">Room 106</button>
             <button type="button" class="btn btn-default">Room 120</button>
@@ -226,7 +198,7 @@
         </div>
             <br>
             <br>
-        <div class="btn-group" ng-click="open()" data-toggle="buttons">
+        <div class="btn" ng-click="open()" data-toggle="buttons">
             <button type="button" class="btn btn-default">Room 144</button>
             <button type="button" class="btn btn-default">Room 145</button>
             <button type="button" class="btn btn-default">Room 146</button>
@@ -243,14 +215,25 @@
 
 
     </div>
-    <!-- jQuery Version 1.11.0 -->
-    <script src="js/jquery-1.11.0.js"></script>
+ 
     
     </div>
+
 
 <script type='text/javaScript'>
     $('#datePicker').datepaginator();
 </script>
+
+ <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      altField: "#alternate",
+      altFormat: "DD, d MM, yy"
+    });
+  });
+  </script>
+
+                      <div> <p>Date: <input type="text" id="datepicker">&nbsp;<input type="text" id="alternate" size="30"></p> </div>
 
 
 </body>
