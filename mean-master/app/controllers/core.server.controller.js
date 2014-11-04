@@ -191,25 +191,25 @@ exports.index = function (req, res) {
 };
 
 exports.approveroom = function(req, res) {
-    var id = req.query.id.slice(1);
+    var id = req.query.id;
 
     Event.findByIdAndUpdate( id, 
         { 'viewed': true, 'approved': true }, 
         function(err, events) {}
     );
 
-    res.redirect('/adminview');
+    res.redirect('/#!/adminview');
 };
 
 exports.denyroom = function(req, res) {
-    var id = req.query.id.slice(1);
+    var id = req.query.id;
 
     Event.findByIdAndUpdate( id, 
         { 'viewed': true, 'approved': false }, 
         function(err, events) {}
     );
 
-    res.redirect('/adminview');
+    res.redirect('/#!/adminview');
 };
 
 exports.roomnumber = function (req, res) {

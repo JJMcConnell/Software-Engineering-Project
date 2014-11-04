@@ -27,9 +27,8 @@
                 2. have hidden fields for the room id for each form
                 3. only submit the form whose button is pushed
                 -->
-
                     <form action='approveroom'>
-                        <input type='hidden' name='id' value=" {{ reservation.id }}">
+                        <input name='id' type="hidden" value="{{reservation._id}}">
                         <button type='submit' id='approve' class='btn btn-success' value=''>
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
@@ -37,7 +36,7 @@
                 </td>
                 <td>
                     <form action='denyroom'>
-                        <input type='hidden' name='id' value=" {{ reservation.id }}">
+                        <input type='hidden' name='id' value="{{reservation._id}}">
                         <button type='submit' class='btn btn-danger' value='deny'>
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
