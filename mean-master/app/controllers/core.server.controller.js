@@ -47,6 +47,38 @@ exports.adminview = function(req,res) {
     })
 }
 
+exports.fetchRequests = function (req, res) {
+    console.log("REQUESTS");
+    /*passport.authenticate('local', function (err, user, info) {
+        if (err || !user) {
+            res.status(400).send(info);
+        } else {
+            // Remove sensitive data before login
+            user.password = undefined;
+            user.salt = undefined;
+
+            req.login(user, function (err) {
+                if (err) {
+                    res.status(400).send(err);
+                } else {
+                    res.jsonp(user);
+                }
+            });
+        }
+    })(req, res, next);*/
+    
+    Event.find({ 'viewed': false }, function (err, events) {
+        if (err) {
+            res.send('error!');
+            return handleError(err);
+        }
+        else {
+            res.jsonp(events);
+        }
+    });
+};
+
+
 exports.index = function (req, res) {
     res.render('index');
     //console.log('index');
@@ -57,7 +89,7 @@ exports.fetchEvents = function (req, res) {
     var day = req.query.day;
     var year = req.query.year;
 
-    Event.find({'approved': true}, function (err, events) {
+    Event.find({ 'approved': true }, function (err, events) {
         if (err) return handleError(err);
 
         res.jsonp(events);
@@ -65,13 +97,13 @@ exports.fetchEvents = function (req, res) {
 
     })
     //res.render('index');
-}
+};
 
 
 exports.fetchEventsFromRoom = function (req, res) {
     var room = req.query.room;
-    
-    Event.find({'room' : room, 'approved': true}, function (err, events) {
+
+    Event.find({ 'room': room, 'approved': true }, function (err, events) {
         if (err) return handleError(err);
 
         res.jsonp(events);
@@ -79,7 +111,7 @@ exports.fetchEventsFromRoom = function (req, res) {
 
     })
     //res.render('index');
-}
+};
 
 exports.eventsByDay = function (req, res) {
     var month = req.query.month;
@@ -94,63 +126,63 @@ exports.eventsByDay = function (req, res) {
 
     })
     //res.render('index');
-}
+};
 
 exports.eventsByYear = function (req, res) {
     var year = req.query.year;
 
-    Event.find({'year': year}, function (err, events){
+    Event.find({ 'year': year }, function (err, events) {
         if (err) return handleError(err);
         res.jsonp(events);
     })
-}
+};
 
 exports.eventsByMonth = function (req, res) {
     var month = req.query.month;
     var year = req.query.year;
 
-    Event.find({'month': month, 'year': year}, function (err, events){
+    Event.find({ 'month': month, 'year': year }, function (err, events) {
         if (err) return handleError(err);
         res.jsonp(events);
     })
-}
+};
 
-exports.AdminWithRoom = function(req,res) {
-    Event.find({ 'viewed': false, 'room': req.param('room')}, function (err, events) {
+exports.AdminWithRoom = function (req, res) {
+    Event.find({ 'viewed': false, 'room': req.param('room') }, function (err, events) {
         if (err) {
             res.send('error!');
             return handleError(err);
         }
         else {
-            res.render('adminview', { 
+            res.render('adminview', {
                 reservations: events
             });
         }
     });
-}
+};
 
-exports.ThisRoomRejected = function(req,res) {
+exports.ThisRoomRejected = function (req, res) {
     if (req.param('tagId') != "") {
         Event.find({ 'room': req.param('tagId'), 'approved': false, 'viewed': true }, function (err, events) {
             if (err) return handleError(err);
             else if (events.length == 0) {
                 console.log(events);
 
-                res.render('NoReservations', 
-                    {room: req.param('tagId')}
+                res.render('NoReservations',
+                    { room: req.param('tagId') }
                 );
             }
             else {
                 console.log(events);
-                res.render('ThisRoom', { 
-                    reservations: events, 
+                res.render('ThisRoom', {
+                    reservations: events,
                     room: req.param('tagId')
-                    }
+                }
                 );
             }
         })
     }
-}
+};
 
 exports.index = function (req, res) {
     res.render('index', {

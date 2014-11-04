@@ -297,12 +297,12 @@ describe('Event Model Unit Tests:', function() {
 	});
 	//admin approved test
 	//admin rejected test
-	/*
+	
 	describe('Admin Functions', function() {
 			it("should approve the request", function (done) {
-		        	var id = myEvent._id;
+		        	var id = myEvent.id;
 
-		        	console.log('myEvent._id is ' + myEvent._id);
+		        	console.log('myEvent._id is ' + myEvent.id);
 		        	console.log('id is: ' + id);
 		        	// var fakeEvent;
 
@@ -337,22 +337,19 @@ describe('Event Model Unit Tests:', function() {
 		           	 done();
 		        	});
 		    });
-			
+	        */
+
+			it('should remove an event from the database', function (done) {
+			    var idt = myEvent._id;
+			    console.log(idt);
+			    done();
+			});
 	});
-	*/
+	
 
 
 
     afterEach(function (done) {
-        /* ._id.$oid
-        Event.remove({ _id: myEvent.id }, function (err) {
-            if (!err) {
-                done();
-            }
-            else {
-                console.log('error with afterEach');
-            }
-        });*/
         done();
     });
 });

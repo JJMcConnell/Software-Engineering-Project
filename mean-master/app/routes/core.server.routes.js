@@ -14,6 +14,7 @@ module.exports = function(app) {
     app.route('/denyroom').get(core.denyroom);
 
     // ROOMS
+    app.route('/fetchRequests').get(core.fetchRequests);
     app.route('/adminview').get(core.adminview);
     app.route('/adminview_room/?:room').get(core.AdminWithRoom);
     app.route('/room/?:tagId').get(core.ThisRoomApproved);

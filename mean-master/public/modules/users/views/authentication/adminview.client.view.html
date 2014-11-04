@@ -1,0 +1,49 @@
+<div class="container" data-ng-controller="AuthenticationController">
+
+    <center><h1>Requested Rooms</h1></center>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Room</th>
+                <th>Period</th>
+                <th>Date</th>
+                <th>Contact</th>
+                <!-- <th>Room ID</th> -->
+                <th>Approve</th>
+                <th>Deny</th>
+            </tr>
+        <tbody ng-init="fetchRequests()">
+            <tr ng-repeat="reservation in events">
+                <td ng-show="reservation.room"> {{ reservation.room }} </td>
+                <td> {{ reservation.period }} </td>
+                <td> {{ reservation.day }}-{{ reservation.month }}-{{ reservation.year }}</td>
+                <td> {{ reservation.contactEmail}} </td>
+                <!-- <td> {{ reservation.id }} </td> -->
+                <td>
+
+                    <!--
+                1. make two forms: one for approving, one for denying
+                2. have hidden fields for the room id for each form
+                3. only submit the form whose button is pushed
+                -->
+
+                    <form action='approveroom'>
+                        <input type='hidden' name='id' value=" {{ reservation.id }}">
+                        <button type='submit' id='approve' class='btn btn-success' value=''>
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form action='denyroom'>
+                        <input type='hidden' name='id' value=" {{ reservation.id }}">
+                        <button type='submit' class='btn btn-danger' value='deny'>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
