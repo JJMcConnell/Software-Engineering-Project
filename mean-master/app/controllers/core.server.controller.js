@@ -12,6 +12,10 @@ var _ = require('lodash'),
 
 //EventSchema = require('./../models/article.server.model.js'),
 
+var mailer = require("mailer")
+, username = "trevorkowens@gmail.com"
+, password = "WD6Av_7xpEyY_rgoRzFNGg";
+
 
 
 exports.ThisRoomApproved = function(req,res) {
@@ -198,6 +202,25 @@ exports.approveroom = function(req, res) {
         function(err, events) {}
     );
 
+
+    mailer.send(
+  {
+      host: "smtp.mandrillapp.com"
+  , port: 587
+  , to: "trevorkowens@gmail.com"
+  , from: "trevorkowens@gmail.com"
+  , subject: "Event Approved"
+  , body: "Your event has been approved."
+  , authentication: "login"
+  , username: username
+  , password: password
+  }, function (err, result) {
+      if (err) {
+          console.log(err);
+      }
+  }
+);
+
     res.redirect('/#!/adminview');
 };
 
@@ -208,6 +231,25 @@ exports.denyroom = function(req, res) {
         { 'viewed': true, 'approved': false }, 
         function(err, events) {}
     );
+
+
+    mailer.send(
+  {
+      host: "smtp.mandrillapp.com"
+  , port: 587
+  , to: "trevorkowens@gmail.com"
+  , from: "trevorkowens@gmail.com"
+  , subject: "Event Denied"
+  , body: "Your event has been denied."
+  , authentication: "login"
+  , username: username
+  , password: password
+  }, function (err, result) {
+      if (err) {
+          console.log(err);
+      }
+  }
+);
 
     res.redirect('/#!/adminview');
 };
