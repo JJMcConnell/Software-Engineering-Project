@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://master:master@ds039850.mongolab.com:39850/projectdb',
+    db: 'mongodb://localhost/mean-dev',
 	app: {
 	    title: 'The University of Florida Department of Music Presents: Room Scheduler',
 	    description: 'A Calendar Application for the University of Florida Music Department.',

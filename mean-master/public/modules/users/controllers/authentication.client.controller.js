@@ -4,14 +4,16 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 	function($scope, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
 		// YEAH!!!
-		//if ($scope.authentication.user) $location.path('/adminview');
+	    if ($scope.authentication.user) $location.path('/adminview');
+
+		$scope.validateLogin = function () {
+		    if (!$scope.authentication.user) $location.path('/');
+		}
+
 		$scope.events = [];
 		$scope.fetchRequests = function () {
-		    
-		    console.log('Doing thing. . ');
 		    $http.get('/fetchRequests', $scope.credentials).success(function (response) {
 		        // If successful we assign the response to the global user model
-		        console.log('SUCCESSS!!!!!!!!!!!!!!!!!!!');
 		        $scope.events = response;
 		        return response;
 		        console.log(response);

@@ -2,7 +2,7 @@
 
     <center><h1>Requested Rooms</h1></center>
 
-    <table class="table table-striped">
+    <table ng-init="validateLogin()" class="table table-striped">
         <thead>
             <tr>
                 <th>Room</th>
@@ -23,10 +23,10 @@
                 <td>
 
                     <!--
-                1. make two forms: one for approving, one for denying
-                2. have hidden fields for the room id for each form
-                3. only submit the form whose button is pushed
-                -->
+                    1. make two forms: one for approving, one for denying
+                    2. have hidden fields for the room id for each form
+                    3. only submit the form whose button is pushed
+                    -->
                     <form action='approveroom'>
                         <input name='id' type="hidden" value="{{reservation._id}}">
                         <button type='submit' id='approve' class='btn btn-success' value=''>
