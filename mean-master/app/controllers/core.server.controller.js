@@ -270,14 +270,14 @@ exports.addevent = function (req, res) {
     //post is req.body
     //dont ask me why, its just how it is
     console.log(req.body);
-    var name = req.query.name;
-    var email = req.query.email;
-    var telephone = req.query.telephone;
-    var sponsor = req.query.name;
-    var date = req.query.date;
-    var roomNumber = req.query.roomNumber;
-    var period = req.query.period;
-    var description = req.query.description;
+    var name = req.body.name;
+    var email = req.body.email;
+    var telephone = req.body.telephone;
+    var sponsor = req.body.sponsor;
+    var date = req.body.date;
+    var roomNumber = req.body.roomNumber;
+    var period = req.body.period;
+    var description = req.body.description;
 
 date='2014-12-12';
 
@@ -351,7 +351,7 @@ date='2014-12-12';
 
     if(period == null){
         return res.status(400).send({
-            message: 'Error. Sponsor not entered correctly.'
+            message: 'Error. Period not entered correctly.'
         });
     }
  testEvent.save(function (err) {
