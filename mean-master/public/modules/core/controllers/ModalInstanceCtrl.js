@@ -19,8 +19,10 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
   $scope.ok = function () {
       
       $scope.error = '';
+      console.log($scope.request);
+      console.log('This method?');
       $http.get('/requestevent', $scope.request).success(function (response) {
-          $modalInstance.close($scope.selected.item);
+         
           // And redirect to the index page
           $location.path('/');
 
@@ -31,9 +33,6 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           $scope.error = response.message;
           console.log($scope.error);
       });
-      console.log($scope.request.name);
-      console.log($scope.request);
-      console.log($scope.request.period);
       
   };
 

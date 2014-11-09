@@ -59,7 +59,7 @@
                 <ul>
 
                     <!-- Request Information is here -->
-                    <form class="form-horizontal" role="form" action="/requestEvent">
+                    <form class="form-horizontal" role="form" ng-submit="ok()">
 
                         <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Name</label>
@@ -100,7 +100,7 @@
                         <div class="form-group">
                             <label for="inputDate" class="col-sm-2 control-label">Date</label>
                             <div class="col-sm-10"> 
-                                <input type="date" name="date" class="form-control" ng-model="date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" ng-required>
+                                <input type="date" name="date" class="form-control" ng-model="request.date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" ng-required>
                             </div>
                         </div>
                         
@@ -118,7 +118,7 @@
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-addon">#</div>
-                                    <select class="form-control" name="roomNumber" ng-model="roomNum" id="inputRoom" ng-required>
+                                    <select class="form-control" name="roomNumber" ng-model="request.roomNumber" id="inputRoom" ng-required>
                                         <option>106B</option>
                                         <option>120</option>
                                         <option>121</option>

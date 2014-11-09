@@ -269,7 +269,8 @@ exports.addevent = function (req, res) {
     //get is req.query
     //post is req.body
     //dont ask me why, its just how it is
-    console.log(req.query);
+    console.log(req.request);
+    console.log(req);
     //example request http://localhost:3000/requestevent?name=Trevor+Owens&telephone=1231234123&sponsor=Trevor+is+Awesome&date=1994-01-04&roomNumber=232A&period=10
     var name = req.query.name;
     var email = req.query.email;
@@ -280,9 +281,33 @@ exports.addevent = function (req, res) {
     var period = req.query.period;
     var description = req.query.description;
 
+date='2014-12-12';
+
     var year = date.substring(0, 4);
     var month = date.substring(5, 7);
     var day = date.substring(8, 10);
+
+
+
+    if(day == null){
+        return res.status(400).send({
+            message: 'Error. Day not entered correctly.'
+        });
+    }
+
+    if(month == null){
+        return res.status(400).send({
+            message: 'Error. Month not entered correctly.'
+        });
+    }
+
+    if(year == null){
+        return res.status(400).send({
+            message: 'Error. Year not entered correctly.'
+        });
+    }
+
+
     console.log(date.toString());
     console.log("day: " + day);
     console.log("month: " + month);
@@ -299,8 +324,39 @@ exports.addevent = function (req, res) {
         year: year,
         period: period
     });
-    
-    testEvent.save(function (err) {
+  
+   
+
+    if(name == null){
+        return res.status(400).send({
+            message: 'Error. Name not entered correctly.'
+        });
+    }
+
+    if(sponsor == null){
+        return res.status(400).send({
+            message: 'Error. Sponsor not entered correctly.'
+        });
+    }
+
+    if(email == null){
+        return res.status(400).send({
+            message: 'Error. Email not entered correctly.'
+        });
+    }
+
+    if(roomNumber == null){
+        return res.status(400).send({
+            message: 'Error. Room not entered correctly.'
+        });
+    }
+
+    if(period == null){
+        return res.status(400).send({
+            message: 'Error. Sponsor not entered correctly.'
+        });
+    }
+ testEvent.save(function (err) {
         if (err) return res.status(400).send({
             message: 'Error adding event. Make sure the fields are entered correctly.'
         });
@@ -308,7 +364,5 @@ exports.addevent = function (req, res) {
         else
             res.redirect('/');
     });
-
-    
     console.log("Done Adding to Database");
 };
