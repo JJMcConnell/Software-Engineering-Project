@@ -37,6 +37,8 @@ var rooms = ['101', '106', '120', '121', '142', '143',
 			'144', '145', '146', '147', '232', '233'];
 var the_room = rooms[Math.floor(Math.random()*rooms.length)];
 
+var the_id = '';
+
 console.log('title: '+name1+'\nsponsor: '+name2+
 		  '\nemail: '+email+'\nday: '+the_day+'\nmonth: '+
 		  the_month+'\nperiod: '+the_period+'\nroom: '+the_room);
@@ -72,6 +74,7 @@ describe('Event Model Unit Tests:', function() {
 
 	});
 
+
 	describe('SAVING EVENTS', function() {
 		it("should connect to database", function (done) {
 	        var db = mongoose.connect('mongodb://master:master@ds039850.mongolab.com:39850/projectdb', function (err) {  
@@ -85,12 +88,15 @@ describe('Event Model Unit Tests:', function() {
 
 
 	    it('should be able to save events in database', function (done) {
-       	    return myEvent.save(function (err) {
+       	    return myEvent.save(function (err, document) {
 	            should.not.exist(err);
+	            the_id = document._id;
+	            console.log(the_id);
 	            done();
 	        });
 	    });
 	});
+
 
 	describe('FINDING EVENTS THAT EXIST', function() {
 	    it('should find events given no parameters', function (done) {
@@ -300,48 +306,47 @@ describe('Event Model Unit Tests:', function() {
 	
 	describe('Admin Functions', function() {
 			it("should approve the request", function (done) {
-		        	var id = myEvent.id;
-
-		        	console.log('myEvent._id is ' + myEvent.id);
-		        	console.log('id is: ' + id);
-		        	// var fakeEvent;
-
-    				Event.findByIdAndUpdate( id, 
+    				Event.findByIdAndUpdate( the_id, 
     					{ 'viewed': true, 'approved': true }, 
     					function(err, events) {
-    						console.log('events is '+events);
-    						console.log('events.approved is '+events.approved);
+    						if(err){
+    							console.log('Error = yes');
+    						}
+    						should.not.exist(err);
     					}
     				);
 
-    				Event.findById( id, function (err, event) {
-	            		console.log('find by id runs');
-	            		console.log('the event is '+event);
-	            		console.log('the event\'s title is '+event.title);
+    				Event.findById( the_id, function (err, event) {
 	            		should.not.exist(err);
-	            		console.log('after error?');
 	            		if ( event.approved == true ) {
-	                		console.log('i\'m true!');
+	                		console.log("Event approved successfully.");
 	                		done();
 	            		}
-	                	else console.log("woopsie!");
+	                	else console.log("Event approved did not work. Woopsie!");
 	        		});
-		        
 			});
 
 
-		    /*
+		    
 		    it('should reject the request', function (done) {
-	       	    	return myEvent.save(function (err) {
-		            	should.not.exist(err);
-		           	 done();
-		        	});
+	       	    	Event.findByIdAndUpdate( the_id, 
+    					{ 'viewed': true, 'approved': false }, 
+    					function(err, events) {
+    						should.not.exist(err);
+    					}
+    				);
+
+    				Event.findById( the_id, function (err, event) {
+	            		should.not.exist(err);
+	            		if ( event.approved == false ) {
+	                		done();
+	            		}
+	                	else console.log("Event rejected did not work. Woopsie!");
+	        		});
 		    });
-	        */
+	        
 
 			it('should remove an event from the database', function (done) {
-			    var idt = myEvent._id;
-			    console.log(idt);
 			    done();
 			});
 	});

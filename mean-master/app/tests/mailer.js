@@ -3,7 +3,7 @@
 var mailer = require("mailer")
 , username = "trevorkowens@gmail.com"
 , password = "WD6Av_7xpEyY_rgoRzFNGg";
-
+/*
 mailer.send(
   {
       host: "smtp.mandrillapp.com"
@@ -20,4 +20,4 @@ mailer.send(
           console.log(err);
       }
   }
-);
+);*/
