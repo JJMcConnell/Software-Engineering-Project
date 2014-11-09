@@ -279,32 +279,20 @@ exports.addevent = function (req, res) {
     var period = req.body.period;
     var description = req.body.description;
 
-date='2014-12-12';
-
+if(date != null){
     var year = date.substring(0, 4);
     var month = date.substring(5, 7);
     var day = date.substring(8, 10);
+}
 
 
-
-    if(day == null){
+    if(date == null){
         return res.status(400).send({
-            message: 'Error. Day not entered correctly.'
+            message: 'Error. Date not entered correctly.'
         });
     }
 
-    if(month == null){
-        return res.status(400).send({
-            message: 'Error. Month not entered correctly.'
-        });
-    }
-
-    if(year == null){
-        return res.status(400).send({
-            message: 'Error. Year not entered correctly.'
-        });
-    }
-
+   
 
     console.log(date.toString());
     console.log("day: " + day);
