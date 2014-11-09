@@ -269,9 +269,7 @@ exports.addevent = function (req, res) {
     //get is req.query
     //post is req.body
     //dont ask me why, its just how it is
-    console.log(req.request);
     console.log(req.body);
-    //example request http://localhost:3000/requestevent?name=Trevor+Owens&telephone=1231234123&sponsor=Trevor+is+Awesome&date=1994-01-04&roomNumber=232A&period=10
     var name = req.query.name;
     var email = req.query.email;
     var telephone = req.query.telephone;
