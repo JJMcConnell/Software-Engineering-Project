@@ -15,13 +15,12 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           $scope.error = response.message;
       });
   }
-    
   $scope.ok = function () {
       
       $scope.error = '';
       console.log($scope.request);
       console.log('This method?');
-      $http.get('/requestevent', $scope.request).success(function (response) {
+      $http.post('/requestevent', $scope.request).success(function (response) {
          
           // And redirect to the index page
           $location.path('/');

@@ -1,0 +1,34 @@
+<div class="container" data-ng-controller="AuthenticationController">
+
+    <center><h1>Requested Rooms</h1></center>
+
+    <table ng-init="validateLogin()" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Room</th>
+                <th>Period</th>
+                <th>Date</th>
+                <th>Contact</th>
+                <!-- <th>Room ID</th> -->
+                <th>Cancel Event</th>
+            </tr>
+        <tbody ng-init="fetchApprovedEvents()">
+            <tr ng-repeat="reservation in events">
+                <td ng-show="reservation.room"> {{ reservation.room }} </td>
+                <td> {{ reservation.period }} </td>
+                <td> {{ reservation.day }}-{{ reservation.month }}-{{ reservation.year }}</td>
+                <td> {{ reservation.contactEmail}} </td>
+                <!-- <td> {{ reservation.id }} </td> -->
+              
+                <td>
+                    <form action='denyroom'>
+                        <input type='hidden' name='id' value="{{reservation._id}}">
+                        <button type='submit' class='btn btn-danger' value='deny'>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

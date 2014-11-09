@@ -100,7 +100,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         $http.get('/fetchEvents', $scope.credentials).success(function (response) {
             
             console.log(response);
-            
+            $scope.createPeriodOpenings();
             for (var event in response) {
                 //console.log(response[event].year);
                 //console.log(response[event].month);
@@ -137,10 +137,15 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     $scope.createPeriodOpenings = function () {
         var hour = 6;
         var minute = 20;
-        for (var period = 1; period < 16; period++) {
+        for (var period = 1; period < 15; period++) {
 
             hour = 6 + period;
+
             minute = 20 + (period * 5);
+            if (period > 11) {
+                hour++;
+                minute = 20;
+            }
 
             console.log(hour);
             $scope.events.push({
