@@ -75,5 +75,33 @@ var EventSchema = new Schema({
     }
 });
 
+var AdminSettings = new Schema({
+    startDay: {
+        type: String,
+        required: 'Must be a valid day'
+    },
+    startMonth: {
+        type: String,
+        required: 'Must be a valid day'
+    },
+    startYear: {
+        type: String,
+        required: 'Must be a valid day'
+    },
+    endDay: {
+        type: String,
+        required: 'Must be a valid day'
+    },
+    endMonth: {
+        type: String,
+        required: 'Must be a valid day'
+    },
+    endYear: {
+        type: String,
+        required: 'Must be a valid day'
+    }
+});
+
 mongoose.model('Event', EventSchema);
 mongoose.model('Article', ArticleSchema);
+mongoose.model('Admin Setting', AdminSettings);
