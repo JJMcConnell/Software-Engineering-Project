@@ -30,6 +30,11 @@ var EventSchema = new Schema({
         default: '',
         required: 'Must have a sponsor'
     },
+    organization: {
+        type: String,
+        default: '',
+        required: 'Must be part of an organization'
+    },
     contactEmail: {
         type: String,
         default: '',
@@ -40,6 +45,10 @@ var EventSchema = new Schema({
         type: String,
         default: ''
         // not required
+    },
+    isClass: {
+        type: Boolean,
+        default: false
     },
     room: {
         type: String,
