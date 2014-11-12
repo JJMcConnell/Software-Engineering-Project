@@ -7,9 +7,10 @@
             <tr>
                 <th>Room</th>
                 <th>Period</th>
-                <th>Date</th>
+                <th>Request For</th>
                 <th>Contact</th>
                 <!-- <th>Room ID</th> -->
+                <th>Submitted on</th>
                 <th>Approve</th>
                 <th>Deny</th>
             </tr>
@@ -20,6 +21,7 @@
                 <td> {{ reservation.day }}-{{ reservation.month }}-{{ reservation.year }}</td>
                 <td> {{ reservation.contactEmail}} </td>
                 <!-- <td> {{ reservation.id }} </td> -->
+                <td> {{ reservation.created}} </td>
                 <td>
 
                     <!--
