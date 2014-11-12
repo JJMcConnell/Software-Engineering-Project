@@ -16,10 +16,25 @@ var mailer = require("mailer")
 , username = "trevorkowens@gmail.com"
 , password = "WD6Av_7xpEyY_rgoRzFNGg";
 
+/*
+ * TABLE OF CONTENTS:
+ * index
+ * adminview
+ * fetchRequests
+ * fetchEvents
+ * fetchEventsFromRoom
+ * eventsByMonth
+ * eventsByDay
+ * eventsByYear
+ * adminWithRoom
+ * thisRoomApproved
+ * thisRoomRejected
+ * approveroom
+ * denyroom
+ * addevent
+ */
 exports.index = function (req, res) {
-    res.render('index', {
-        data: "this is data"
-    });
+    res.render('index');
 };
 
 exports.adminview = function(req,res) {
@@ -65,11 +80,6 @@ exports.fetchRequests = function (req, res) {
             res.jsonp(events);
         }
     });
-};
-
-
-exports.index = function (req, res) {
-    res.render('index');
 };
 
 exports.fetchEvents = function (req, res) {
