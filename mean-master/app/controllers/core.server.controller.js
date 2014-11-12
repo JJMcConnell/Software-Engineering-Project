@@ -294,35 +294,36 @@ exports.addevent = function (req, res) {
         period: period
     });
   
-   
+    var m1 = 'Error. ';
+    var m2 = ' not entered correctly';
 
     if(name == null){
         return res.status(400).send({
-            message: 'Error. Name not entered correctly.'
+            message: m1+'Name'+m2
         });
     }
 
     if(sponsor == null){
         return res.status(400).send({
-            message: 'Error. Sponsor not entered correctly.'
+            message: m1+'Sponsor'+m2
         });
     }
 
     if(email == null){
         return res.status(400).send({
-            message: 'Error. Email not entered correctly.'
+            message: m1+'Email'+m2
         });
     }
 
     if(roomNumber == null){
         return res.status(400).send({
-            message: 'Error. Room not entered correctly.'
+            message: m1+'Room'+m2
         });
     }
 
     if(period == null){
         return res.status(400).send({
-            message: 'Error. Period not entered correctly.'
+            message: m1+'Period'+m2
         });
     }
  testEvent.save(function (err) {
