@@ -16,26 +16,11 @@ var mailer = require("mailer")
 , username = "trevorkowens@gmail.com"
 , password = "WD6Av_7xpEyY_rgoRzFNGg";
 
-
-
-exports.ThisRoomApproved = function(req,res) {
-    if (req.param('tagId') != "") {
-        Event.find({ 'room': req.param('tagId'), 'approved': true }, function (err, events) {
-            if (err) return handleError(err);
-            else if (events.length == 0) {
-                res.render('NoReservations', 
-                    {room: req.param('tagId')}
-                );
-            }
-            else {
-                res.render('ThisRoom', { 
-                    reservations: events, 
-                    room: req.param('tagId')
-                });
-            }
-        })
-    }
-}
+exports.index = function (req, res) {
+    res.render('index', {
+        data: "this is data"
+    });
+};
 
 exports.adminview = function(req,res) {
     Event.find({ 'viewed': false }, function (err, events) {
@@ -85,7 +70,6 @@ exports.fetchRequests = function (req, res) {
 
 exports.index = function (req, res) {
     res.render('index');
-    //console.log('index');
 };
 
 exports.fetchEvents = function (req, res) {
@@ -102,7 +86,6 @@ exports.fetchEvents = function (req, res) {
     })
     //res.render('index');
 };
-
 
 exports.fetchEventsFromRoom = function (req, res) {
     var room = req.query.room;
@@ -165,6 +148,25 @@ exports.AdminWithRoom = function (req, res) {
     });
 };
 
+exports.ThisRoomApproved = function(req,res) {
+    if (req.param('tagId') != "") {
+        Event.find({ 'room': req.param('tagId'), 'approved': true }, function (err, events) {
+            if (err) return handleError(err);
+            else if (events.length == 0) {
+                res.render('NoReservations', 
+                    {room: req.param('tagId')}
+                );
+            }
+            else {
+                res.render('ThisRoom', { 
+                    reservations: events, 
+                    room: req.param('tagId')
+                });
+            }
+        })
+    }
+}
+
 exports.ThisRoomRejected = function (req, res) {
     if (req.param('tagId') != "") {
         Event.find({ 'room': req.param('tagId'), 'approved': false, 'viewed': true }, function (err, events) {
@@ -186,12 +188,6 @@ exports.ThisRoomRejected = function (req, res) {
             }
         })
     }
-};
-
-exports.index = function (req, res) {
-    res.render('index', {
-        data: "this is data"
-    });
 };
 
 exports.approveroom = function(req, res) {
@@ -254,17 +250,6 @@ exports.denyroom = function(req, res) {
     res.redirect('/#!/adminview');
 };
 
-exports.roomnumber = function (req, res) {
-    console.log(req.param("tagId"));
-    res.render('room');
-    /*
-    Event.find({ 'room': req.param("tagId") }, function (err, events) {
-        if (err) return handleError(err);
-        else if (events != "") res.json(events);
-        else res.send("No events in this room");
-    })*/
-}
-
 exports.addevent = function (req, res) {
     //get is req.query
     //post is req.body
@@ -279,11 +264,11 @@ exports.addevent = function (req, res) {
     var period = req.body.period;
     var description = req.body.description;
 
-if(date != null){
-    var year = date.substring(0, 4);
-    var month = date.substring(5, 7);
-    var day = date.substring(8, 10);
-}
+    if(date != null){
+        var year = date.substring(0, 4);
+        var month = date.substring(5, 7);
+        var day = date.substring(8, 10);
+    }
 
 
     if(date == null){
@@ -291,8 +276,6 @@ if(date != null){
             message: 'Error. Date not entered correctly.'
         });
     }
-
-   
 
     console.log(date.toString());
     console.log("day: " + day);
