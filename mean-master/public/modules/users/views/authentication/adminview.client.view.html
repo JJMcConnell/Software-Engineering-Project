@@ -15,20 +15,20 @@
                 <th>Deny</th>
             </tr>
         <tbody ng-init="fetchRequests()">
-            <tr ng-repeat="reservation in events">
+            <tr ng-repeat="reservation in events.slice().reverse()">
                 <td ng-show="reservation.room"> {{ reservation.room }} </td>
                 <td> {{ reservation.period }} </td>
                 <td> {{ reservation.day }}-{{ reservation.month }}-{{ reservation.year }}</td>
                 <td> {{ reservation.contactEmail}} </td>
                 <!-- <td> {{ reservation.id }} </td> -->
-                <td> {{ reservation.created}} </td>
+                <td> {{ parseWeirdDate(reservation.created)}} </td>
                 <td>
 
                     <!--
-                    1. make two forms: one for approving, one for denying
-                    2. have hidden fields for the room id for each form
-                    3. only submit the form whose button is pushed
-                    -->
+            1. make two forms: one for approving, one for denying
+            2. have hidden fields for the room id for each form
+            3. only submit the form whose button is pushed
+            -->
                     <form action='approveroom'>
                         <input name='id' type="hidden" value="{{reservation._id}}">
                         <button type='submit' id='approve' class='btn btn-success' value=''>
