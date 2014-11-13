@@ -1,0 +1,27 @@
+/*$background: #FF0000;*/
+
+.btn {
+    border-radius: 50px; /*Button rounding*/
+    background-image: none; /*Remove gradient*/
+   /*background-color: red; /*Button color*/
+   /* color: blue; /*Text color*/
+}
+
+.form-control {
+	border-radius: 50px;
+}
+
+
+/*
+.navbar{
+	background-image: none; /*Remove gradient
+	background-color: darkslateblue; /*Navbar color
+	text-shadow:none;
+
+	color: orangered !important;
+}
+
+#page{
+	background-color: $background;
+}
+*/
