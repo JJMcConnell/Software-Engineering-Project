@@ -11,6 +11,7 @@ angular.module('core').controller('GetMyParameters', ['$scope',
 	    }
 
 	    $scope.getTagAfter = function (tag) {
+	        console.log("SOMETHING CHANGED!!!!!!!!!!!!!!!!!!!!!!!");
 	        console.log(window.location.href);
 	        var prmstr = window.location.href.substr(window.location.href.indexOf(tag) + tag.length);
 	        return prmstr;

@@ -41,14 +41,9 @@
         <!--  <script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script> -->
         <!-- Page Content -->
         <div class="container">
-
-
-
-
             <div class="row">
                 <div ng-controller="GetMyParameters" class="col-lg-12 text-center">
-                    <!--<h1>Calendar View</h1>-->
-                    <h2>Calendar View for room {{getTagAfter("calendar#")}} </h2>
+                    <h2>Calendar View</h2>
 
                     <!-- Basic Calendar -->
                     <div class="btn-toolbar">
@@ -59,9 +54,13 @@
                         </div>
                     </div>
 
-
-                    <div ng-init="fetchRoomEvents(getTagAfter('calendar#'))" class="span8 calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
-
+                    
+                    <div class="span8 calendar" ng-init="fetchEvents()" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+                    <!--<script>
+                        $(window).scroll(function () {
+                            //pos = window.pageYOffset;
+                        });
+                    </script>-->
                     <!-- Alert Message
         <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
             <h4>{{alertMessage}}</h4>

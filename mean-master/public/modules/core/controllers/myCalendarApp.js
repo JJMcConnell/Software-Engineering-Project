@@ -95,6 +95,40 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
     };
 
+
+    var currentRoom = '';
+
+    var loaded = false;
+    $scope.newRoomPage = function (tag) {
+
+        var roomNumber = window.location.href.substr(window.location.href.indexOf(tag) + tag.length);
+        if (window.location.href.indexOf(tag) == -1) {
+            currentRoom = ")please select a room)"
+            return "(please select a room)";
+        }
+            
+
+        console.log("SOMETHING CHANGED!!!!!!!!!");
+        console.log("ROOM IS NOW SET TO " + roomNumber);
+        console.log(window.location.href);
+
+        //$scope.fetchRoomEvents(roomNum);
+        if (tag != currentRoom) {
+            
+            //$scope.fetchRoomEvents(roomNum);
+            //currentRoom = tag;
+            
+        } console.log("STUFF!!!!!!");
+        if (currentRoom != '' && currentRoom != roomNumber)
+        window.location.reload(true);
+            loaded = true;
+            currentRoom = roomNumber;
+        //I LOVE MAKESHIFT SOLUTIONS!!!!!!!!!!!!!!!!
+        return roomNumber;
+    }
+
+
+
     $scope.fetchEvents = function () {
 
         $http.get('/fetchEvents', $scope.credentials).success(function (response) {
@@ -167,7 +201,9 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
 
     $scope.fetchRoomEvents = function (roomNumber) {
-        
+
+
+        console.log("NEW ROOM!!!!!!!!");
         console.log(roomNumber);
         $http.get('/fetchEventsFromRoom?room='+roomNumber).success(function (response) {
             // If successful we assign the response to the global user model
@@ -196,7 +232,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             }
             
             // And redirect to the index page
-            //$location.path('/roomCalendar');
+            //$location.path('/');
         }).error(function (response) {
             
             $scope.error = response.message;
