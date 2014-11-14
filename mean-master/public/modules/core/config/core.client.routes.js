@@ -22,7 +22,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'modules/core/views/home.client.view.html'
         }).
         state('room calendar', {
-            url: '/roomCalendar',
+            url: '/calendarForRoom',
             templateUrl: 'modules/core/views/roomCalendar.client.view.html'
         });
 
