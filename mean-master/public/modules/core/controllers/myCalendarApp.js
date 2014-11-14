@@ -134,6 +134,48 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         
     };
 
+
+    $scope.fetchUnEvents = function () {
+            // to show when OPEN periods are, rather than 
+            // TAKEN ones
+
+        $http.get('/fetchEvents', $scope.credentials).success(function (response) {
+            
+            console.log(response);
+            $scope.createPeriodOpenings();
+            for (var event in response) {
+                //console.log(response[event].year);
+                //console.log(response[event].month);
+                // console.log(m);
+                var hour = 6;
+                var minute = 20;
+                var period = parseInt(response[event].period);
+                if (period < 12) {
+                    hour += period;
+                    minute += period * 5;
+                } else
+                {
+                    hour = 7 + (period - 12);
+                    minute = 20;
+                }
+                // console.log(hour);
+                $scope.events.push({
+                    title: response[event].title,
+                    // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                    start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                    //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                    end: new Date(response[event].year, response[event].month-1, response[event].day, hour+1, minute-10)
+                });
+            }
+
+            // And redirect to the index page
+            //$location.path('');
+        }).error(function (response) {
+            $scope.error = response.message;
+        });
+        
+    };
+
     $scope.createPeriodOpenings = function () {
         var hour = 6;
         var minute = 20;

@@ -17,15 +17,18 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		    url: '/calendar',
 		    templateUrl: 'modules/core/views/calendar.client.view.html'
 		}).
+		state('uncalendar', {
+			url: '/uncalendar',
+			templateUrl: 'modules/core/views/uncalendar.client.view.html'
+		}).
         state('home', {
             url: '/',
             templateUrl: 'modules/core/views/home.client.view.html'
         }).
         state('room calendar', {
-            url: '/roomCalendar',
+            url: '/roomCalendar'/*?:tagID'*/,
             templateUrl: 'modules/core/views/roomCalendar.client.view.html'
         });
-
 		// Home state routing
 	}
 

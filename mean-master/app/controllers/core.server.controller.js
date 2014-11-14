@@ -32,7 +32,42 @@ var mailer = require("mailer")
  * approveroom
  * denyroom
  * addevent
+ * {working on} show rooms available rather than rooms taken
+ * {working on} displaying when rooms are not taken
  */
+ 
+exports.available = function (req, res) {
+    var periods = [false, false, false, false, false, false, false, false, false, false, false];
+        // periods[0] to periods[6] ==> periods 1 through 7
+        // periods[7] to periods[9] ==> periods E1 through E3
+
+        // search all events for a given room on a given day
+    var string = req.param('info');
+    var roomNo, month, day, year;
+
+    var split = string.split('_');
+
+    var roomNo = split[0];
+    var month = split[1];
+    var day = split[2];
+    var year = split[3];
+
+    console.log(roomNo + " " + month + " " + day + " " + year);
+
+    Event.find({ 'approved': true, 'room': roomNo, 'month': month, 
+        'day': day, 'year': year }, function (err, events) {        
+        if (err) return handleError(err);
+
+        else if (events == null)
+            res.render('available', {reservations: "NONE"});
+
+        else res.render('available', {
+            reservations: events,
+            array: periods
+        });
+    })
+}
+
 exports.index = function (req, res) {
     res.render('index');
 };
