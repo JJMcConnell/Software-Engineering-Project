@@ -119,8 +119,13 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             //currentRoom = tag;
             
         } console.log("STUFF!!!!!!");
-        if (currentRoom != '' && currentRoom != roomNumber)
-        window.location.reload(true);
+        if (currentRoom != '' && currentRoom != roomNumber) {
+            while ($scope.events.length > 0) {
+                $scope.events.pop();
+            }
+            //$scope.events.clear();
+            $scope.fetchRoomEvents(roomNumber);
+        }
             loaded = true;
             currentRoom = roomNumber;
         //I LOVE MAKESHIFT SOLUTIONS!!!!!!!!!!!!!!!!
@@ -201,8 +206,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
 
     $scope.fetchRoomEvents = function (roomNumber) {
-
-
+        
         console.log("NEW ROOM!!!!!!!!");
         console.log(roomNumber);
         $http.get('/fetchEventsFromRoom?room='+roomNumber).success(function (response) {
@@ -223,6 +227,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     hour = 7 + (period - 12);
                     minute = 20;
                 }
+
                 $scope.events.push({
                     title: response[event].title,
                     // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
