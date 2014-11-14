@@ -54,7 +54,7 @@ var EventSchema = new Schema({
         type: String,
         default: '',
         trim: true,
-        index: true,
+        
         required: 'Must be a valid number'
     },
     month: {
