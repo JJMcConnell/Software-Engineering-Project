@@ -4,9 +4,16 @@
 angular.module('core').controller('GetMyParameters', ['$scope',
 	function ($scope) {
 
-	    $scope.getTagAfter = function (pageName) {
+	    $scope.getGetTagAfter = function (pageName) {
 	        console.log(window.localStorage);
 	        var prmstr = window.location.pathname.substr(window.location.pathname.indexOf(pageName) + pageName.length);
+	        return prmstr;
+	    }
+
+	    $scope.getTagAfter = function (tag) {
+	        console.log("SOMETHING CHANGED!!!!!!!!!!!!!!!!!!!!!!!");
+	        console.log(window.location.href);
+	        var prmstr = window.location.href.substr(window.location.href.indexOf(tag) + tag.length);
 	        return prmstr;
 	    }
 

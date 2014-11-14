@@ -304,6 +304,7 @@ exports.addevent = function (req, res) {
     var email = req.body.email;
     var telephone = req.body.telephone;
     var sponsor = req.body.sponsor;
+    var organization = req.body.organization;
     var date = req.body.date;
     var roomNumber = req.body.roomNumber;
     var period = req.body.period;
@@ -330,6 +331,7 @@ exports.addevent = function (req, res) {
         description: description,
         title: name,
         sponsor: sponsor,
+        organization: organization,
         contactEmail: email,
         contactPhone: telephone,
         room: roomNumber,
@@ -354,6 +356,12 @@ exports.addevent = function (req, res) {
         });
     }
 
+    if (organization == null) {
+        return res.status(400).send({
+            message: 'Error. Organization not entered correctly.'
+        });
+    }
+
     if(email == null){
         return res.status(400).send({
             message: m1+'Email'+m2
@@ -371,7 +379,8 @@ exports.addevent = function (req, res) {
             message: m1+'Period'+m2
         });
     }
- testEvent.save(function (err) {
+    testEvent.save(function (err) {
+        if (err) console.log(err);
         if (err) return res.status(400).send({
             message: 'Error adding event. Make sure the fields are entered correctly.'
         });
