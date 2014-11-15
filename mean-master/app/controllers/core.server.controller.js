@@ -18,8 +18,11 @@ var mailer = require("mailer")
 , password = "WD6Av_7xpEyY_rgoRzFNGg";
 
 
-exports.generateAdmin = function(req,res){
+
+exports.generateAdmin = function (req, res) {
+    console.log('Trying to create admin.');
     Settings.find({}, function (err, events) {
+        console.log('Trying to create admin.');
         if (events.length == 0) {
             var date = new Date();
             var startDay = date.getDate();
@@ -36,8 +39,14 @@ exports.generateAdmin = function(req,res){
 
             });
 
+            adminsetting.save(function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Successfully created admin settings.");
+                }
+            });
         }
-
     });
     /*
     var user = new User(req.body);//Needs work.
@@ -68,6 +77,7 @@ exports.generateAdmin = function(req,res){
     });
     */
 }
+
 
 
 exports.ThisRoomApproved = function(req,res) {
