@@ -155,6 +155,14 @@ exports.fetchEvents = function (req, res) {
     //res.render('index');
 };
 
+exports.fetchEventByID = function (req,res){
+    var id = req.query.id;
+    Event.findById(id, function (err, events){
+        if(err) return handleError(err);
+
+        res.jsonp(events);
+    })
+};
 
 exports.fetchEventsFromRoom = function (req, res) {
     var room = req.query.room;
