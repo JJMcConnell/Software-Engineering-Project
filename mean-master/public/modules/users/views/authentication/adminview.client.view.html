@@ -1,6 +1,19 @@
 <div class="container" data-ng-controller="AuthenticationController">
 
     <center><h1>Requested Rooms</h1></center>
+    <script>
+        function getStuff() {
+            return "STUFF!!!!";
+            document.getElementById("demo").innerHTML = toCelsius;
+        }
+    </script>
+    <script>
+        sessionStorage.reservationNumber = 0;
+        function reservationNumber() {
+            sessionStorage.reservationNumber++;
+            return sessionStorage.reservationNumber-1;
+        }
+    </script>
 
     <table ng-init="validateLogin()" class="table table-striped">
         <thead>
@@ -16,42 +29,70 @@
                 <th>Deny</th>
             </tr>
         <tbody ng-init="fetchRequests()">
-            <tr ng-repeat="reservation in events.slice().reverse()">
+            
+            <tr ng-repeat="reservation in events.slice().reverse()" id="tbl" ng-init="res = reserva;">
                 <td ng-show="reservation.room"> {{ reservation.room }} </td>
                 <td> {{ reservation.period }} </td>
                 <td> {{ reservation.day }}-{{ reservation.month }}-{{ reservation.year }}</td>
                 <td> {{ reservation.contactEmail}} </td>
                 <!-- <td> {{ reservation.id }} </td> -->
-                <td> {{ parseWeirdDate(reservation.created)}} </td>
+                <td> {{ parseWeirdDate(reservation.created) }} </td>
+
+                <td id="nameGoesHere" hidden="hidden" ng-init="title = reservation.title;">NAME!!!!!!!</td>
 
                 <td>
+                    <script type="text/javascript">
+                        var scope = angular.element(document.getElementById("tbl")).scope();///YES!!!!!!!!!!
+                        
+                        function getTitle() {
+                            var scope = angular.element(document.getElementById("tbl")).scope();///YES!!!!!!!!!!
+                            return scope.title;
+                        }
+                        document.getElementById("nameGoesHere").innerHTML = getTitle();
+                        var title = scope.title;
+                        //document.getElementById("infomodal.html1").id = reservationNumber();
+                        
+                        var i = 0;
+                        /*container = document.getElementById("ModalInfoCtrl");
+                        container.innerHTML = container.innerHTML +
+                        "<div id= 'inner_box_container_' +i" +
+                        "<br/>Buyer id : <input type='text' name='buyer" + i + "' id='buyer" + i + "' value=' ' >" +
+                        "<input type = 'submit' value = '" + i + "' onclick = 'check_ID(this.value)' />" +
+                        "</div>";
+                        */
+                        //THE PLAN
+                        //MAKE EACH RESERVATION INFO MODAL HAVE A UNIQUE ID
+                        //MAKE A JAVASCRIPT VARIABLE THAT IS AN ARRAY THAT CONTAINS EVERY RESERVATION
+                        //MAKE A JAVASCRIPT METHOD THAT RETURNS THAT ARRAY
+                        //MAKE A JAVASCRIPT COMMAND TO POPULATES EACH RESERVATION MODAL WITH INFORMATION FROM THAT RESERVATION BASED ON IT'S ID
+                    </script>
+
                     <!--
                     provide additional details here with a modal (event title, desc, contact)
                     -->
-                <div ng-controller="ModalInfoCtrl">
-                    <script type="text/ng-template" id="infomodal.html">
-                        <div class="modal-header">
-                            <h3 class="modal-title">Event Information</h3>
-                        </div>
-                        <div class="modal-body">
-                            <ul>
-                                <li ng-repeat="item in items">
-                                    <a ng-click="selected.item = item">{{ item }}</a>
-                                </li>
-                            </ul>
-                            Selected: <b>{{ selected.item }}</b>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-warning" ng-click="cancel()">Close</button>
-                        </div>
-                    </script>
+                    <div ng-controller="ModalInfoCtrl" >
+                        <!--
+                        <script type="text/ng-template" id="infomodal.html1" ng-init="cool = 'coolStuff';">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Event Information</h3>
+                            </div>
+                            <div class="modal-body">
+                                <ul></ul>
+                                
+                                Selected: {{ angular.element(document.getElementById("tbl")).scope().title }}
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-warning" ng-click="cancel()">Close</button>
+                            </div>
+                        </script>
 
 
 
                         <button ng-click="open()" class='btn btn-info'>
                             <span class="glyphicon glyphicon-info-sign"></span>
                         </button>
-                </div>
+                            -->
+                    </div>
 
                 </td>
 
