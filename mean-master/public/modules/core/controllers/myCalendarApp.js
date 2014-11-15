@@ -236,12 +236,22 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     minute = 20;
                 }
 
+                var endHour = hour + 1;
+                var endMinute = minute - 10;
+                if (response[event].length) {
+                    if (response[event].length > 1) {
+                        endHour = endHour + (response[event].length - 1);
+                        endMinute = endMinute + (response[event].length - 1) * 5;
+                    }
+                }
                 $scope.events.push({
                     title: response[event].title,
                     // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
                     start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
-                        end: new Date(response[event].year, response[event].month - 1, response[event].day, hour + 1, minute)
+                    //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                    end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
                 });
+
             }
             
             // And redirect to the index page
