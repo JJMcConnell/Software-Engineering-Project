@@ -9,6 +9,7 @@ var _ = require('lodash'),
     EventSchema = require('./../models/article.server.model.js'),
     Event = mongoose.model('Event'),
     swig = require('swig');
+    Settings = mongoose.model('Admin Setting');
 
 //EventSchema = require('./../models/article.server.model.js'),
 
@@ -16,6 +17,29 @@ var mailer = require("mailer")
 , username = "trevorkowens@gmail.com"
 , password = "WD6Av_7xpEyY_rgoRzFNGg";
 
+
+exports.adminSettings = function(req,res){
+    Settings.find({}, function (err, events){
+        if(events.length == 0){
+            var date = new Date();
+            var startDay = date.getDate();
+            var startMonth = date.getMonth();
+            var startYear = date.getFullYear();
+
+            var adminsetting = new Settings({
+                startDay: startDay,
+                startMonth: startMonth,
+                startYear: startYear,
+                endDay: 1,
+                endMonth: 1, 
+                endYear: startYear + 1
+
+            });
+
+        }
+
+    })
+}
 
 
 exports.ThisRoomApproved = function(req,res) {
