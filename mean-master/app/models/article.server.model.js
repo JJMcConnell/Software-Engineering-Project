@@ -119,4 +119,4 @@ var AdminSettings = new Schema({
 
 mongoose.model('Event', EventSchema);
 mongoose.model('Article', ArticleSchema);
-mongoose.model('Admin Setting', AdminSettings);
+mongoose.model('AdminSetting', AdminSettings);

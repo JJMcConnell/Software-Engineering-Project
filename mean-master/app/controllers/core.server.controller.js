@@ -9,7 +9,7 @@ var _ = require('lodash'),
     EventSchema = require('./../models/article.server.model.js'),
     Event = mongoose.model('Event'),
     swig = require('swig'),
-    Settings = mongoose.model('Admin Setting');
+    Settings = mongoose.model('AdminSetting');
 
 //EventSchema = require('./../models/article.server.model.js'),
 
