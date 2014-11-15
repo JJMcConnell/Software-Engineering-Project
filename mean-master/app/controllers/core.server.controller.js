@@ -18,9 +18,9 @@ var mailer = require("mailer")
 , password = "WD6Av_7xpEyY_rgoRzFNGg";
 
 
-exports.adminSettings = function(req,res){
-    Settings.find({}, function (err, events){
-        if(events.length == 0){
+exports.generateAdmin = function(req,res){
+    Settings.find({}, function (err, events) {
+        if (events.length == 0) {
             var date = new Date();
             var startDay = date.getDate();
             var startMonth = date.getMonth();
@@ -31,14 +31,42 @@ exports.adminSettings = function(req,res){
                 startMonth: startMonth,
                 startYear: startYear,
                 endDay: 1,
-                endMonth: 1, 
+                endMonth: 1,
                 endYear: startYear + 1
 
             });
 
         }
 
-    })
+    });
+    /*
+    var user = new User(req.body);//Needs work.
+    var message = null;
+
+    // Add missing user fields
+    user.provider = 'local';
+    user.displayName = user.firstName + ' ' + user.lastName;
+    // Then save the user 
+    user.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            // Remove sensitive data before login
+            user.password = undefined;
+            user.salt = undefined;
+
+            req.login(user, function (err) {
+                if (err) {
+                    res.status(400).send(err);
+                } else {
+                    res.jsonp(user);
+                }
+            });
+        }
+    });
+    */
 }
 
 

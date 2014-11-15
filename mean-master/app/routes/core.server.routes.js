@@ -8,7 +8,7 @@ module.exports = function(app) {
 
     // CREATE
     app.route('/requestevent').post(core.addevent);
-    app.route('/adminSettings').post(core.adminSettings);
+    app.route('/generateAdmin').post(core.generateAdmin);
 
     // UPDATE
     app.route('/approveroom').get(core.approveroom);
