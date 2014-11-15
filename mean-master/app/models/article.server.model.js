@@ -82,6 +82,11 @@ var EventSchema = new Schema({
     approved: {
         type: Boolean,
         default: false
+    },
+    length: {
+        type: Number,
+        default: 1,
+        required: 'Must have a length'
     }
 });
 

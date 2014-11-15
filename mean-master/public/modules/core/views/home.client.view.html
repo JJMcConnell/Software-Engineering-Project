@@ -143,7 +143,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputPeriod" class="col-sm-2 control-label">Period</label>
+                            <label for="inputPeriod" class="col-sm-2 control-label">Starting Period</label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <div class="input-group-addon">#</div>
@@ -162,6 +162,20 @@
                                         <option value="12">E1</option>
                                         <option value="13">E2</option>
                                         <option value="14">E3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLength" class="col-sm-2 control-label">Length (Periods)</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-addon">#</div>
+                                    <select class="form-control" ng-model="request.length" name="length" id="inputLength" ng-required>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
                                     </select>
                                 </div>
                             </div>

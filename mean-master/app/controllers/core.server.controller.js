@@ -279,6 +279,7 @@ exports.addevent = function (req, res) {
     var roomNumber = req.body.roomNumber;
     var period = req.body.period;
     var description = req.body.description;
+    var length = req.body.length;
 
 if(date != null){
     var year = date.substring(0, 4);
@@ -310,7 +311,8 @@ if(date != null){
         day: day,
         month: month,
         year: year,
-        period: period
+        period: period,
+        length: length
     });
   
    
