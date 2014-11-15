@@ -8,7 +8,7 @@ var _ = require('lodash'),
 	passport = require('passport'),
     EventSchema = require('./../models/article.server.model.js'),
     Event = mongoose.model('Event'),
-    swig = require('swig');
+    swig = require('swig'),
     Settings = mongoose.model('Admin Setting');
 
 //EventSchema = require('./../models/article.server.model.js'),
