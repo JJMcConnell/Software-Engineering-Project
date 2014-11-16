@@ -70,15 +70,15 @@
                     <!--
                     provide additional details here with a modal (event title, desc, contact)
                     -->
-                    <div ng-controller="ModalInfoCtrl" >
-                        <!--
-                        <script type="text/ng-template" id="infomodal.html1" ng-init="cool = 'coolStuff';">
+                    <div ng-controller="ModalInfoCtrl" ng-init="doStuff()">
+
+                        <script type="text/ng-template" id="infomodal.html" ng-init="cool = 'coolStuff';">
                             <div class="modal-header">
                                 <h3 class="modal-title">Event Information</h3>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body" ng-init="doStuff()">
                                 <ul></ul>
-                                
+
                                 Selected: {{ angular.element(document.getElementById("tbl")).scope().title }}
                             </div>
                             <div class="modal-footer">
@@ -91,7 +91,7 @@
                         <button ng-click="open()" class='btn btn-info'>
                             <span class="glyphicon glyphicon-info-sign"></span>
                         </button>
-                            -->
+
                     </div>
 
                 </td>

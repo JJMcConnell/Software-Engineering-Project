@@ -45,7 +45,7 @@
                    
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
-
+                    <div id="selectedDate"></div>
                 </div>
     
 
@@ -202,6 +202,7 @@
 
             <div class="jumbotron">
                 <h3> Step 2 - Pick a room! </h3>
+                //insert date picker as a parameter in open.
                 <div class="btn-toolbar" ng-click="open()" data-toggle="buttons">
                     <button type="button" class="btn btn-default">Room 101</button>
                     <button type="button" class="btn btn-default">Room 106B</button>
@@ -232,6 +233,7 @@
 
 <script type='text/javaScript'>
     $('#datePicker').datepaginator();
+    console.log($('#datePicker').datepaginator());
 </script>
 
  <script>

@@ -4,6 +4,11 @@ angular.module('users').controller('ModalInfoCtrl', function ($scope, $modal, $l
 
   $scope.items = ['item1', 'item2', 'item3'];
 
+
+  $scope.doStuff = function () {
+      console.log('STUFF!!!!');
+  }
+
   $scope.open = function (size) {
 
     var modalInstance = $modal.open({
