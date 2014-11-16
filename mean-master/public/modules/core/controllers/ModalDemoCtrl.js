@@ -2,7 +2,16 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
 
   $scope.items = ['item1', 'item2', 'item3'];
 
-  $scope.open = function (size) {
+
+  $scope.buttonData = function (butId) {
+    $scope.buttonId = butId; 
+    console.log($scope.buttonId);
+    $scope.open(butId);
+    
+  }
+
+  $scope.open = function (butId, size) {
+   
 
     var modalInstance = $modal.open({
       templateUrl: 'myModalContent.html',
@@ -11,8 +20,13 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
       resolve: {
         items: function () {
           return $scope.items;
+        },
+         buttonId: function() {
+          return butId;
         }
       }
+     
+
     });
 
     modalInstance.result.then(function (selectedItem) {
