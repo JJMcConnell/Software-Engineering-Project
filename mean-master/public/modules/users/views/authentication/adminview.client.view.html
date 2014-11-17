@@ -187,9 +187,7 @@
 
                         <script type="text/ng-template" id="infomodal.html" ng-init="setInfo(reservation)">
                             <div class="modal-header">
-                                <ul class="list-group">
-                                <li class="list-group-item list-group-item-info"><h3 class="modal-title">Event Information</h3></li>
-                                </ul>
+                                <h3 class="modal-title">Event Information</h3>
                             </div>
                             <div id="innerInfo">
                                 <ul class="list-group">
@@ -203,6 +201,7 @@
                                 <li class="list-group-item"><strong>Description: </strong>{{ items.description }}</li>
                                 <li class="list-group-item"><strong>Requested for: </strong>{{ items.month }}-{{ items.day }}-{{ items.year }}</li>
                                 </ul>
+
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-warning" ng-click="cancel()">Close</button>
