@@ -309,7 +309,7 @@ exports.approveroom = function(req, res) {
   {
       host: "smtp.mandrillapp.com"
   , port: 587
-  , to: "trevorkowens@gmail.com"
+  , to: "trevorkowens@gmail.com" //WILL CHANGE THIS TO USERS EMAIL, BUT NOT NOW SO RANDOM PEOPLE DON'T GET EMAILS
   , from: "trevorkowens@gmail.com"
   , subject: "Event Approved"
   , body: "Your event has been approved."

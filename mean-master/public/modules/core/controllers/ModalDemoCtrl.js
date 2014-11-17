@@ -10,8 +10,11 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
     
   }
 
+
+
+
   $scope.open = function (butId, size) {
-   
+
 
     var modalInstance = $modal.open({
       templateUrl: 'myModalContent.html',
