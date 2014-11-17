@@ -6,13 +6,18 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
     $scope.buttonId = butId; 
     console.log($scope.buttonId);
     $scope.items = document.getElementById('selectedDate').innerHTML;
-    var date = new Date(document.getElementById('selectedDate').innerHTML);
-    var day = document.getElementById('selectedDate').innerHTML.substr(8, 2);
-    var month = document.getElementById('selectedDate').innerHTML.substr(11, 4);
-    var year = document.getElementById('selectedDate').innerHTML.substr(4, 3);
-    $scope.items = new Date(month + ' ' + day + ', ' + year);
+    var date = document.getElementById('selectedDate').innerHTML;
     if (document.getElementById('selectedDate').innerHTML == '')
-        $scope.items = new Date();
+        date = new Date().toDateString();
+    var day = date.substr(8, 2);
+    var year = date.substr(11, 4);
+    var month = date.substr(4, 3);
+    if (document.getElementById('selectedDate').innerHTML == '') {
+        console.log(new Date().toDateString());
+    }
+    var newDateFormat = new Date(month + ' ' + day + ', ' + year).toISOString(); // This sets it to mm/dd/yyyy
+    console.log('THIS SHOULD BE CORRECT: ' + newDateFormat);
+    $scope.items = newDateFormat.substring(0, 10);
     $scope.open(butId);
 
   }
