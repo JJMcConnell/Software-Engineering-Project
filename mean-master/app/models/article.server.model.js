@@ -82,6 +82,11 @@ var EventSchema = new Schema({
     approved: {
         type: Boolean,
         default: false
+    },
+    length: {
+        type: Number,
+        default: 1,
+        required: 'Must have a length'
     }
 });
 
@@ -114,4 +119,4 @@ var AdminSettings = new Schema({
 
 mongoose.model('Event', EventSchema);
 mongoose.model('Article', ArticleSchema);
-mongoose.model('Admin Setting', AdminSettings);
+mongoose.model('AdminSetting', AdminSettings);
