@@ -14,6 +14,18 @@ describe('angularjs homepage', function() {
 	var room232 = element(by.id('232'));
 	var room233 = element(by.id('233A'));
 
+
+//These should be all of the modal options. Note: if by.model doesn't work try id
+	var modName = element(by.model('request.name'));
+	var modEmail = element(by.model('request.email'));
+	var modPhone = element(by.model('request.telephone'));
+	var modSponser = element(by.model('request.sponser'));
+	var modOrganization = element(by.model('request.organization'));
+	var modDescription = element(by.model('request.description'));
+	var modDate = element(by.model('request.date'));
+	var modPeriod = element(by.model('request.period'));
+	var modLength = element(by.model('request.length'));
+	var submitButton = element(by.buttonText("Submit"));
 	var cancelButton = element(by.buttonText("Cancel"));
 
 //Array containing all of the room options and random number within array
@@ -24,7 +36,8 @@ describe('angularjs homepage', function() {
 	var modal = element(by.className('modal-header'));
 
 	beforeEach(function() {
-		browser.get('http://localhost:3000')
+		browser.get('http://localhost:3000');
+		//protractor.getInstance().ignoreSynchronization = true;
 	});
 
 	it('should have a title', function() {
@@ -51,7 +64,36 @@ describe('angularjs homepage', function() {
 
 	 it('should log into the admin account', function() {
 
-	 	
+	 	browser.get('http://localhost:3000/#!/signin');
+
+	 	element(by.id('username')).sendKeys('admin');
+	 	element(by.id('password')).sendKeys('admin1234');
+
+	 	element(by.buttonText("Sign in")).click();
+
+	 	expect(element(by.id('requestTable')).isPresent()).toBeTruthy();
+
+
+	 }); 
+
+	 it('should create an event', function() {
+
+	 	roomButtons[randomnumber].click();
+
+	 	modName.sendKeys('John Johnson');
+	 	modEmail.sendKeys('JohnJJohnson@gmail.com');
+	 	modPhone.sendKeys('123-456-7890');
+	 	modSponser.sendKeys('Dr. Will Williston');
+	 	modOrganization.sendKeys('French Horn Fanatics');
+	 	modDescription.sendKeys('We need a fine fortress in which to frequently fumble our French fanfares');
+	 	modDate.sendKeys('12252015');
+	 	element(by.cssContainingText('option', '10')).click();
+	 	element(by.cssContainingText('option', '1')).click();
+
+	 	submitButton.click();
+
+	 	expect(modal.isPresent()).toBeFalsy();
+
 
 
 	 });
