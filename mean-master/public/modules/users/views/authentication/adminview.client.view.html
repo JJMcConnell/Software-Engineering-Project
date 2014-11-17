@@ -35,18 +35,22 @@
 
                         <script type="text/ng-template" id="infomodal.html" ng-init="setInfo(reservation)">
                             <div class="modal-header">
-                                <h3 class="modal-title">Event Information</h3>
+                                <ul class="list-group">
+                                <li class="list-group-item list-group-item-info"><h3 class="modal-title">Event Information</h3></li>
+                                </ul>
                             </div>
                             <div id="innerInfo">
-                                <ul>Title: {{ items.title }}</ul>
-                                <ul>Email: {{ items.contactEmail }}</ul>
-                                <ul>Phone Number: {{ items.contactPhone }}</ul>
-                                <ul>Room : {{ items.room }}</ul>
-                                <ul>Period : {{ items.period }}</ul>
-                                <ul>Sponsor : {{ items.sponsor }}</ul>
-                                <ul>Organization : {{ items.organization }}</ul>
-                                <ul>Requested for: {{ items.day }}-{{ items.month }}-{{ items.year }}</ul>
-
+                                <ul class="list-group">
+                                <li class="list-group-item"><strong>Name: </strong>{{ items.title }}</li>
+                                <li class="list-group-item"><strong>Email: </strong>{{ items.contactEmail }}</li>
+                                <li class="list-group-item"><strong>Phone Number: </strong>{{ items.contactPhone }}</li>
+                                <li class="list-group-item"><strong>Room: </strong>{{ items.room }}</li>
+                                <li class="list-group-item"><strong>Period: </strong>{{ items.period }}</li>
+                                <li class="list-group-item"><strong>Sponsor: </strong>{{ items.sponsor }}</li>
+                                <li class="list-group-item"><strong>Organization: </strong>{{ items.organization }}</li>
+                                <li class="list-group-item"><strong>Description: </strong>{{ items.description }}</li>
+                                <li class="list-group-item"><strong>Requested for: </strong>{{ items.day }}-{{ items.month }}-{{ items.year }}</li>
+                                </ul>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-warning" ng-click="cancel()">Close</button>
