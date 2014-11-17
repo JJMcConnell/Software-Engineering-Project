@@ -59,7 +59,6 @@
             <div class="modal-body">
                 <ul>
 
-
                         <!-- Request Information is here -->
                         <form class="form-horizontal" role="form" ng-submit="ok()">
 
@@ -101,7 +100,7 @@
                             <div class="form-group">
                                 <label for="inputDesc" class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" data-ng-model="request.description" name="description" id="inputDesc" placeholder="Describe the reason for requesting a room." rows="2"></textarea>
+                                    <textarea class="form-control" data-ng-model="request.description" name="description" id="inputDesc"  placeholder="Describe the reason for requesting a room." rows="2"></textarea>
                                 </div>
                             </div>
 
@@ -109,7 +108,8 @@
                             <div class="form-group">
                                 <label for="inputDate" class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-10">
-                                    <input type="date" name="date" class="form-control" ng-model="request.date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" ng-required>
+                                    <!--input type="date" name="date" class="form-control" ng-model="request.date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" value="1222-12-12" ng-required -->
+                                    <textarea class="form-control"  ng-model="items" name="date" id="inputDate">{{ items }}</textarea>
                                 </div>
                             </div>
 
@@ -222,7 +222,6 @@
                 <button type="button" ng-attr-id="144" ng-click="buttonData(144)" id="144" class="btn btn-default">Room 144</button>
                 <button type="button" ng-attr-id="145" ng-click="buttonData(145)" id="145" class="btn btn-default">Room 145</button>
                 <button type="button" ng-attr-id="146" ng-click="buttonData(146)" id="146" class="btn btn-default">Room 146</button>
-                <button type="button" ng-attr-id="147" ng-click="buttonData(147)" id="147" class="btn btn-default">Room 147</button>
                 <button type="button" ng-attr-id="232" ng-click="buttonData(232)" id="232" class="btn btn-default">Room 232</button>
                 <button type="button" ng-attr-id="233A" ng-click="buttonData('233A')" id="233A" class="btn btn-default">Room 233A</button>
 

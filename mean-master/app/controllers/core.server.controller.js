@@ -20,7 +20,7 @@ var mailer = require("mailer")
 
 
 exports.generateAdmin = function (req, res) {
-    console.log('Trying to create admin.');
+/*    console.log('Trying to create admin.');
     Settings.find({}, function (err, events) {
         console.log('Trying to create admin.');
         if (events.length == 0) {
