@@ -20,7 +20,7 @@
             <tr ng-repeat="reservation in events.slice().reverse()" id="tbl" ng-init="res = reserva;">
                 <td ng-show="reservation.room"> {{ reservation.room }} </td>
                 <td> {{ reservation.period }} </td>
-                <td> {{ reservation.day }}-{{ reservation.month }}-{{ reservation.year }}</td>
+                <td> {{ reservation.month }}-{{ reservation.day }}-{{ reservation.year }}</td>
                 <td> {{ reservation.contactEmail}} </td>
                 <!-- <td> {{ reservation.id }} </td> -->
                 <td> {{ parseWeirdDate(reservation.created) }} </td>

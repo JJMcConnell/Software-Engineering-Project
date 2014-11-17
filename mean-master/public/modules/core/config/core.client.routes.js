@@ -24,6 +24,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         state('room calendar', {
             url: '/calendarForRoom',
             templateUrl: 'modules/core/views/roomCalendar.client.view.html'
+        }).
+        state('contact', {
+            url: '/contact',
+            templateUrl: 'modules/core/views/contact.client.view.html'
         });
 
 		// Home state routing
