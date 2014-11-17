@@ -1,16 +1,25 @@
 angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
-  $scope.items = ['item1', 'item2', 'item3'];
-
+  $scope.items = 'DATE!!!';
 
   $scope.buttonData = function (butId) {
     $scope.buttonId = butId; 
     console.log($scope.buttonId);
+    $scope.items = document.getElementById('selectedDate').innerHTML;
+    var date = new Date(document.getElementById('selectedDate').innerHTML);
+    var day = document.getElementById('selectedDate').innerHTML.substr(8, 2);
+    var month = document.getElementById('selectedDate').innerHTML.substr(11, 4);
+    var year = document.getElementById('selectedDate').innerHTML.substr(4, 3);
+    $scope.items = new Date(month + ' ' + day + ', ' + year);
+    if (document.getElementById('selectedDate').innerHTML == '')
+        $scope.items = new Date();
     $scope.open(butId);
-    
+
   }
 
-
+  $scope.setDate = function () {
+      console.log($scope.items);
+  }
 
 
   $scope.open = function (butId, size) {
