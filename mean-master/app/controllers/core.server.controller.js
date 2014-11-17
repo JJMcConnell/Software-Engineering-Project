@@ -8,7 +8,8 @@ var _ = require('lodash'),
 	passport = require('passport'),
     EventSchema = require('./../models/article.server.model.js'),
     Event = mongoose.model('Event'),
-    swig = require('swig');
+    swig = require('swig'),
+    Settings = mongoose.model('AdminSetting');
 
 //EventSchema = require('./../models/article.server.model.js'),
 
@@ -66,6 +67,85 @@ exports.available = function (req, res) {
             array: periods
         });
     })
+}
+exports.generateAdmin = function (req, res) {
+/*    console.log('Trying to create admin.');
+    Settings.find({}, function (err, events) {
+        console.log('Trying to create admin.');
+        if (events.length == 0) {
+            var date = new Date();
+            var startDay = date.getDate();
+            var startMonth = date.getMonth();
+            var startYear = date.getFullYear();
+
+            var adminsetting = new Settings({
+                startDay: startDay,
+                startMonth: startMonth,
+                startYear: startYear,
+                endDay: 1,
+                endMonth: 1,
+                endYear: startYear + 1
+
+            });
+
+            adminsetting.save(function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Successfully created admin settings.");
+                }
+            });
+        }
+    });
+    /*
+    var user = new User(req.body);//Needs work.
+    var message = null;
+
+    // Add missing user fields
+    user.provider = 'local';
+    user.displayName = user.firstName + ' ' + user.lastName;
+    // Then save the user 
+    user.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            // Remove sensitive data before login
+            user.password = undefined;
+            user.salt = undefined;
+
+            req.login(user, function (err) {
+                if (err) {
+                    res.status(400).send(err);
+                } else {
+                    res.jsonp(user);
+                }
+            });
+        }
+    });
+    */
+}
+
+
+
+exports.ThisRoomApproved = function(req,res) {
+    if (req.param('tagId') != "") {
+        Event.find({ 'room': req.param('tagId'), 'approved': true }, function (err, events) {
+            if (err) return handleError(err);
+            else if (events.length == 0) {
+                res.render('NoReservations', 
+                    {room: req.param('tagId')}
+                );
+            }
+            else {
+                res.render('ThisRoom', { 
+                    reservations: events, 
+                    room: req.param('tagId')
+                });
+            }
+        })
+    }
 }
 
 exports.index = function (req, res) {
@@ -132,6 +212,15 @@ exports.fetchEvents = function (req, res) {
     //res.render('index');
 };
 
+exports.fetchEventByID = function (req,res){
+    var id = req.query.id;
+    Event.findById(id, function (err, events){
+        if(err) return handleError(err);
+
+        res.jsonp(events);
+    })
+};
+
 exports.fetchEventsFromRoom = function (req, res) {
     var room = req.query.room;
 
@@ -178,6 +267,38 @@ exports.eventsByMonth = function (req, res) {
         res.jsonp(events);
     })
 };
+/*
+exports.getAvailablePeriods = function (req,res) {
+    var month = req.query.month;
+    var day = req.query.day;
+    var year = req.query.year;
+    var room = req.query.room;
+    var length = req.query.length;
+
+    
+    console.log(day);
+
+
+    Event.find({'month': month, 'day': day, 'year': year, 'room':room}, function (err, events){
+    var periodsAvailable = [];  
+    console.log("NUMBER OF EVENTS "+events.length);  
+        for(var myEvent in events){
+            for(var x = 1; x < 14; x++){
+                periodsAvailable[x-1] = true;
+                for(var i = 0; i < length; i++){
+                    //somethnigs booked at period x+i
+                    console.log(events[0]);
+                    if(myEvent.period == (x+i))
+                    periodsAvailable[x-1] = false;
+
+                }
+                //nothing booked for periods i = add period to periodsAvailable
+            }
+        }
+        res.jsonp(periodsAvailable);
+    })
+
+};*/
 
 exports.AdminWithRoom = function (req, res) {
     Event.find({ 'viewed': false, 'room': req.param('room') }, function (err, events) {
@@ -248,7 +369,7 @@ exports.approveroom = function(req, res) {
   {
       host: "smtp.mandrillapp.com"
   , port: 587
-  , to: "trevorkowens@gmail.com"
+  , to: "trevorkowens@gmail.com" //WILL CHANGE THIS TO USERS EMAIL, BUT NOT NOW SO RANDOM PEOPLE DON'T GET EMAILS
   , from: "trevorkowens@gmail.com"
   , subject: "Event Approved"
   , body: "Your event has been approved."
@@ -309,6 +430,7 @@ exports.addevent = function (req, res) {
     var roomNumber = req.body.roomNumber;
     var period = req.body.period;
     var description = req.body.description;
+    var length = req.body.length;
 
     if(date != null){
         var year = date.substring(0, 4);
@@ -338,7 +460,8 @@ exports.addevent = function (req, res) {
         day: day,
         month: month,
         year: year,
-        period: period
+        period: period,
+        length: length
     });
   
     var m1 = 'Error. ';

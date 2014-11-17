@@ -1,7 +1,14 @@
 
-angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, $http, $location) {
+angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, buttonId, $http, $location) {
 
   $scope.items = items;
+  console.log($scope.items);
+  console.log(buttonId);
+
+  $scope.request = {
+    roomNumber: buttonId
+  }
+
   $scope.selected = {
     item: $scope.items[0]
   };

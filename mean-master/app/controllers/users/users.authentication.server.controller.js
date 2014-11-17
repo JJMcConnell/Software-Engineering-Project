@@ -10,25 +10,13 @@ var _ = require('lodash'),
 	User = mongoose.model('User');
 
 
+
+
+
 /**
  * Signup
  */
 exports.signup = function(req, res) {
-
-    /*
-
-    var thor = new Movie({
-        title: 'Thor'
-, rating: 'PG-13'
-, releaseYear: '2011'  // Notice the use of a String rather than a Number - Mongoose will automatically convert this for us.
-, hasCreditCookie: true
-    });
-
-    thor.save(function (err, thor) {
-        if (err) return console.error(err);
-        console.dir(thor);
-    });
-    */
 
     // For security measurement we remove the roles from the req.body object
 	delete req.body.roles;
@@ -40,7 +28,6 @@ exports.signup = function(req, res) {
 	// Add missing user fields
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
-	console.log("YAYAYAYAYAYAY");
 	// Then save the user 
 	user.save(function(err) {
 		if (err) {

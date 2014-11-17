@@ -2,17 +2,32 @@
 
 angular.module('users').controller('ModalInfoCtrl', function ($scope, $modal, $log) {
 
-  $scope.items = ['item1', 'item2', 'item3'];
+  $scope.items = ['stuff', 'item2', 'item3'];
 
+
+  $scope.info = 'info';
+
+  $scope.setInfo = function (info) {
+      if(info.period == 12)
+          info.period = 'E1'
+      if (info.period == 13)
+          info.period = 'E2'
+      if (info.period == 14)
+          info.period = 'E2'
+      $scope.info = info;
+  }
+    
   $scope.open = function (size) {
-
     var modalInstance = $modal.open({
       templateUrl: 'infomodal.html',
       controller: 'ModalInstanceCtrl',
       size: size,
       resolve: {
         items: function () {
-          return $scope.items;
+          return $scope.info;
+        },
+        buttonId: function () {
+            return 'INFO BUTTON';
         }
       }
     });

@@ -23,6 +23,7 @@
 
 	'use strict';
 
+    //This is the magical line that creates the method.
 	var pluginName = 'datepaginator';
 
 	var DatePaginator = function(element, options) {
@@ -75,6 +76,11 @@
 
 			// Only remove data if user initiated
 			$.removeData(this, 'plugin_' + pluginName);
+		},
+		getSelectedDate: function() {
+		    //console.log(this.options.selectedDate);
+		    // Trevor was here b%^&*s!
+		    return 'date';
 		},
 
 		_init: function(options) {
@@ -183,7 +189,8 @@
 		},
 
 		_setSelectedDate: function(selectedDate) {
-
+		    document.getElementById('selectedDate').innerHTML = selectedDate;
+		    //console.log(selectedDate);
 			if ((!selectedDate.isSame(this.options.selectedDate)) &&
 				(!selectedDate.isBefore(this.options.startDate)) &&
 				(!selectedDate.isAfter(this.options.endDate))) {
