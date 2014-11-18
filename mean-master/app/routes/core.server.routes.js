@@ -8,6 +8,7 @@ module.exports = function(app) {
 
     // CREATE
     app.route('/requestevent').post(core.addevent);
+    app.route('/requestAdminEvent').post(core.addAdminEvent);
     // Creating the admin when the website first starts.
     app.route('/generateAdmin').post(core.generateAdmin);
 
@@ -29,5 +30,5 @@ module.exports = function(app) {
     app.route('/calendarYear').get(core.eventsByYear);
     app.route('/calendarMonth').get(core.eventsByMonth);
     app.route('/fetchEventByID').get(core.fetchEventByID);
-    //app.route('/getAvailablePeriods').get(core.getAvailablePeriods);
+    app.route('/getAvailablePeriods').get(core.getAvailablePeriods);
 };
