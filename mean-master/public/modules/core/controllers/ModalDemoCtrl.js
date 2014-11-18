@@ -27,6 +27,7 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
   }
 
   $scope.comment = function (id, size) {
+      $scope.items = id;
       var modalInstance = $modal.open({
           templateUrl: 'myCommentContent.html',
           controller: 'ModalInstanceCtrl',

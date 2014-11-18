@@ -339,6 +339,7 @@ exports.denyroom = function (req, res) {
 
     
     var id = req.body.id;
+    var adminComment = req.body.adminComment;
     
     console.log('POSTED!!!!!!!!');
     console.log(req.body);
@@ -353,10 +354,10 @@ exports.denyroom = function (req, res) {
   {
       host: "smtp.mandrillapp.com"
   , port: 587
-  , to: "trevorkowens@gmail.com"
+  , to: "trevorkowens@ufl.edu"
   , from: "trevorkowens@gmail.com"
   , subject: "Event Denied"
-  , body: "Your event has been denied."
+  , body: "Your event has been denied. Here is a comment from the administrator: "+adminComment
   , authentication: "login"
   , username: username
   , password: password
@@ -367,7 +368,6 @@ exports.denyroom = function (req, res) {
   }
 );
     res.redirect('/');
-       //res.redirect('/#!/adminview');
 };
 
 exports.roomnumber = function (req, res) {

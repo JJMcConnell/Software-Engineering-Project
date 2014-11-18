@@ -80,7 +80,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
 		    });
 		};
+		
 
+        //NO LONGER NEEDED (in ModalInstanceCtrl)
 		$scope.deny = function (id) {
 		    //$window.location.reload();
 		    var jsonParam = {'id': 1};
