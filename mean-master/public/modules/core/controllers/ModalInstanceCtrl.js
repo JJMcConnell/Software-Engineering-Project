@@ -43,7 +43,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
   };
 
   $scope.adminRequest = function () {
-      
+      console.log('ADMIN REQUEST!!!!!!!!!!!!');
       $scope.error = '';
       console.log($scope.request);
       console.log('This method?');

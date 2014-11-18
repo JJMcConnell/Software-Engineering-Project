@@ -421,17 +421,6 @@ exports.addAdminEvent = function (req, res){
         });
     }
 
-    if(sponsor == null){
-        return res.status(400).send({
-            message: 'Error. Sponsor not entered correctly.'
-        });
-    }
-
-    if (organization == null) {
-        return res.status(400).send({
-            message: 'Error. Organization not entered correctly.'
-        });
-    }
 
     if(email == null){
         return res.status(400).send({
