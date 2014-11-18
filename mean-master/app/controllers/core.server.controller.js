@@ -374,6 +374,93 @@ exports.roomnumber = function (req, res) {
     })*/
 }
 
+exports.addAdminEvent = function (req, res){
+    var name = req.body.name;
+    var email = req.body.email;
+    var telephone = req.body.telephone;
+    var roomNumber = req.body.roomNumber;
+    var date = req.body.date;
+    var period = req.body.period;
+    var description = req.body.description;
+    var length = req.body.length;
+
+    if(date != null){
+        var year = date.substring(0, 4);
+        var month = date.substring(5, 7);
+        var day = date.substring(8, 10);
+    }
+
+    if(date == null){
+        return res.status(400).send({
+            message: 'Error. Date not entered correctly.'
+        });
+    }
+
+    var AdminEvent = new Event({
+        description: description,
+        title: name,
+        sponsor: 'Pickeral',
+        organization: 'Admin',
+        contactEmail: email,
+        contactPhone: telephone,
+        isClass: true,
+        room: roomNumber,
+        day: day,
+        month: month,
+        year: year,
+        period: period,
+        length: length,
+        viewed: true,
+        approved: true
+    });
+
+    if(name == null){
+        return res.status(400).send({
+            message: 'Error. Name not entered correctly.'
+        });
+    }
+
+    if(sponsor == null){
+        return res.status(400).send({
+            message: 'Error. Sponsor not entered correctly.'
+        });
+    }
+
+    if (organization == null) {
+        return res.status(400).send({
+            message: 'Error. Organization not entered correctly.'
+        });
+    }
+
+    if(email == null){
+        return res.status(400).send({
+            message: 'Error. Email not entered correctly.'
+        });
+    }
+
+    if(roomNumber == null){
+        return res.status(400).send({
+            message: 'Error. Room not entered correctly.'
+        });
+    }
+
+    if(period == null){
+        return res.status(400).send({
+            message: 'Error. Period not entered correctly.'
+        });
+    }
+    AdminEvent.save(function (err) {
+        if (err) console.log(err);
+        if (err) return res.status(400).send({
+            message: 'Error adding event. Make sure the fields are entered correctly.'
+        });
+
+        else
+            res.redirect('/');
+    });
+
+}
+
 exports.addevent = function (req, res) {
     //get is req.query
     //post is req.body

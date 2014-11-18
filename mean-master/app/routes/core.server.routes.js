@@ -8,6 +8,7 @@ module.exports = function(app) {
 
     // CREATE
     app.route('/requestevent').post(core.addevent);
+    app.route('/requestAdminEvent').post(core.addAdminEvent);
     // Creating the admin when the website first starts.
     app.route('/generateAdmin').post(core.generateAdmin);
 
