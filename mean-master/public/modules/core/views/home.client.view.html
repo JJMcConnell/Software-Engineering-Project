@@ -45,7 +45,7 @@
                    
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
-                    <div id="selectedDate" hidden="hidden"></div>
+                    <div id="selectedDate"></div>
                 </div>
     
 
@@ -206,39 +206,53 @@
         <!--Select Room Number and form pops up-->
         <!--Should auto-populate form-->
       
-        <div class="jumbotron">
-            <h3> Step 2 - Pick a room! </h3>
-            <div class="btn-toolbar"  data-toggle="buttons">
+            <div class="jumbotron">
+                <h3> Step 2 - Pick a room! </h3>
+                <div class="btn-toolbar"  data-toggle="buttons">
 
-                <button type="button" ng-attr-id="101" ng-click="buttonData(101)"  id="101" class="btn btn-default">Room 101</button>
-                <button type="button" ng-attr-id="106B" ng-click="buttonData('106B')" id="106B" class="btn btn-default">Room 106B</button>
-                <button type="button" ng-attr-id="120" ng-click="buttonData(120)" id="120" class="btn btn-default">Room 120</button>
-                <button type="button" ng-attr-id="121" ng-click="buttonData(121)" id="121" class="btn btn-default">Room 121</button>
-                <button type="button" ng-attr-id="142" ng-click="buttonData(142)" id="142" class="btn btn-default">Room 142</button>
-                <button type="button" ng-attr-id="143" ng-click="buttonData(143)" id="143" class="btn btn-default">Room 143</button>
-            </div>
-                <br>
-            <div class="btn-toolbar" data-toggle="buttons">
-                <button type="button" ng-attr-id="144" ng-click="buttonData(144)" id="144" class="btn btn-default">Room 144</button>
-                <button type="button" ng-attr-id="145" ng-click="buttonData(145)" id="145" class="btn btn-default">Room 145</button>
-                <button type="button" ng-attr-id="146" ng-click="buttonData(146)" id="146" class="btn btn-default">Room 146</button>
-                <button type="button" ng-attr-id="232" ng-click="buttonData(232)" id="232" class="btn btn-default">Room 232</button>
-                <button type="button" ng-attr-id="233A" ng-click="buttonData('233A')" id="233A" class="btn btn-default">Room 233A</button>
-
-                        
-            </div>
-
-
+                    <button type="button" ng-attr-id="101" ng-click="buttonData(101)"  id="101" class="btn btn-default">Room 101</button>
+                    <button type="button" ng-attr-id="106B" ng-click="buttonData('106B')" id="106B" class="btn btn-default">Room 106B</button>
+                    <button type="button" ng-attr-id="120" ng-click="buttonData(120)" id="120" class="btn btn-default">Room 120</button>
+                    <button type="button" ng-attr-id="121" ng-click="buttonData(121)" id="121" class="btn btn-default">Room 121</button>
+                    <button type="button" ng-attr-id="142" ng-click="buttonData(142)" id="142" class="btn btn-default">Room 142</button>
+                    <button type="button" ng-attr-id="143" ng-click="buttonData(143)" id="143" class="btn btn-default">Room 143</button>
                 </div>
+                    <br>
+                <div class="btn-toolbar" data-toggle="buttons">
+                    <button type="button" ng-attr-id="144" ng-click="buttonData(144)" id="144" class="btn btn-default">Room 144</button>
+                    <button type="button" ng-attr-id="145" ng-click="buttonData(145)" id="145" class="btn btn-default">Room 145</button>
+                    <button type="button" ng-attr-id="146" ng-click="buttonData(146)" id="146" class="btn btn-default">Room 146</button>
+                    <button type="button" ng-attr-id="232" ng-click="buttonData(232)" id="232" class="btn btn-default">Room 232</button>
+                    <button type="button" ng-attr-id="233A" ng-click="buttonData('233A')" id="233A" class="btn btn-default">Room 233A</button>
 
+                            
+                </div>
             </div>
+        </div>
 
             <!--<div ng-show="selected">Selection from a modal: {{ selected }}</div>-->
 
         </div>
- 
-    
-    </div>
+
+        <div class="jumbotron text-center">
+                <h3> Individual calendars for each room: </h3>
+                <div class="btn-toolbar"  data-toggle="buttons">
+                      <a type="button" href="#!/calendarForRoom#101" class="btn btn-sm btn-success">Room 101</a>
+                      <a type="button" href="#!/calendarForRoom#106B" class="btn btn-sm btn-success">Room 106B</a>
+                      <a type="button" href="#!/calendarForRoom#120" class="btn btn-sm btn-success">Room 120</a>
+
+                      <a type="button" href="#!/calendarForRoom#121" class="btn btn-sm btn-success">Room 121</a>
+                      <a type="button" href="#!/calendarForRoom#142" class="btn btn-sm btn-success">Room 142</a>
+                      <a type="button" href="#!/calendarForRoom#143" class="btn btn-sm btn-success">Room 143</a> 
+
+                      <a type="button" href="#!/calendarForRoom#144" class="btn btn-sm btn-success">Room 144</a>
+                      <a type="button" href="#!/calendarForRoom#145" class="btn btn-sm btn-success">Room 145</a>
+                      <a type="button" href="#!/calendarForRoom#146" class="btn btn-sm btn-success">Room 146</a>
+
+                      <a type="button" href="#!/calendarForRoom#232" class="btn btn-sm btn-success">Room 232</a>
+                      <a type="button" href="#!/calendarForRoom#233A" class="btn btn-sm btn-success">Room 233A</a>
+                </div>
+        </div>
 
 
 <script type='text/javaScript'>
@@ -263,4 +277,3 @@
 </html>
 
 </section>
-
