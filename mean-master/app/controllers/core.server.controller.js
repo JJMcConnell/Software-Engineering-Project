@@ -220,8 +220,8 @@ exports.eventsByMonth = function (req, res) {
         res.jsonp(events);
     })
 };
-/*
-exports.getAvailablePeriods = function (req,res) {
+
+exports.getAvailablePeriods = function (req, res) {
     var month = req.query.month;
     var day = req.query.day;
     var year = req.query.year;
@@ -233,16 +233,23 @@ exports.getAvailablePeriods = function (req,res) {
 
 
     Event.find({'month': month, 'day': day, 'year': year, 'room':room}, function (err, events){
-    var periodsAvailable = [];  
-    console.log("NUMBER OF EVENTS "+events.length);  
+    var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true];  
+    console.log("NUMBER OF EVENTS "+events.length);
+    console.log(events);  
+        // There it works.
         for(var myEvent in events){
             for(var x = 1; x < 14; x++){
-                periodsAvailable[x-1] = true;
+                
                 for(var i = 0; i < length; i++){
                     //somethnigs booked at period x+i
-                    console.log(events[0]);
-                    if(myEvent.period == (x+i))
-                    periodsAvailable[x-1] = false;
+                    console.log(events[myEvent]);
+
+                    if(events[myEvent].period == (x+i)){
+                        periodsAvailable[x-1] = false;
+                        for (var j = 1; j<events[myEvent].length; j++){
+                            periodsAvailable[x-1+j] = false;
+                        }
+                    }
 
                 }
                 //nothing booked for periods i = add period to periodsAvailable
@@ -251,7 +258,7 @@ exports.getAvailablePeriods = function (req,res) {
         res.jsonp(periodsAvailable);
     })
 
-};*/
+};
 
 exports.AdminWithRoom = function (req, res) {
     Event.find({ 'viewed': false, 'room': req.param('room') }, function (err, events) {
