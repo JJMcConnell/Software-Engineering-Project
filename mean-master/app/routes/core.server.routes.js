@@ -14,7 +14,7 @@ module.exports = function(app) {
 
     // UPDATE
     app.route('/approveroom').get(core.approveroom);
-    app.route('/denyroom').get(core.denyroom);
+    app.route('/denyroom').post(core.denyroom);
 
     // ROOMS
     app.route('/fetchRequests').get(core.fetchRequests);

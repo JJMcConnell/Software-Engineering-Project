@@ -296,10 +296,35 @@
 
 
         </script>
+
+        <script type="text/ng-template" id="myCommentContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Add a Comment!</h3>
+            </div>
+            <div class="modal-body">
+                    
+                    <!-- Request Information is here -->
+                    <form class="form-horizontal" role="form" ng-submit="adminRequest()">
+                        <label for="inputComment" class="col-sm-2 control-label">Deny Event?</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="comment" class="form-control" ng-model="comment" id="inputComment" placeholder="Insert a comment (optional)">
+
+                        </div>
+                        <!-- Submits the denial for the id of the event plus a comment. -->
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </form>
+            </div>
+
+
+        </script>
         </div>
 
         <center><h1>Requested Rooms</h1></center>
         <button type="button" data-toggle="buttons" class="btn btn-default" style="float: right;" ng-click="open(147)">Custom Request</button>
+    <button type="button" data-toggle="buttons" class="btn btn-default" style="float: right;" ng-click="comment(147)">Pop up thing</button>
         <br><br>
         <table ng-init="validateLogin()" class="table table-striped">
             <thead>
@@ -372,7 +397,7 @@
                         2. have hidden fields for the room id for each form
                         3. only submit the form whose button is pushed
                         -->
-                        <form action='approveroom'>
+                        <form ng-submit="approve(reservation._id)">
                             <input name='id' type="hidden" value="{{reservation._id}}">
                             <button type='submit' id='approve' class='btn btn-success' value=''>
                                 <span class="glyphicon glyphicon-ok"></span>
@@ -380,7 +405,7 @@
                         </form>
                     </td>
                     <td>
-                        <form action='denyroom'>
+                        <form ng-submit="deny(reservation._id)">
                             <input type='hidden' name='id' value="{{reservation._id}}">
                             <button type='submit' class='btn btn-danger' value='deny'>
                                 <span class="glyphicon glyphicon-remove"></span>

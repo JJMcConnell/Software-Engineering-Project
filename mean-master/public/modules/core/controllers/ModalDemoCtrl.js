@@ -26,6 +26,21 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
       console.log($scope.items);
   }
 
+  $scope.comment = function (id, size) {
+      var modalInstance = $modal.open({
+          templateUrl: 'myCommentContent.html',
+          controller: 'ModalInstanceCtrl',
+          size: size,
+          resolve: {
+              items: function () {
+                  return $scope.items;
+              },
+              buttonId: function () {
+                  return id;
+              }
+          }
+      });
+  }
 
   $scope.open = function (butId, size) {
 

@@ -303,10 +303,10 @@ exports.index = function (req, res) {
         data: "this is data"
     });
 };
-
+var d;
 exports.approveroom = function(req, res) {
     var id = req.query.id;
-
+    console.log(id);
     Event.findByIdAndUpdate( id, 
         { 'viewed': true, 'approved': true }, 
         function(err, events) {}
@@ -334,9 +334,15 @@ exports.approveroom = function(req, res) {
     res.redirect('/#!/adminview');
 };
 
-exports.denyroom = function(req, res) {
-    var id = req.query.id;
+exports.denyroom = function (req, res) {
+    console.log('POST!!!!');
 
+    
+    var id = req.body.id;
+    
+    console.log('POSTED!!!!!!!!');
+    console.log(req.body);
+    
     Event.findByIdAndUpdate( id, 
         { 'viewed': true, 'approved': false }, 
         function(err, events) {}
@@ -360,8 +366,8 @@ exports.denyroom = function(req, res) {
       }
   }
 );
-
-    res.redirect('/#!/adminview');
+    res.redirect('/');
+       //res.redirect('/#!/adminview');
 };
 
 exports.roomnumber = function (req, res) {
