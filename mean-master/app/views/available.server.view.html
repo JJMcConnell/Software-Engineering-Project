@@ -1,0 +1,18 @@
+{% extends 'layout.server.view.html' %}
+
+{% block content %}
+	<section data-ui-view>
+		<h1>Hello and welcome</h1>
+		<p>Here are the events:</p> 
+		{% for reservation in reservations %}
+	  		<tr>
+	    		<td> {{ reservation.day }} {{ reservation.month }}, {{ reservation.year }} </td> 
+	    		<td> {{ reservation.period}} </td> 
+	    		<td> {{ reservation.contactEmail}} </td>
+	  		</tr>
+	  		<br>
+		{% endfor %}
+		<p>{{ array }}</p>
+		<p>end paragraph</p>
+	</section>
+{% endblock %}

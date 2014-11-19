@@ -18,10 +18,11 @@ var  myEvent;
  */
 
 var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
-			'Aaron', 'Costello', 'Abbot', 'Vermont', 'Maine', 'Florida',
-			'Michael', 'Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta',
-			'Beatles', 'Zeppelin', 'Floyd', 'Amber', 'Ruby', 'Charmander',
-			'Treeko', 'Apple', 'Orange', 'Red', 'Blue'];
+			'Aaron', 'Costello', 'Abbot', 'France', 'Tobias', 'Myriam',
+			'Jacqui', 'Lesli', 'Mana', 'Boyd', 'Janean', 'Noah', 'Velia',
+			'sarah', 'Caroll', 'Kattie', 'Lynell', 'Berta', 'Blanca',
+			'Harry', 'Dorsey', 'Alda', 'Mariam', 'Leoma', 'Paz', 'Calvin',
+			'Candie', 'Mari', 'Derek', 'Layla', 'Robert', 'Roberta'];
 var name1 = names[Math.floor(Math.random()*names.length)];
 var name2 = names[Math.floor(Math.random()*names.length)];
 var email = names[Math.floor(Math.random()*names.length)] + '@gmail.com';
@@ -43,6 +44,8 @@ console.log('title: '+name1+'\nsponsor: '+name2+
 		  '\nemail: '+email+'\nday: '+the_day+'\nmonth: '+
 		  the_month+'\nperiod: '+the_period+'\nroom: '+the_room);
  
+
+
 describe('Event Model Unit Tests:', function() {
 
     beforeEach(function(done) {

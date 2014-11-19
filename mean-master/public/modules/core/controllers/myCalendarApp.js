@@ -135,15 +135,52 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
 
     $scope.fetchEvents = function () {
-
         $http.get('/fetchEvents', $scope.credentials).success(function (response) {
+            /*$scope.createPeriodOpenings();
+            console.log("\n\n\nhello hello hello hello");
+                // first we should store all the events that we have
+            var startTime = new Date().getTime();
+            // LOOP for days
+            for (var day = 14; day < 15; day++) {
+                // LOOP for periods
+                for(var period = 1; period < 2; period++) {
+                    var hour = 6;
+                    var minute = 20;
+                    if (period < 12) {
+                        hour += period;
+                        minute += period * 5;
+                    } 
+                    else {
+                        hour = 7 + (period - 12);
+                        minute = 20;
+                    }
+
+                    var endHour = hour + 1;
+                    var endMinute = minute - 10;
+                    $scope.events.push({
+                        title: "event",
+                        // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                        start: new Date(2014, 10, day, hour, minute),
+                        end: new Date(2014, 10, day, endHour, endMinute)
+                    });
+                    var endTime = new Date().getTime();
+                    console.log("\n\nTime taken is "+(endTime-startTime)+" milliseconds");
+                }
+            }
+            */
             
             console.log(response);
             $scope.createPeriodOpenings();
+
+
+            // fill the calendar with dummy events
+
             for (var event in response) {
                 //console.log(response[event].year);
                 //console.log(response[event].month);
-                console.log(m);
+                //console.log(m);
+                
+                // first we should store all the events that we have
                 var hour = 6;
                 var minute = 20;
                 var period = parseInt(response[event].period);
@@ -170,6 +207,48 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
                     //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
                     end: new Date(response[event].year, response[event].month-1, response[event].day, endHour, endMinute)
+                });
+            }
+
+            // And redirect to the index page
+            //$location.path('');
+        }).error(function (response) {
+            $scope.error = response.message;
+       });
+        
+    };
+
+
+    $scope.fetchUnEvents = function () {
+            // to show when OPEN periods are, rather than 
+            // TAKEN ones
+
+        $http.get('/fetchEvents', $scope.credentials).success(function (response) {
+            
+            console.log(response);
+            $scope.createPeriodOpenings();
+            for (var event in response) {
+                //console.log(response[event].year);
+                //console.log(response[event].month);
+                // console.log(m);
+                var hour = 6;
+                var minute = 20;
+                var period = parseInt(response[event].period);
+                if (period < 12) {
+                    hour += period;
+                    minute += period * 5;
+                } else
+                {
+                    hour = 7 + (period - 12);
+                    minute = 20;
+                }
+                // console.log(hour);
+                $scope.events.push({
+                    title: response[event].title,
+                    // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                    start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                    //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                    end: new Date(response[event].year, response[event].month-1, response[event].day, hour+1, minute-10)
                 });
             }
 

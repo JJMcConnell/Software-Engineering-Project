@@ -1,0 +1,101 @@
+<!--
+THIS IS TO SHOW WHEN OPEN PERIODS ARE, RATHER THAN WHEN EVENTS ARE ALREADY
+-->
+
+<section data-ng-controller="myCalendarApp">
+
+    <!DOCTYPE HTML>
+    <html lang="en" id="top">
+
+    <head>
+
+
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>App Template</title>
+
+        <!-- Custom CSS -->
+        <style>
+            body {
+                padding-top: 40px;
+                /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+            }
+        </style>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel='stylesheet' href='lib/fullcalendar/dist/fullcalendar.css' />
+        <script src='lib/jquery.min.js'></script>
+        <script src='lib/moment.min.js'></script>
+        <script src='fullcalendar/fullcalendar.js'></script>
+
+    </head>
+
+    <body>
+
+        <!--  <script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script> -->
+        <!-- Page Content -->
+        <div class="container">
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <!--<h1>Calendar View</h1>-->
+                    
+
+                    <!-- Basic Calendar -->
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <button class="btn btn-success" ng-click="changeView('agendaDay', myCalendar)">Day</button>
+                            <button class="btn btn-success" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
+                            <button class="btn btn-success" ng-click="changeView('month', myCalendar)">Month</button>
+                        </div>
+                    </div>
+                    
+
+                    <div ng-init="fetchEvents()" class="span8 calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+                   
+                    <!-- Alert Message 
+                    <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                        <h4>{{alertMessage}}</h4>
+                    </div>
+                        -->
+                    
+                    <!-- List of task for Current Date 
+                    <ul class="unstyled">
+                        <li ng-repeat="e in events | filter:currentDate">
+                            <div class="alert alert-info">
+                                <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
+                                <b> {{e.title}}</b> - {{e.start | date:"MMM dd"}}
+                            </div>
+                        </li>
+                    </ul>
+                        -->
+
+
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+        <br>
+        <br>
+    </body>
+
+</html>
+
+</section>
+

@@ -17,8 +17,57 @@ var mailer = require("mailer")
 , username = "trevorkowens@gmail.com"
 , password = "WD6Av_7xpEyY_rgoRzFNGg";
 
+/*
+ * TABLE OF CONTENTS:
+ * index
+ * adminview
+ * fetchRequests
+ * fetchEvents
+ * fetchEventsFromRoom
+ * eventsByMonth
+ * eventsByDay
+ * eventsByYear
+ * adminWithRoom
+ * thisRoomApproved
+ * thisRoomRejected
+ * approveroom
+ * denyroom
+ * addevent
+ * {working on} show rooms available rather than rooms taken
+ * {working on} displaying when rooms are not taken
+ */
+ 
+exports.available = function (req, res) {
+    var periods = [false, false, false, false, false, false, false, false, false, false, false];
+        // periods[0] to periods[6] ==> periods 1 through 7
+        // periods[7] to periods[9] ==> periods E1 through E3
 
+        // search all events for a given room on a given day
+    var string = req.param('info');
+    var roomNo, month, day, year;
 
+    var split = string.split('_');
+
+    var roomNo = split[0];
+    var month = split[1];
+    var day = split[2];
+    var year = split[3];
+
+    console.log(roomNo + " " + month + " " + day + " " + year);
+
+    Event.find({ 'approved': true, 'room': roomNo, 'month': month, 
+        'day': day, 'year': year }, function (err, events) {        
+        if (err) return handleError(err);
+
+        else if (events == null)
+            res.render('available', {reservations: "NONE"});
+
+        else res.render('available', {
+            reservations: events,
+            array: periods
+        });
+    })
+}
 exports.generateAdmin = function (req, res) {
     res.jsonp('created admin');
 /*    console.log('Trying to create admin.');
@@ -100,6 +149,10 @@ exports.ThisRoomApproved = function(req,res) {
     }
 }
 
+exports.index = function (req, res) {
+    res.render('index');
+};
+
 exports.adminview = function(req,res) {
     Event.find({ 'viewed': false }, function (err, events) {
         if (err) {
@@ -145,12 +198,6 @@ exports.fetchRequests = function (req, res) {
     });
 };
 
-
-exports.index = function (req, res) {
-    res.render('index');
-    //console.log('index');
-};
-
 exports.fetchEvents = function (req, res) {
     var month = req.query.month;
     var day = req.query.day;
@@ -160,7 +207,7 @@ exports.fetchEvents = function (req, res) {
         if (err) return handleError(err);
 
         res.jsonp(events);
-        console.log(events);
+        // console.log(events);
 
     })
     //res.render('index');
@@ -274,6 +321,25 @@ exports.AdminWithRoom = function (req, res) {
         }
     });
 };
+
+exports.ThisRoomApproved = function(req,res) {
+    if (req.param('tagId') != "") {
+        Event.find({ 'room': req.param('tagId'), 'approved': true }, function (err, events) {
+            if (err) return handleError(err);
+            else if (events.length == 0) {
+                res.render('NoReservations', 
+                    {room: req.param('tagId')}
+                );
+            }
+            else {
+                res.render('ThisRoom', { 
+                    reservations: events, 
+                    room: req.param('tagId')
+                });
+            }
+        })
+    }
+}
 
 exports.ThisRoomRejected = function (req, res) {
     if (req.param('tagId') != "") {
@@ -476,11 +542,11 @@ exports.addevent = function (req, res) {
     var description = req.body.description;
     var length = req.body.length;
 
-if(date != null){
-    var year = date.substring(0, 4);
-    var month = date.substring(5, 7);
-    var day = date.substring(8, 10);
-}
+    if(date != null){
+        var year = date.substring(0, 4);
+        var month = date.substring(5, 7);
+        var day = date.substring(8, 10);
+    }
 
 
     if(date == null){
@@ -488,8 +554,6 @@ if(date != null){
             message: 'Error. Date not entered correctly.'
         });
     }
-
-   
 
     console.log(date.toString());
     console.log("day: " + day);
@@ -510,17 +574,18 @@ if(date != null){
         length: length
     });
   
-   
+    var m1 = 'Error. ';
+    var m2 = ' not entered correctly';
 
     if(name == null){
         return res.status(400).send({
-            message: 'Error. Name not entered correctly.'
+            message: m1+'Name'+m2
         });
     }
 
     if(sponsor == null){
         return res.status(400).send({
-            message: 'Error. Sponsor not entered correctly.'
+            message: m1+'Sponsor'+m2
         });
     }
 
@@ -532,19 +597,19 @@ if(date != null){
 
     if(email == null){
         return res.status(400).send({
-            message: 'Error. Email not entered correctly.'
+            message: m1+'Email'+m2
         });
     }
 
     if(roomNumber == null){
         return res.status(400).send({
-            message: 'Error. Room not entered correctly.'
+            message: m1+'Room'+m2
         });
     }
 
     if(period == null){
         return res.status(400).send({
-            message: 'Error. Period not entered correctly.'
+            message: m1+'Period'+m2
         });
     }
     testEvent.save(function (err) {

@@ -29,6 +29,9 @@ module.exports = function(app) {
     app.route('/calendarDay').get(core.eventsByDay);
     app.route('/calendarYear').get(core.eventsByYear);
     app.route('/calendarMonth').get(core.eventsByMonth);
+
+    // delete this when done
+    app.route('/available/?:info').get(core.available);
     app.route('/fetchEventByID').get(core.fetchEventByID);
     app.route('/getAvailablePeriods').get(core.getAvailablePeriods);
 };
