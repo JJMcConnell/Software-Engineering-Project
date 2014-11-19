@@ -206,7 +206,7 @@ exports.fetchEvents = function (req, res) {
         if (err) return handleError(err);
 
         res.jsonp(events);
-        console.log(events);
+        // console.log(events);
 
     })
     //res.render('index');
