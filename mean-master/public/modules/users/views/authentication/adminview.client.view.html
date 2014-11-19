@@ -1,158 +1,14 @@
-<div class="container" data-ng-controller="AuthenticationController">
+<style>
+body {
+padding-top: 40px;
+padding-bottom:40px;
+}
+</style>
 
-<div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl">
-        <script type="text/ng-template" id="myModalContent.html">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Request Form</h3>
-            </div>
-            <div class="modal-body">
-                <ul>
+<div class="container" data-ng-controller="AuthenticationController" >
 
+<div class="col-lg-12" ng-controller="ModalDemoCtrl">
 
-                        <!-- Request Information is here -->
-                        <form class="form-horizontal" role="form" ng-submit="ok()">
-
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-2 control-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" data-ng-model="request.name" name="name" class="form-control" id="inputName" placeholder="Name" ng-required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" data-ng-model="request.email" name="email" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputNumber" class="col-sm-2 control-label">Phone</label>
-                                <div class="col-sm-10">
-                                    <input type="tel" data-ng-model="request.telephone" name="telephone" class="form-control" id="inputNumber" placeholder="Phone Number">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputSponsor" class="col-sm-2 control-label">Sponsor</label>
-                                <div class="col-sm-10">
-                                    <input type="text" data-ng-model="request.sponsor" name="sponsor" class="form-control" id="inputSponsor" placeholder="Sponsor Name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputOrg" class="col-sm-2 control-label">Organization</label>
-                                <div class="col-sm-10">
-                                    <input type="text" data-ng-model="request.organization" name="organization" class="form-control" id="inputOrg" placeholder="Organization Name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputDesc" class="col-sm-2 control-label">Description</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" data-ng-model="request.description" name="description" id="inputDesc" placeholder="Describe the reason for requesting a room." rows="2"></textarea>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="inputDate" class="col-sm-2 control-label">Date</label>
-                                <div class="col-sm-10">
-                                    <input type="date" name="date" class="form-control" ng-model="request.date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" ng-required>
-                                </div>
-                            </div>
-
-                            <!--
-                        <div class="form-group">
-                            <label for="inputDate" class="col-sm-2 control-label"> TestDate</label>
-                            <div class="col-sm-10">
-                                <input type="text" data-ng-model="request.date" name="date" class="form-control" id="inputDate">
-                            </div>
-                        </div>
-                        -->
-
-                        
-                        <div class="form-group">
-                            <label for="inputRoom" class="col-sm-2 control-label">Room</label>
-                            <div class="col-sm-10">
-                                <div class="input-group">
-                                    <div class="input-group-addon">#</div>
-                                    <select class="form-control" name="roomNumber" ng-model="request.roomNumber" id="inputRoom" ng-required>
-                                        <option> {{buttonId}} </option>
-                                        <option>106B</option>
-                                        <option>120</option>
-                                        <option>121</option>
-                                        <option>142</option>
-                                        <option>143</option>
-                                        <option>144</option>
-                                        <option>145</option>
-                                        <option>146</option>
-                                        <option>147</option>
-                                        <option>232</option>
-                                        <option>232A</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> 
-
-
-                            <div class="form-group">
-                                <label for="inputPeriod" class="col-sm-2 control-label">Starting Period</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">#</div>
-                                        <select class="form-control" ng-model="request.period" name="period" id="inputPeriod" ng-required>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option value="12">E1</option>
-                                            <option value="13">E2</option>
-                                            <option value="14">E3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputLength" class="col-sm-2 control-label">Length (Periods)</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">#</div>
-                                        <select class="form-control" ng-model="request.length" name="length" id="inputLength" ng-required>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-ng-show="error" class="text-center text-danger">
-                                <strong data-ng-bind="error"></strong>
-                            </div>
-                            <br>
-                            <!-- Request Information module ends here -->
-                            <!-- On submitform have a success message, on cancel close the big modal-->
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Submit</button>
-                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                            </div>
-                        </form>
-                    </ul>
-                </div>
-
-
-        </script>
-
-
-    <div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl">
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
                 <h3 class="modal-title" id="modalTitle">Request Form</h3>
@@ -321,34 +177,35 @@
 
 
         </script>
-        </div>
 
         <center><h1>Requested Rooms</h1></center>
+
         <button type="button" data-toggle="buttons" class="btn btn-default" style="float: right;" ng-click="open(147)">Custom Request</button>
+
     <a href="#!/approvedevents" class="btn btn-default" style="float: left;">View Approved Events<i class="fa fa-home"></i></a>
         <br><br>
         <table ng-init="validateLogin()" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Room</th>
-                    <th>Period</th>
-                    <th>Request For</th>
-                    <th>Contact</th>
+                    <th style="padding-right:25px">Room</th>
+                    <th style="padding-right:25px">Period</th>
+                    <th style="padding-right:25px">Request For</th>
+                    <th style="padding-right:25px">Contact</th>
                     <!-- <th>Room ID</th> -->
-                    <th>Submitted on</th>
-                    <th>Details</th>
-                    <th>Approve</th>
-                    <th>Deny</th>
+                    <th class="text-left" style="padding-right:25px">Submitted on</th>
+                    <th class="text-center">Details</th>
+                    <th class="text-center">Approve</th>
+                    <th class="text-center">Deny</th>
                 </tr>
             <tbody ng-init="fetchRequests()">
 
                 <tr ng-repeat="reservation in events.slice().reverse()" id="tbl" ng-init="res = reserva;">
-                    <td ng-show="reservation.room"> {{ reservation.room }} </td>
-                    <td> {{ reservation.period }} </td>
-                    <td> {{ reservation.month }}-{{ reservation.day }}-{{ reservation.year }}</td>
-                    <td> {{ reservation.contactEmail}} </td>
+                    <td ng-show="reservation.room" style="padding-right:25px"> {{ reservation.room }} </td>
+                    <td style="padding-right:25px"> {{ reservation.period }} </td>
+                    <td style="padding-right:25px"> {{ reservation.month }}-{{ reservation.day }}-{{ reservation.year }}</td>
+                    <td style="padding-right:25px"> {{ reservation.contactEmail}} </td>
                     <!-- <td> {{ reservation.id }} </td> -->
-                    <td> {{ parseWeirdDate(reservation.created) }} </td>
+                    <td class="text-left" style="padding-right:25px"> {{ parseWeirdDate(reservation.created) }} </td>
 
                     <td id="nameGoesHere" hidden="hidden" ng-init="title = reservation.title;">NAME!!!!!!!</td>
 
@@ -383,7 +240,7 @@
 
 
 
-                            <button ng-click="open()" class='btn btn-info'>
+                            <button ng-click="open()" class='btn btn-info center-block'>
                                 <span class="glyphicon glyphicon-info-sign"></span>
                             </button>
 
@@ -400,7 +257,7 @@
                         -->
                         <form ng-submit="approve(reservation._id)">
                             <input name='id' type="hidden" value="{{reservation._id}}">
-                            <button type='submit' id='approve' class='btn btn-success' value=''>
+                            <button type='submit' id='approve' class='btn btn-success center-block' value=''>
                                 <span class="glyphicon glyphicon-ok"></span>
                             </button>
                         </form>
@@ -408,7 +265,7 @@
                     <td>
                         <form ng-submit="comment(reservation._id)">
                             <input type='hidden' name='id' value="{{reservation._id}}">
-                            <button type='submit' class='btn btn-danger' value='deny'>
+                            <button type='submit' class='btn btn-danger center-block' value='deny'>
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </form>

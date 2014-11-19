@@ -6,7 +6,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		// YEAH!!!
 		$scope.validateLogin = function () {
 		    //if ($scope.authentication.user) $location.path(path);
-		    if (!$scope.authentication.user) $location.path('/');
+		    //if (!$scope.authentication.user) $location.path('/');
 		}
 
 		$scope.redirectIfLoggedIn = function () {
