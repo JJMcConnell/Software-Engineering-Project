@@ -32,6 +32,9 @@ var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
 		// between 11 and 12
 	var the_period = Math.floor((Math.random() * 7) + 1);
 		// between 1 and 7
+	var the_length = Math.floor((Math.random() * 4) + 1);
+        // between 1 and 4
+
 
 	var rooms = ['101', '106B', '120', '121', '142', '143',
 				'144', '145', '146', '147', '232', '233A'];
@@ -59,7 +62,8 @@ var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
 	            year: 2014,
 		        period: the_period,
 		        approved: true,
-		        viewed: true
+		        viewed: true,
+                length: 2
 		    });
 		    done();
 		});

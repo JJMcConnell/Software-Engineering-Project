@@ -24,15 +24,19 @@ var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
 			'Harry', 'Dorsey', 'Alda', 'Mariam', 'Leoma', 'Paz', 'Calvin',
 			'Candie', 'Mari', 'Derek', 'Layla', 'Robert', 'Roberta'];
 var name1 = names[Math.floor(Math.random()*names.length)];
-var name2 = names[Math.floor(Math.random()*names.length)];
+var name2 = names[Math.floor(Math.random() * names.length)];
+var name3 = names[Math.floor(Math.random() * names.length)];
 var email = names[Math.floor(Math.random()*names.length)] + '@gmail.com';
 
 var the_day = Math.floor((Math.random() * 30) + 1);
 	// between 1 and 30
 var the_month = 11 + Math.floor((Math.random() * 2));
 	// between 11 and 12
-var the_period = Math.floor((Math.random() * 7) + 1);
-	// between 1 and 7
+var the_period = Math.floor((Math.random() * 7) + 3);
+	// between 4 and 10 (for period lengths of four)
+
+var the_length = Math.floor((Math.random() * 4) + 1);
+// between 1 and 4
 
 var rooms = ['101', '106', '120', '121', '142', '143',
 			'144', '145', '146', '147', '232', '233'];
@@ -56,7 +60,7 @@ describe('Event Model Unit Tests:', function() {
 	    myEvent = new Event({
 	        title: name1,
 	        sponsor: name2,
-	        organization: name2,
+	        organization: name3,
 	        contactEmail: email,
 	        room: the_room,
             day: the_day,
@@ -65,7 +69,7 @@ describe('Event Model Unit Tests:', function() {
 	        period: the_period,
 	        approved: false,
 	        viewed: false,
-            length: 1
+            length: the_length
 	    });
 	    done();
 	});
@@ -273,6 +277,144 @@ describe('Event Model Unit Tests:', function() {
 	                done();
 	        });
 	    });		
+	});
+
+	describe('Finding conflicting events', function () {
+	    it('Should find unavailable periods for length 1', function (done) {
+	        Event.find({ 'month': the_month, 'day': the_day, 'year': 2014, 'room': the_room }, function (err, events) {
+	            var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true];
+	            // There it works.
+	            for (var myEvent in events) {
+	                for (var x = 1; x < 14; x++) {
+
+	                    for (var i = 0; i < 1; i++) {
+	                        //somethnigs booked at period x+i
+	                        //console.log(events[myEvent]);
+
+	                        if (events[myEvent].period == (x + i)) {
+	                            periodsAvailable[x - 1] = false;
+	                            for (var j = 1; j < events[myEvent].length; j++) {
+	                                periodsAvailable[x - 1 + j] = false;
+	                            }
+	                        }
+
+	                    }
+	                    //nothing booked for periods i = add period to periodsAvailable
+	                }
+	            }
+	            if (periodsAvailable[the_period - 1] == false)
+	                done();
+	        });
+	    });
+	    it('Should find unavailable periods for length 2', function (done) {
+	        Event.find({ 'month': the_month, 'day': the_day, 'year': 2014, 'room': the_room }, function (err, events) {
+	            var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true];
+	            // There it works.
+	            for (var myEvent in events) {
+	                for (var x = 1; x < 14; x++) {
+
+	                    for (var i = 0; i < 2; i++) {
+	                        //somethnigs booked at period x+i
+	                        //console.log(events[myEvent]);
+
+	                        if (events[myEvent].period == (x + i)) {
+	                            periodsAvailable[x - 1] = false;
+	                            for (var j = 1; j < events[myEvent].length; j++) {
+	                                periodsAvailable[x - 1 + j] = false;
+	                            }
+	                        }
+
+	                    }
+	                    //nothing booked for periods i = add period to periodsAvailable
+	                }
+	            }
+	            if (periodsAvailable[the_period - 1] == false && periodsAvailable[the_period-2] == false)
+	                done();
+	        });
+	    });
+	    it('Should find unavailable periods for length 3', function (done) {
+	        Event.find({ 'month': the_month, 'day': the_day, 'year': 2014, 'room': the_room }, function (err, events) {
+	            var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true];
+	            // There it works.
+	            for (var myEvent in events) {
+	                for (var x = 1; x < 14; x++) {
+
+	                    for (var i = 0; i < 3; i++) {
+	                        //somethnigs booked at period x+i
+	                        //console.log(events[myEvent]);
+
+	                        if (events[myEvent].period == (x + i)) {
+	                            periodsAvailable[x - 1] = false;
+	                            for (var j = 1; j < events[myEvent].length; j++) {
+	                                periodsAvailable[x - 1 + j] = false;
+	                            }
+	                        }
+
+	                    }
+	                    //nothing booked for periods i = add period to periodsAvailable
+	                }
+	            }
+	            if (periodsAvailable[the_period - 1] == false && periodsAvailable[the_period - 2] == false && periodsAvailable[the_period - 3] == false)
+	                done();
+	        });
+	    });
+	    it('Should find unavailable periods for length 4', function (done) {
+	        Event.find({ 'month': the_month, 'day': the_day, 'year': 2014, 'room': the_room }, function (err, events) {
+	            var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true];
+	            // There it works.
+	            for (var myEvent in events) {
+	                for (var x = 1; x < 14; x++) {
+
+	                    for (var i = 0; i < 4; i++) {
+	                        //somethnigs booked at period x+i
+	                        //console.log(events[myEvent]);
+
+	                        if (events[myEvent].period == (x + i)) {
+	                            periodsAvailable[x - 1] = false;
+	                            for (var j = 1; j < events[myEvent].length; j++) {
+	                                periodsAvailable[x - 1 + j] = false;
+	                            }
+	                        }
+
+	                    }
+	                    //nothing booked for periods i = add period to periodsAvailable
+	                }
+	            }
+	            console.log('THE PERIOD');
+	            console.log(the_period);
+	            if (periodsAvailable[the_period - 1] == false && periodsAvailable[the_period - 2] == false && periodsAvailable[the_period - 3] == false && periodsAvailable[the_period - 4] == false)
+	                done();
+	        });
+	    });
+	    it('Should mark periods unavailable based on event length', function (done) {
+	        Event.find({ 'month': the_month, 'day': the_day, 'year': 2014, 'room': the_room }, function (err, events) {
+	            var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true];
+	            // There it works.
+	            for (var myEvent in events) {
+	                for (var x = 1; x < 14; x++) {
+
+	                    for (var i = 0; i < 1; i++) {
+	                        //somethnigs booked at period x+i
+	                        //console.log(events[myEvent]);
+
+	                        if (events[myEvent].period == (x + i)) {
+	                            periodsAvailable[x - 1] = false;
+	                            for (var j = 1; j < events[myEvent].length; j++) {
+	                                periodsAvailable[x - 1 + j] = false;
+	                            }
+	                        }
+
+	                    }
+	                    //nothing booked for periods i = add period to periodsAvailable
+	                }
+	            }
+	            console.log('THE PERIOD');
+	            console.log(the_period);
+	            for (var i = 0; i < the_length; i++)
+	                periodsAvailable[the_period - 1 + i].should.equal(false);
+	                done();
+	        });
+	    });
 	});
 
 
