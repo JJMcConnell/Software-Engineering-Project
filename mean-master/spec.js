@@ -10,7 +10,6 @@ describe('angularjs homepage', function() {
 	var room144 = element(by.id('144'));
 	var room145 = element(by.id('145'));
 	var room146 = element(by.id('146'));
-	var room147 = element(by.id('147'));
 	var room232 = element(by.id('232'));
 	var room233 = element(by.id('233A'));
 
@@ -29,17 +28,20 @@ describe('angularjs homepage', function() {
 	var cancelButton = element(by.buttonText("Cancel"));
 
 //Array containing all of the room options and random number within array
-	var roomButtons = [room101, room106, room120, room121, room142, room143, room144, room145, room146, room147, room232, room233];
+	var roomButtons = [room101, room106, room120, room121, room142, room143, room144, room145, room146, room232, room233];
 	var randomnumber = Math.floor(Math.random() * (11 - 0 + 1)) + 0;
+
+	var adminUser = element(by.id('username'));
+	var adminPass = element(by.id('password'));
 
 
 	var modal = element(by.className('modal-header'));
 
 	beforeEach(function() {
 		browser.get('http://localhost:3000');
-		//protractor.getInstance().ignoreSynchronization = true;
+		
 	});
-/*
+
 	it('should have a title', function() {
 		expect(browser.getTitle()).toEqual('The University of Florida Department of Music Presents: Room Scheduler')
 	});
@@ -62,6 +64,13 @@ describe('angularjs homepage', function() {
 
 	});
 
+	 it ('should have a working contact page', function() {
+
+	 	browser.get('http://localhost:3000/#!/contact');
+
+	 	expect(element(by.id('pick')).isPresent()).toBeTruthy();
+	 });
+/*
 	 it('should log into the admin account', function() {
 
 	 	browser.get('http://localhost:3000/#!/signin');
@@ -76,23 +85,38 @@ describe('angularjs homepage', function() {
 
 	 }); */
 
+
+
 	 it('should create an event', function() {
 
 	 	roomButtons[randomnumber].click();
 
 	 	modName.sendKeys('John Johnson');
+		element(by.id('five')).click();
+	 	element(by.id('lOne')).click();
 	 	modEmail.sendKeys('JohnJJohnson@gmail.com');
 	 	modPhone.sendKeys('123-456-7890');
 	 	modSponsor.sendKeys('Dr. Will Williston');
 	 	modOrganization.sendKeys('French Horn Fanatics');
 	 	modDescription.sendKeys('We found a fine fortress for which we frequently fumble our French fanfares');
 	 	//modDate.sendKeys('12252015');
-	 	element(by.id('five')).click();
-	 	element(by.id('lOne')).click();
-
+	 
 	 	submitButton.click();
 
-	 	expect(modal.isPresent()).toBeTruthy();
+	 	browser.get('http://localhost:3000/#!/signin');
+
+	 	adminUser.sendKeys('admin');
+	 	adminPass.sendKeys('admin1234');
+
+	 	element(by.buttonText("Sign in")).click();
+
+	 	//var url = protractor.getInstance().getCurrentUrl().toString();
+
+
+
+	 	//expect(url.toEqual('http://localhost:3000/#!/adminview'));
+		expect(adminUser.isPresent()).toBeFalsy();
+	 	
 
 
 
