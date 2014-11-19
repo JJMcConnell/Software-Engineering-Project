@@ -75,7 +75,7 @@ var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
 		                    should.not.exist(err);      
 		                });
 		            done();
-		        });s
+		        });
 		    });
 
 

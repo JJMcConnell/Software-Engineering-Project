@@ -48,11 +48,15 @@ console.log('title: '+name1+'\nsponsor: '+name2+
 
 describe('Event Model Unit Tests:', function() {
 
+
+
+
     beforeEach(function(done) {
 		// create sample event
 	    myEvent = new Event({
 	        title: name1,
 	        sponsor: name2,
+	        organization: name2,
 	        contactEmail: email,
 	        room: the_room,
             day: the_day,
@@ -60,7 +64,8 @@ describe('Event Model Unit Tests:', function() {
             year: 2014,
 	        period: the_period,
 	        approved: false,
-	        viewed: false
+	        viewed: false,
+            length: 1
 	    });
 	    done();
 	});
@@ -273,7 +278,7 @@ describe('Event Model Unit Tests:', function() {
 
 	describe('NOT FINDING EVENTS THAT DON\'T EXIST', function() {
    		it('invalid year', function (done) {
-	        Event.find({ 'year': '2015' }, function (err, events) {
+	        Event.find({ 'year': '9999' }, function (err, events) {
 	            should.not.exist(err);
 	            if (events.length == 0)
 	                done();
