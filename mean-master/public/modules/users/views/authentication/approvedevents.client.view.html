@@ -1,6 +1,6 @@
 <div class="container" data-ng-controller="AuthenticationController">
 
-    <center><h1>Requested Rooms</h1></center>
+    <center><h1>Approved List</h1></center>
 
     <table ng-init="validateLogin()" class="table table-striped">
         <thead>
@@ -9,6 +9,8 @@
                 <th>Period</th>
                 <th>Date</th>
                 <th>Contact</th>
+                <th>Event Title</th>
+                <th>Info</th>
                 <!-- <th>Room ID</th> -->
                 <th>Cancel Event</th>
             </tr>
@@ -18,8 +20,51 @@
                 <td> {{ reservation.period }} </td>
                 <td> {{ reservation.month }}-{{ reservation.day }}-{{ reservation.year }}</td>
                 <td> {{ reservation.contactEmail}} </td>
+                <td> {{ reservation.title}} </td>
                 <!-- <td> {{ reservation.id }} </td> -->
               
+
+
+                <td>
+                    <!--
+        provide additional details here with a modal (event title, desc, contact)
+        -->
+                    <div ng-controller="ModalInfoCtrl">
+
+                        <script type="text/ng-template" id="infomodal.html" ng-init="setInfo(reservation)">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Event Information</h3>
+                            </div>
+                            <div id="innerInfo">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><strong>Name: </strong>{{ items.title }}</li>
+                                    <li class="list-group-item"><strong>Email: </strong>{{ items.contactEmail }}</li>
+                                    <li class="list-group-item"><strong>Phone Number: </strong>{{ items.contactPhone }}</li>
+                                    <li class="list-group-item"><strong>Room: </strong>{{ items.room }}</li>
+                                    <li class="list-group-item"><strong>Period: </strong>{{ items.period }}</li>
+                                    <li class="list-group-item"><strong>Sponsor: </strong>{{ items.sponsor }}</li>
+                                    <li class="list-group-item"><strong>Organization: </strong>{{ items.organization }}</li>
+                                    <li class="list-group-item"><strong>Description: </strong>{{ items.description }}</li>
+                                    <li class="list-group-item"><strong>Requested for: </strong>{{ items.month }}-{{ items.day }}-{{ items.year }}</li>
+                                </ul>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-warning" ng-click="cancel()">Close</button>
+                            </div>
+                        </script>
+
+
+
+                        <button ng-click="open()" class='btn btn-info'>
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                        </button>
+
+                    </div>
+
+                </td>
+
+
                 <td>
                     <form action='denyroom'>
                         <input type='hidden' name='id' value="{{reservation._id}}">
@@ -28,7 +73,9 @@
                         </button>
                     </form>
                 </td>
+
             </tr>
         </tbody>
+        <a href="#!/adminview" class="btn btn-default"  style="float: right;">View Pending Requests<i class="fa fa-home"></i></a>
     </table>
 </div>
