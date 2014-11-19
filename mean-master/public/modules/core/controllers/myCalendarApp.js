@@ -136,7 +136,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
     $scope.fetchEvents = function () {
         $http.get('/fetchEvents', $scope.credentials).success(function (response) {
-            $scope.createPeriodOpenings();
+            /*$scope.createPeriodOpenings();
             console.log("\n\n\nhello hello hello hello");
                 // first we should store all the events that we have
             var startTime = new Date().getTime();
@@ -167,8 +167,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     console.log("\n\nTime taken is "+(endTime-startTime)+" milliseconds");
                 }
             }
+            */
             
-            /*
             console.log(response);
             $scope.createPeriodOpenings();
 
@@ -209,7 +209,6 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     end: new Date(response[event].year, response[event].month-1, response[event].day, endHour, endMinute)
                 });
             }
-            */
 
             // And redirect to the index page
             //$location.path('');
