@@ -29,7 +29,7 @@
 .col-lg-12{
 	background-color: white;
 
-	padding-top: 25px;
+	padding-top: 15px;
     padding-right: 50px;
     padding-bottom: 25px;
     padding-left: 50px;
@@ -39,7 +39,7 @@
 .col-md-4{
 	background-color: white;
 
-	padding-top: 25px;
+	padding-top: 15px;
     padding-right: 50px;
     padding-bottom: 25px;
     padding-left: 50px;
@@ -49,6 +49,8 @@
 
 body{
 	background-color: steelblue;
+	padding-top: 40px;
+	padding-bottom:40px;
 }
 /*
 #page{
