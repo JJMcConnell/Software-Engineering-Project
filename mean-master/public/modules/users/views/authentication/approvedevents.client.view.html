@@ -10,7 +10,7 @@
                 <th>Date</th>
                 <th>Contact</th>
                 <th>Event Title</th>
-                <th>Info</th>
+                <th>Details</th>
                 <!-- <th>Room ID</th> -->
                 <th>Cancel Event</th>
             </tr>
@@ -66,7 +66,7 @@
 
 
                 <td>
-                    <form action='denyroom'>
+                    <form ng-submit='deny(reseration._id)'>
                         <input type='hidden' name='id' value="{{reservation._id}}">
                         <button type='submit' class='btn btn-danger' value='deny'>
                             <span class="glyphicon glyphicon-remove"></span>
@@ -76,6 +76,6 @@
 
             </tr>
         </tbody>
-        <a href="#!/adminview" class="btn btn-default"  style="float: right;">View Pending Requests<i class="fa fa-home"></i></a>
+        <a href="#!/adminview" class="btn btn-default"  style="float: left;">View Pending Requests<i class="fa fa-home"></i></a>
     </table>
 </div>
