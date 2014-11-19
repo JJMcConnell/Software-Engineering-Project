@@ -6,7 +6,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		// YEAH!!!
 		$scope.validateLogin = function () {
 		    //if ($scope.authentication.user) $location.path(path);
-		    //if (!$scope.authentication.user) $location.path('/');
+		    if (!$scope.authentication.user) $location.path('/');
 		}
 
 		$scope.redirectIfLoggedIn = function () {
@@ -83,21 +83,23 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		
 
         //ONLY FOR APPROVED (in ModalInstanceCtrl)
+
 		$scope.deny = function (id) {
 		    //$window.location.reload();
-		    var jsonParam = {'id': 1};
+		    var jsonParam = { 'id': 1 };
 		    jsonParam.id = id;
 		    console.log('DENIED!');
 		    $http.post('/denyroom', jsonParam).success(function (response) {
 		        $location.path('/signin');
-		        console.log('successfully canceled event');
 		        //$window.location.reload();
-		        $scope.fetchRequests();
+		        //$scope.fetchRequests();
 		        //$scope.signin($scope.authentication.user);
 		    }).error(function (response) {
 		        //$scope.error = response.message;
 		        console.log('ERROR!');
 		    });
+		    //$modalInstance.dismiss('cancel');
 		};
+
 	}
 ]);

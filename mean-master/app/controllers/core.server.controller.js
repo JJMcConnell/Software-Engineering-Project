@@ -375,18 +375,17 @@ exports.approveroom = function(req, res) {
     console.log(id);
     Event.findByIdAndUpdate( id, 
         { 'viewed': true, 'approved': true }, 
-        function(err, events) {}
-    );
+        function(err, events) {
 
 
     mailer.send(
   {
       host: "smtp.mandrillapp.com"
   , port: 587
-  , to: "trevorkowens@gmail.com" //WILL CHANGE THIS TO USERS EMAIL, BUT NOT NOW SO RANDOM PEOPLE DON'T GET EMAILS
+  , to: events.contactEmail //WILL CHANGE THIS TO USERS EMAIL, BUT NOT NOW SO RANDOM PEOPLE DON'T GET EMAILS
   , from: "trevorkowens@gmail.com"
   , subject: "Event Approved"
-  , body: "Your event has been approved."
+  , body: "Your event, "+events.title+", has been approved."
   , authentication: "login"
   , username: username
   , password: password
@@ -396,7 +395,8 @@ exports.approveroom = function(req, res) {
       }
   }
 );
-
+        }
+    );
     res.redirect('/#!/adminview');
 };
 
@@ -424,7 +424,7 @@ exports.denyroom = function (req, res) {
           , to: events.contactEmail
           , from: "trevorkowens@gmail.com"
           , subject: "Event Denied"
-          , body: "Your event, "+events.title+". has been denied." + adminComment
+          , body: "Your event, "+events.title+", has been denied." + adminComment
           , authentication: "login"
           , username: username
           , password: password
