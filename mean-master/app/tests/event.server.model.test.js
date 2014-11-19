@@ -6,7 +6,8 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	EventModel = require('./../models/article.server.model.js'),
-	Event = mongoose.model('Event');
+	Event = mongoose.model('Event'),
+    Settings = mongoose.model('AdminSetting');
 
 
 /**
@@ -122,7 +123,7 @@ describe('Event Model Unit Tests:', function() {
 
 	describe('\t~~ finding events given single parameter', function() {
         it('by sponsor', function (done) {
-            Event.find({ 'sponsor': 'Michael' }, function (err, events) {
+            Event.find({ 'sponsor': name2 }, function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
@@ -138,7 +139,7 @@ describe('Event Model Unit Tests:', function() {
 	    });
 
 	    it('by room number', function (done) {
-	        Event.find({ 'room': '121' }, 'period', function (err, events) {
+	        Event.find({ 'room': the_room }, 'period', function (err, events) {
 	            should.not.exist(err);
 	            if (events.length > 0)
 	                done();
@@ -167,7 +168,7 @@ describe('Event Model Unit Tests:', function() {
         });
 
         it('by email', function (done) {
-            Event.find({ 'contactEmail': 'Beta@gmail.com' }, function (err, events) {
+            Event.find({ 'contactEmail': email }, function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
@@ -200,6 +201,38 @@ describe('Event Model Unit Tests:', function() {
 
         it('by viewed (false)', function (done) {
             Event.find({ 'viewed': false }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
+        it('by isClass (false)', function (done) {
+            Event.find({ 'isClass': false }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
+        it('by title', function (done) {
+            Event.find({ 'title': name1 }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
+        it('by sponsor', function (done) {
+            Event.find({ 'sponsor': name2 }, function (err, events) {
+                should.not.exist(err);
+                if (events.length > 0)
+                    done();
+            });
+        });
+
+        it('by organization', function (done) {
+            Event.find({ 'organization': name3 }, function (err, events) {
                 should.not.exist(err);
                 if (events.length > 0)
                     done();
@@ -260,15 +293,15 @@ describe('Event Model Unit Tests:', function() {
 	        });
 	    });
 
-	    /*
+	    
 	    it('should find events by day, month, and year', function (done) {
-	        Event.find({ 'day': the_day, 'month': the_month, 'year': the_year }, function (err, events) {
+	        Event.find({ 'day': the_day, 'month': the_month, 'year': 2014 }, function (err, events) {
 	            should.not.exist(err);
 	            if (events.length > 0)
 	                done();
 	        });
 	    });
-		*/
+		
 
 	    it('should find events by title, sponsor, and email', function (done) {
 	        Event.find({ 'title': name1, 'sponsor': name2, 'contactEmail': email }, function (err, events) {
@@ -277,6 +310,58 @@ describe('Event Model Unit Tests:', function() {
 	                done();
 	        });
 	    });		
+	});
+
+	describe('Admin Settings', function () {
+	    it('Should find admin settings', function (done) {
+	        Settings.find({}, function(err, settings){
+	            if (settings.length > 0)
+	                done();
+	        });
+	    });
+
+	    it('Should find admin settings start day', function (done) {
+	        Settings.find({}, function (err, settings) {
+	            if (settings[0].startDay != null)
+	                done();
+	        });
+	    });
+
+	    it('Should find admin settings start month', function (done) {
+	        Settings.find({}, function (err, settings) {
+	            if (settings[0].startMonth != null)
+	                done();
+	        });
+	    });
+
+	    it('Should find admin settings start year', function (done) {
+	        Settings.find({}, function (err, settings) {
+	            if (settings[0].startYear != null)
+	                done();
+	        });
+	    });
+
+	    it('Should find admin settings end day', function (done) {
+	        Settings.find({}, function (err, settings) {
+	            if (settings[0].endDay != null)
+	                done();
+	        });
+	    });
+
+	    it('Should find admin settings end month', function (done) {
+	        Settings.find({}, function (err, settings) {
+	            if (settings[0].endMonth != null)
+	                done();
+	        });
+	    });
+
+	    it('Should find admin settings end year', function (done) {
+	        Settings.find({}, function (err, settings) {
+	            if (settings[0].endYear != null)
+	                done();
+	        });
+	    });
+
 	});
 
 	describe('Finding conflicting events', function () {
@@ -380,8 +465,6 @@ describe('Event Model Unit Tests:', function() {
 	                    //nothing booked for periods i = add period to periodsAvailable
 	                }
 	            }
-	            console.log('THE PERIOD');
-	            console.log(the_period);
 	            if (periodsAvailable[the_period - 1] == false && periodsAvailable[the_period - 2] == false && periodsAvailable[the_period - 3] == false && periodsAvailable[the_period - 4] == false)
 	                done();
 	        });
@@ -408,8 +491,6 @@ describe('Event Model Unit Tests:', function() {
 	                    //nothing booked for periods i = add period to periodsAvailable
 	                }
 	            }
-	            console.log('THE PERIOD');
-	            console.log(the_period);
 	            for (var i = 0; i < the_length; i++)
 	                periodsAvailable[the_period - 1 + i].should.equal(false);
 	                done();

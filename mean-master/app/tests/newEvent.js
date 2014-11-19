@@ -10,7 +10,7 @@ var should = require('should'),
  * Globals
  */
 var  myEvent;
-/**
+/** 
  * Unit tests
  */
 
@@ -63,7 +63,7 @@ var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
 		        period: the_period,
 		        approved: true,
 		        viewed: true,
-                length: 2
+                length: the_length
 		    });
 		    done();
 		});
