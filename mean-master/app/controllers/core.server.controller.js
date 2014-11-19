@@ -339,34 +339,37 @@ exports.denyroom = function (req, res) {
 
     
     var id = req.body.id;
-    var adminComment = req.body.adminComment;
-    
+    var adminComment = '';
+    if (req.body.adminComment)
+        var adminComment = ' Here is a comment from the administrator: ' + req.body.adminComment;
+
     console.log('POSTED!!!!!!!!');
     console.log(req.body);
     
-    Event.findByIdAndUpdate( id, 
-        { 'viewed': true, 'approved': false }, 
-        function(err, events) {}
-    );
+    Event.findByIdAndUpdate(id,
+        { 'viewed': true, 'approved': false },
+        function (err, events) {
+
+            console.log(events.contactEmail);
+            mailer.send(
+          {
+              host: "smtp.mandrillapp.com"
+          , port: 587
+          , to: events.contactEmail
+          , from: "trevorkowens@gmail.com"
+          , subject: "Event Denied"
+          , body: "Your event, "+events.title+". has been denied." + adminComment
+          , authentication: "login"
+          , username: username
+          , password: password
+          }, function (err, result) {
+              if (err) {
+                  console.log(err);
+              }
+          });
 
 
-    mailer.send(
-  {
-      host: "smtp.mandrillapp.com"
-  , port: 587
-  , to: "trevorkowens@ufl.edu"
-  , from: "trevorkowens@gmail.com"
-  , subject: "Event Denied"
-  , body: "Your event has been denied. Here is a comment from the administrator: "+adminComment
-  , authentication: "login"
-  , username: username
-  , password: password
-  }, function (err, result) {
-      if (err) {
-          console.log(err);
-      }
-  }
-);
+        });
     res.redirect('/');
 };
 

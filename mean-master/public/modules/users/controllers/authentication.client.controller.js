@@ -74,7 +74,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		$scope.approve = function (id) {
 		    console.log(id);
 		    $http.get('/approveroom?id='+ id).success(function (response) {
-		        
+		        $location.path('/signin');
 		    }).error(function (response) {
 		        //$scope.error = response.message;
 
