@@ -54,7 +54,7 @@
     <div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl">
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Request Form</h3>
+                <h3 class="modal-title" id="modalTitle">Request Form for Room {{ request.roomNumber }} on {{items}}</h3>
             </div>
             <div class="modal-body">
                 <ul>
@@ -63,14 +63,52 @@
                         <form class="form-horizontal" role="form" ng-submit="ok()">
 
                             <div class="form-group">
-                                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                <label for="inputName" class="col-sm-2 control-label">Name*</label>
                                 <div class="col-sm-10">
                                     <input type="text" data-ng-model="request.name" name="name" class="form-control" id="inputName" placeholder="Name" ng-required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                                <label for="inputPeriod" class="col-sm-2 control-label">Starting* Period</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">#</div>
+                                        <select class="form-control" ng-model="request.period" name="period" id="inputPeriod" ng-required>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option id='five'>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option value="12">E1</option>
+                                            <option value="13">E2</option>
+                                            <option value="14">E3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLength" class="col-sm-2 control-label">Length* (Periods)</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">#</div>
+                                        <select class="form-control" ng-model="request.length" name="length" id="inputLength" ng-required>
+                                            <option id='lOne'>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Email*</label>
                                 <div class="col-sm-10">
                                     <input type="email" data-ng-model="request.email" name="email" class="form-control" id="inputEmail" placeholder="Email" ng-required>
                                 </div>
@@ -84,14 +122,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="inputSponsor" class="col-sm-2 control-label">Sponsor</label>
+                                <label for="inputSponsor" class="col-sm-2 control-label">Sponsor*</label>
                                 <div class="col-sm-10">
                                     <input type="text" data-ng-model="request.sponsor" name="sponsor" class="form-control" id="inputSponsor" placeholder="Sponsor Name" ng-required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputOrg" class="col-sm-2 control-label">Organization</label>
+                                <label for="inputOrg" class="col-sm-2 control-label">Organization*</label>
                                 <div class="col-sm-10">
                                     <input type="text" data-ng-model="request.organization" name="organization" class="form-control" id="inputOrg" placeholder="Organization Name" ng-required>
                                 </div>
@@ -104,8 +142,9 @@
                                 </div>
                             </div>
 
+                            <div>* = required</div>
 
-                            <div class="form-group">
+                            <div class="form-group" hidden="hidden">
                                 <label for="inputDate" class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-10">
                                     <!--input type="date" name="date" class="form-control" ng-model="request.date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" value="1222-12-12" ng-required -->
@@ -147,44 +186,6 @@
                         </div> -->
 
 
-                            <div class="form-group">
-                                <label for="inputPeriod" class="col-sm-2 control-label">Starting Period</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">#</div>
-                                        <select class="form-control" ng-model="request.period" name="period" id="inputPeriod" ng-required>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option id='five'>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option value="12">E1</option>
-                                            <option value="13">E2</option>
-                                            <option value="14">E3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputLength" class="col-sm-2 control-label">Length (Periods)</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">#</div>
-                                        <select class="form-control" ng-model="request.length" name="length" id="inputLength" ng-required>
-                                            <option id='lOne'>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div data-ng-show="error" class="text-center text-danger">
                                 <strong data-ng-bind="error"></strong>
                             </div>
