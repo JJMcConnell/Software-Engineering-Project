@@ -1,6 +1,13 @@
+<style>
+body {
+padding-top: 40px;
+padding-bottom:40px;
+}
+</style>
+
 <section class="row" data-ng-controller="SettingsController">
-	<h3 class="col-md-12 text-center">Edit your profile</h3>
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+	<div class="col-md-4 col-md-offset-4">
+	<h3 class="text-center">Edit your profile</h3>
 		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
 				<div class="form-group">
