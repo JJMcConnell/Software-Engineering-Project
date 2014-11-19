@@ -16,15 +16,41 @@
 }
 
 
-/*
-.navbar{
-	background-image: none; /*Remove gradient
-	background-color: darkslateblue; /*Navbar color
-	text-shadow:none;
 
-	color: orangered !important;
+.navbar{
+	background-image: none; /*Remove gradient*/
+	/*ackground-color: teal; /*Navbar color*/
+	text-shadow:none;
+	/*background: linear-gradient(red, blue);*/
+
+	/*color: orangered !important;*/
 }
 
+.col-lg-12{
+	background-color: white;
+
+	padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 50px;
+    border-radius:15px;
+}
+
+.col-md-4{
+	background-color: white;
+
+	padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 50px;
+    border-radius:15px;
+
+}
+
+body{
+	background-color: steelblue;
+}
+/*
 #page{
 	background-color: $background;
 }
