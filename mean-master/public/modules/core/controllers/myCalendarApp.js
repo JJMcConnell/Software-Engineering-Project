@@ -139,11 +139,11 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             $scope.createPeriodOpenings();
             console.log("\n\n\nhello hello hello hello");
                 // first we should store all the events that we have
-
+            var startTime = new Date().getTime();
             // LOOP for days
-            for (var day = 14; day < 21; day++) {
+            for (var day = 14; day < 15; day++) {
                 // LOOP for periods
-                for(var period = 1; period < 15; period++) {
+                for(var period = 1; period < 2; period++) {
                     var hour = 6;
                     var minute = 20;
                     if (period < 12) {
@@ -163,6 +163,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                         start: new Date(2014, 10, day, hour, minute),
                         end: new Date(2014, 10, day, endHour, endMinute)
                     });
+                    var endTime = new Date().getTime();
+                    console.log("\n\nTime taken is "+(endTime-startTime)+" milliseconds");
                 }
             }
             

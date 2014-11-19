@@ -19,10 +19,10 @@ describe('angularjs homepage', function() {
 	var modName = element(by.model('request.name'));
 	var modEmail = element(by.model('request.email'));
 	var modPhone = element(by.model('request.telephone'));
-	var modSponser = element(by.model('request.sponser'));
+	var modSponsor = element(by.model('request.sponsor'));
 	var modOrganization = element(by.model('request.organization'));
 	var modDescription = element(by.model('request.description'));
-	var modDate = element(by.model('request.date'));
+	var modDate = element(by.id('inputDate'));
 	var modPeriod = element(by.model('request.period'));
 	var modLength = element(by.model('request.length'));
 	var submitButton = element(by.buttonText("Submit"));
@@ -39,7 +39,7 @@ describe('angularjs homepage', function() {
 		browser.get('http://localhost:3000');
 		//protractor.getInstance().ignoreSynchronization = true;
 	});
-
+/*
 	it('should have a title', function() {
 		expect(browser.getTitle()).toEqual('The University of Florida Department of Music Presents: Room Scheduler')
 	});
@@ -71,10 +71,10 @@ describe('angularjs homepage', function() {
 
 	 	element(by.buttonText("Sign in")).click();
 
-	 	expect(element(by.id('requestTable')).isPresent()).toBeTruthy();
+	 	expect(element(by.cssContainingText('Requested Rooms')).isPresent()).toBeTruthy();
 
 
-	 }); 
+	 }); */
 
 	 it('should create an event', function() {
 
@@ -83,16 +83,16 @@ describe('angularjs homepage', function() {
 	 	modName.sendKeys('John Johnson');
 	 	modEmail.sendKeys('JohnJJohnson@gmail.com');
 	 	modPhone.sendKeys('123-456-7890');
-	 	modSponser.sendKeys('Dr. Will Williston');
+	 	modSponsor.sendKeys('Dr. Will Williston');
 	 	modOrganization.sendKeys('French Horn Fanatics');
-	 	modDescription.sendKeys('We need a fine fortress in which to frequently fumble our French fanfares');
-	 	modDate.sendKeys('12252015');
-	 	element(by.cssContainingText('option', '10')).click();
-	 	element(by.cssContainingText('option', '1')).click();
+	 	modDescription.sendKeys('We found a fine fortress for which we frequently fumble our French fanfares');
+	 	//modDate.sendKeys('12252015');
+	 	element(by.id('five')).click();
+	 	element(by.id('lOne')).click();
 
 	 	submitButton.click();
 
-	 	expect(modal.isPresent()).toBeFalsy();
+	 	expect(modal.isPresent()).toBeTruthy();
 
 
 

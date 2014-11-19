@@ -8,12 +8,13 @@ module.exports = function(app) {
 
     // CREATE
     app.route('/requestevent').post(core.addevent);
+    app.route('/requestAdminEvent').post(core.addAdminEvent);
     // Creating the admin when the website first starts.
     app.route('/generateAdmin').post(core.generateAdmin);
 
     // UPDATE
     app.route('/approveroom').get(core.approveroom);
-    app.route('/denyroom').get(core.denyroom);
+    app.route('/denyroom').post(core.denyroom);
 
     // ROOMS
     app.route('/fetchRequests').get(core.fetchRequests);
@@ -32,5 +33,5 @@ module.exports = function(app) {
     // delete this when done
     app.route('/available/?:info').get(core.available);
     app.route('/fetchEventByID').get(core.fetchEventByID);
-    //app.route('/getAvailablePeriods').get(core.getAvailablePeriods);
+    app.route('/getAvailablePeriods').get(core.getAvailablePeriods);
 };

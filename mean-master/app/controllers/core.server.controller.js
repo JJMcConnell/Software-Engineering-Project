@@ -69,6 +69,7 @@ exports.available = function (req, res) {
     })
 }
 exports.generateAdmin = function (req, res) {
+    res.jsonp('created admin');
 /*    console.log('Trying to create admin.');
     Settings.find({}, function (err, events) {
         console.log('Trying to create admin.');
@@ -267,8 +268,8 @@ exports.eventsByMonth = function (req, res) {
         res.jsonp(events);
     })
 };
-/*
-exports.getAvailablePeriods = function (req,res) {
+
+exports.getAvailablePeriods = function (req, res) {
     var month = req.query.month;
     var day = req.query.day;
     var year = req.query.year;
@@ -280,16 +281,23 @@ exports.getAvailablePeriods = function (req,res) {
 
 
     Event.find({'month': month, 'day': day, 'year': year, 'room':room}, function (err, events){
-    var periodsAvailable = [];  
-    console.log("NUMBER OF EVENTS "+events.length);  
+    var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true];  
+    console.log("NUMBER OF EVENTS "+events.length);
+    console.log(events);  
+        // There it works.
         for(var myEvent in events){
             for(var x = 1; x < 14; x++){
-                periodsAvailable[x-1] = true;
+                
                 for(var i = 0; i < length; i++){
                     //somethnigs booked at period x+i
-                    console.log(events[0]);
-                    if(myEvent.period == (x+i))
-                    periodsAvailable[x-1] = false;
+                    console.log(events[myEvent]);
+
+                    if(events[myEvent].period == (x+i)){
+                        periodsAvailable[x-1] = false;
+                        for (var j = 1; j<events[myEvent].length; j++){
+                            periodsAvailable[x-1+j] = false;
+                        }
+                    }
 
                 }
                 //nothing booked for periods i = add period to periodsAvailable
@@ -298,7 +306,7 @@ exports.getAvailablePeriods = function (req,res) {
         res.jsonp(periodsAvailable);
     })
 
-};*/
+};
 
 exports.AdminWithRoom = function (req, res) {
     Event.find({ 'viewed': false, 'room': req.param('room') }, function (err, events) {
@@ -356,9 +364,15 @@ exports.ThisRoomRejected = function (req, res) {
     }
 };
 
+exports.index = function (req, res) {
+    res.render('index', {
+        data: "this is data"
+    });
+};
+var d;
 exports.approveroom = function(req, res) {
     var id = req.query.id;
-
+    console.log(id);
     Event.findByIdAndUpdate( id, 
         { 'viewed': true, 'approved': true }, 
         function(err, events) {}
@@ -386,35 +400,131 @@ exports.approveroom = function(req, res) {
     res.redirect('/#!/adminview');
 };
 
-exports.denyroom = function(req, res) {
-    var id = req.query.id;
+exports.denyroom = function (req, res) {
+    console.log('POST!!!!');
 
-    Event.findByIdAndUpdate( id, 
-        { 'viewed': true, 'approved': false }, 
-        function(err, events) {}
-    );
+    
+    var id = req.body.id;
+    var adminComment = '';
+    if (req.body.adminComment)
+        var adminComment = ' Here is a comment from the administrator: ' + req.body.adminComment;
+
+    console.log('POSTED!!!!!!!!');
+    console.log(req.body);
+    
+    Event.findByIdAndUpdate(id,
+        { 'viewed': true, 'approved': false },
+        function (err, events) {
+
+            console.log(events.contactEmail);
+            mailer.send(
+          {
+              host: "smtp.mandrillapp.com"
+          , port: 587
+          , to: events.contactEmail
+          , from: "trevorkowens@gmail.com"
+          , subject: "Event Denied"
+          , body: "Your event, "+events.title+". has been denied." + adminComment
+          , authentication: "login"
+          , username: username
+          , password: password
+          }, function (err, result) {
+              if (err) {
+                  console.log(err);
+              }
+          });
 
 
-    mailer.send(
-  {
-      host: "smtp.mandrillapp.com"
-  , port: 587
-  , to: "trevorkowens@gmail.com"
-  , from: "trevorkowens@gmail.com"
-  , subject: "Event Denied"
-  , body: "Your event has been denied."
-  , authentication: "login"
-  , username: username
-  , password: password
-  }, function (err, result) {
-      if (err) {
-          console.log(err);
-      }
-  }
-);
-
-    res.redirect('/#!/adminview');
+        });
+    res.redirect('/');
 };
+
+exports.roomnumber = function (req, res) {
+    console.log(req.param("tagId"));
+    res.render('room');
+    /*
+    Event.find({ 'room': req.param("tagId") }, function (err, events) {
+        if (err) return handleError(err);
+        else if (events != "") res.json(events);
+        else res.send("No events in this room");
+    })*/
+}
+
+exports.addAdminEvent = function (req, res){
+    var name = req.body.name;
+    var email = req.body.email;
+    var telephone = req.body.telephone;
+    var roomNumber = req.body.roomNumber;
+    var date = req.body.date;
+    var period = req.body.period;
+    var description = req.body.description;
+    var length = req.body.length;
+
+    if(date != null){
+        var year = date.substring(0, 4);
+        var month = date.substring(5, 7);
+        var day = date.substring(8, 10);
+    }
+
+    if(date == null){
+        return res.status(400).send({
+            message: 'Error. Date not entered correctly.'
+        });
+    }
+
+    var AdminEvent = new Event({
+        description: description,
+        title: name,
+        sponsor: 'Pickeral',
+        organization: 'Admin',
+        contactEmail: email,
+        contactPhone: telephone,
+        isClass: true,
+        room: roomNumber,
+        day: day,
+        month: month,
+        year: year,
+        period: period,
+        length: length,
+        viewed: true,
+        approved: true
+    });
+
+    if(name == null){
+        return res.status(400).send({
+            message: 'Error. Name not entered correctly.'
+        });
+    }
+
+
+    if(email == null){
+        return res.status(400).send({
+            message: 'Error. Email not entered correctly.'
+        });
+    }
+
+    if(roomNumber == null){
+        return res.status(400).send({
+            message: 'Error. Room not entered correctly.'
+        });
+    }
+
+    if(period == null){
+        return res.status(400).send({
+            message: 'Error. Period not entered correctly.'
+        });
+    }
+    AdminEvent.save(function (err) {
+        if (err) console.log(err);
+        if (err) return res.status(400).send({
+            message: 'Error adding event. Make sure the fields are entered correctly.'
+        });
+
+        else
+            res.redirect('/');
+    });
+
+}
 
 exports.addevent = function (req, res) {
     //get is req.query

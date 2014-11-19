@@ -1,12 +1,16 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
-	function($scope, $http, $location, Authentication) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', '$window', 'Authentication',
+	function($scope, $http, $location, $window, Authentication) {
 		$scope.authentication = Authentication;
 		// YEAH!!!
 		$scope.validateLogin = function () {
 		    //if ($scope.authentication.user) $location.path(path);
 		    if (!$scope.authentication.user) $location.path('/');
+		}
+
+		$scope.redirectIfLoggedIn = function () {
+		    if ($scope.authentication.user) $location.path('/adminview');
 		}
 
 		$scope.parseWeirdDate = function (weirdDate) {
@@ -65,6 +69,35 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
+		};
+
+		$scope.approve = function (id) {
+		    console.log(id);
+		    $http.get('/approveroom?id='+ id).success(function (response) {
+		        $location.path('/signin');
+		    }).error(function (response) {
+		        //$scope.error = response.message;
+
+		    });
+		};
+		
+
+        //ONLY FOR APPROVED (in ModalInstanceCtrl)
+		$scope.deny = function (id) {
+		    //$window.location.reload();
+		    var jsonParam = {'id': 1};
+		    jsonParam.id = id;
+		    console.log('DENIED!');
+		    $http.post('/denyroom', jsonParam).success(function (response) {
+		        $location.path('/signin');
+		        console.log('successfully canceled event');
+		        //$window.location.reload();
+		        $scope.fetchRequests();
+		        //$scope.signin($scope.authentication.user);
+		    }).error(function (response) {
+		        //$scope.error = response.message;
+		        console.log('ERROR!');
+		    });
 		};
 	}
 ]);
