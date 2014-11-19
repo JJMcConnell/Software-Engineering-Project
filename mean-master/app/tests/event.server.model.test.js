@@ -27,13 +27,13 @@ var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
 var name1 = names[Math.floor(Math.random()*names.length)];
 var name2 = names[Math.floor(Math.random() * names.length)];
 var name3 = names[Math.floor(Math.random() * names.length)];
-var email = names[Math.floor(Math.random()*names.length)] + '@gmail.com';
+var email = 'trevorkowens@gmail.com';//names[Math.floor(Math.random()*names.length)] + '@gmail.com';
 
 var the_day = Math.floor((Math.random() * 30) + 1);
 	// between 1 and 30
 var the_month = 11 + Math.floor((Math.random() * 2));
 	// between 11 and 12
-var the_period = Math.floor((Math.random() * 7) + 3);
+var the_period = Math.floor((Math.random() * 7) + 4);
 	// between 4 and 10 (for period lengths of four)
 
 var the_length = Math.floor((Math.random() * 4) + 1);
@@ -538,7 +538,7 @@ describe('Event Model Unit Tests:', function() {
 	describe('Admin Functions', function() {
 			it("should approve the request", function (done) {
     				Event.findByIdAndUpdate( the_id, 
-    					{ 'viewed': true, 'approved': true }, 
+    					{'approved': true }, 
     					function(err, events) {
     						if(err){
     							console.log('Error = yes');
@@ -561,7 +561,7 @@ describe('Event Model Unit Tests:', function() {
 		    
 		    it('should reject the request', function (done) {
 	       	    	Event.findByIdAndUpdate( the_id, 
-    					{ 'viewed': true, 'approved': false }, 
+    					{'approved': false }, 
     					function(err, events) {
     						should.not.exist(err);
     					}
