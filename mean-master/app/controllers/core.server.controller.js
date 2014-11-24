@@ -400,6 +400,53 @@ exports.approveroom = function(req, res) {
     res.redirect('/#!/adminview');
 };
 
+exports.changeDates = function (req, res) {
+    //var startDate = req.body.startDate;
+    //var endDate = req.body.endDate;
+    var startDate = '2014-08-01';
+    var endDate =  '2015-08-01';
+
+     if(startDate != null){
+        var startYear = startDate.substring(0, 4);
+        var startMonth = startDate.substring(5, 7);
+        var startDay = startDate.substring(8, 10);
+    }
+
+    if(endDate != null){
+        var endYear = endDate.substring(0, 4);
+        var endMonth = endDate.substring(5, 7);
+        var endDay = endDate.substring(8, 10);
+    }
+
+    if(startDate == null){
+        return res.status(400).send({
+            message: 'Error. Start date not entered correctly.'
+        });
+    }
+
+    if(endDate == null){
+        return res.status(400).send({
+            message: 'Error. End date not entered correctly.'
+        });
+    }
+
+    Settings.findOne({}, function (err, doc) {
+        if(err){
+            return handleError(err);
+        }
+        else{
+            doc.startDay = startDay;
+            doc.startMonth = startMonth;
+            doc.startYear = startYear;
+            doc.endDay = endDay;
+            doc.endMonth = endMonth;
+            doc.endYear = endYear;
+            doc.save();
+        }
+    })
+    res.redirect('/');
+};
+
 exports.denyroom = function (req, res) {
     console.log('POST!!!!');
 
