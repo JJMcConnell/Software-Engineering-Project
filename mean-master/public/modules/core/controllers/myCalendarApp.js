@@ -379,6 +379,7 @@ var butId = 100;
         
     };
     /* config object */
+    /*
     $scope.uiConfig = {
         calendar: {
             slotDuration: '01:05:00',
@@ -392,6 +393,45 @@ var butId = 100;
           right: 'today prev,next'
         },
         eventClick: $scope.alertOnEventClick,
+        eventDrop: $scope.alertOnDrop,
+        eventResize: $scope.alertOnResize
+      }
+    };
+*/
+$scope.initRequest = function(){
+    console.log('INIT REQUEST');
+    $scope.uiConfig = {
+        calendar: {
+            slotDuration: '01:05:00',
+            minTime: '07:25:00',
+            maxTime: '22:20:00',
+        height: 500,
+        editable: true,
+        header:{
+          left: 'title',
+          center: '',
+          right: 'today prev,next'
+        },
+        eventClick: $scope.alertOnEventClick,
+        eventDrop: $scope.alertOnDrop,
+        eventResize: $scope.alertOnResize
+      }
+    };
+
+};
+
+$scope.uiConfig = {
+        calendar: {
+            slotDuration: '01:05:00',
+            minTime: '07:25:00',
+            maxTime: '22:20:00',
+        height: 500,
+        editable: true,
+        header:{
+          left: 'title',
+          center: '',
+          right: 'today prev,next'
+        },
         eventDrop: $scope.alertOnDrop,
         eventResize: $scope.alertOnResize
       }
