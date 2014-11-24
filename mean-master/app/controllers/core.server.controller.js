@@ -69,8 +69,8 @@ exports.available = function (req, res) {
     })
 }
 exports.generateAdmin = function (req, res) {
-    res.jsonp('created admin');
-/*    console.log('Trying to create admin.');
+    //res.jsonp('created admin');
+    console.log('Trying to create admin.');
     Settings.find({}, function (err, events) {
         console.log('Trying to create admin.');
         if (events.length == 0) {
@@ -98,8 +98,10 @@ exports.generateAdmin = function (req, res) {
             });
         }
     });
-    /*
-    var user = new User(req.body);//Needs work.
+
+    var credentials = {firstName: 'Trevor', lastName: 'Owens', email: 'trevorkowens@ufl.edu', username: 'trevor', password: 'admin1234'};
+
+    var user = new User(credentials);
     var message = null;
 
     // Add missing user fields
@@ -125,7 +127,7 @@ exports.generateAdmin = function (req, res) {
             });
         }
     });
-    */
+    
 }
 
 
