@@ -36,7 +36,160 @@
 
     </head>
 
-    <body>
+    <body  ng-controller="ModalDemoCtrl">
+
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Request Form for Room {{ request.roomNumber }} on {{items}}</h3>
+            </div>
+            <div class="modal-body">
+                <ul>
+
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" ng-submit="ok()">
+
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Name*</label>
+                                <div class="col-sm-10">
+                                    <input type="text" data-ng-model="request.name" name="name" class="form-control" id="inputName" placeholder="Name" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPeriod" class="col-sm-2 control-label">Starting* Period</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">#</div>
+                                        <select class="form-control" ng-model="request.period" name="period" id="inputPeriod" ng-required>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option id='five'>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option value="12">E1</option>
+                                            <option value="13">E2</option>
+                                            <option value="14">E3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLength" class="col-sm-2 control-label">Length* (Periods)</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">#</div>
+                                        <select class="form-control" ng-model="request.length" name="length" id="inputLength" ng-required>
+                                            <option id='lOne'>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Email*</label>
+                                <div class="col-sm-10">
+                                    <input type="email" data-ng-model="request.email" name="email" class="form-control" id="inputEmail" placeholder="Email" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputNumber" class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" data-ng-model="request.telephone" name="telephone" class="form-control" id="inputNumber" placeholder="Phone Number" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputSponsor" class="col-sm-2 control-label">Sponsor*</label>
+                                <div class="col-sm-10">
+                                    <input type="text" data-ng-model="request.sponsor" name="sponsor" class="form-control" id="inputSponsor" placeholder="Sponsor Name" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputOrg" class="col-sm-2 control-label">Organization*</label>
+                                <div class="col-sm-10">
+                                    <input type="text" data-ng-model="request.organization" name="organization" class="form-control" id="inputOrg" placeholder="Organization Name" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputDesc" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" data-ng-model="request.description" name="description" id="inputDesc"  placeholder="Describe the reason for requesting a room." rows="2"></textarea>
+                                </div>
+                            </div>
+
+                            <div>* = required</div>
+
+                            <div class="form-group" hidden="hidden">
+                                <label for="inputDate" class="col-sm-2 control-label">Date</label>
+                                <div class="col-sm-10">
+                                    <!--input type="date" name="date" class="form-control" ng-model="request.date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" value="1222-12-12" ng-required -->
+                                    <input class="form-control" ng-init="request.date=items" data-ng-model="request.date" name="date" id="inputDate">
+                                </div>
+                            </div>
+
+                            <!--
+                        <div class="form-group">
+                            <label for="inputDate" class="col-sm-2 control-label"> TestDate</label>
+                            <div class="col-sm-10">
+                                <input type="text" data-ng-model="request.date" name="date" class="form-control" id="inputDate">
+                            </div>
+                        </div>
+                        -->
+
+                        <!-- 
+                        <div class="form-group">
+                            <label for="inputRoom" class="col-sm-2 control-label">Room</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-addon">#</div>
+                                    <select class="form-control" name="roomNumber" ng-model="request.roomNumber" id="inputRoom" ng-required>
+                                        <option> {{buttonId}} </option>
+                                        <option>106B</option>
+                                        <option>120</option>
+                                        <option>121</option>
+                                        <option>142</option>
+                                        <option>143</option>
+                                        <option>144</option>
+                                        <option>145</option>
+                                        <option>146</option>
+                                        <option>147</option>
+                                        <option>232</option>
+                                        <option>232A</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                            <div data-ng-show="error" class="text-center text-danger">
+                                <strong data-ng-bind="error"></strong>
+                            </div>
+                            <br>
+                            <!-- Request Information module ends here -->
+                            <!-- On submitform have a success message, on cancel close the big modal-->
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+
+
+        </script>
+
+
 
         <!--  <script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script> -->
         <!-- Page Content -->

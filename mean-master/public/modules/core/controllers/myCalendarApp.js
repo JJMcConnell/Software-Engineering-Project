@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$location', '$http', 'Authentication',
-    function ($scope, $stateParams, $location, $http, Authentication ) {
+angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$location', '$http', 'Authentication', '$modal',
+    function ($scope, $stateParams, $location, $http, Authentication, $modal ) {
 
     var date = new Date();
     var d = date.getDate();
@@ -54,7 +54,27 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
     };
     /* alert on eventClick */
     $scope.alertOnEventClick = function( event, allDay, jsEvent, view ){
+        console.log('Clicked!!!');
         $scope.alertMessage = (event.title + ' was clicked ');
+
+var size = 100;
+var butId = 100;
+    var modalInstance = $modal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        items: function () {
+          return event.start;
+        },
+         buttonId: function() {
+          return event.title;
+        }
+      }
+     
+
+    });
+    
     };
     /* alert on Drop */
      $scope.alertOnDrop = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
@@ -279,7 +299,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
                 start: new Date(2014, 11, 7, hour, minute),
                 end: new Date(2014, 11, 7, hour + 1, minute - 10),
-                url: '/'
+                url: '/#!/myModalContent.html'
             });
         }
         $scope.events.push({
