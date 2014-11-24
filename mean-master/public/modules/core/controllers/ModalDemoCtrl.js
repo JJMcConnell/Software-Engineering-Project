@@ -66,8 +66,26 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
       $scope.selected = selectedItem;
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
+      $scope.openSuccess(); 
     });
-  };
+  }
+
+  $scope.openSuccess = function (){
+    var modalInstance = $modal.open({
+      templateUrl: 'ModalSuccess.html',
+      controller: 'ModalInstanceCtrl',
+      size: 100,
+      resolve:{
+        items: function () {
+          return "Success!";
+
+        },
+        buttonId: function () {
+          return "ONE HUNDRED!";
+        }
+      }
+    });
+  }
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.

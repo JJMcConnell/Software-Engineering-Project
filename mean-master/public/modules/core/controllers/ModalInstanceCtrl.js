@@ -33,6 +33,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           $location.path('/');
           $modalInstance.dismiss('done');
           //ENTER SUCCESS MESSAGE CODE HERE!!
+          
           //For example, redirect to a success page $location.path('/success');
 
       }).error(function (response) {
@@ -75,6 +76,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           $location.path('/');
           $modalInstance.dismiss('done');
           //ENTER SUCCESS MESSAGE CODE HERE!!
+
           //For example, redirect to a success page $location.path('/success');
 
       }).error(function (response) {

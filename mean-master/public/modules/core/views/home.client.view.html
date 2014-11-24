@@ -202,6 +202,25 @@
 
         </script>
 
+        <script type="text/ng-template" id="ModalSuccess.html">
+
+            <div class="modal-body">
+                <ul>
+
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" ng-submit="ok()">
+                        <h3 style="color:green;"> Success! </h3>
+
+                            <div class="modal-footer" style="border-top:none;">
+                                <button class="btn btn-primary" ng-click="cancel()">Okay</button>
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+
+
+        </script>
+
 
         <!--Select Room Number and form pops up-->
         <!--Should auto-populate form-->
