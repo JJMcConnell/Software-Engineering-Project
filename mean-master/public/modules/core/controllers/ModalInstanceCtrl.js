@@ -33,10 +33,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           // And redirect to the index page
           $location.path('/');
           $modalInstance.dismiss('done');
-          //ENTER SUCCESS MESSAGE CODE HERE!!
           
-          //For example, redirect to a success page $location.path('/success');
-
       }).error(function (response) {
           $scope.error = response.message;
           console.log($scope.error);
@@ -74,12 +71,9 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
       $http.post('/requestAdminEvent', $scope.request).success(function (response) {
          
           // And redirect to the index page
-          $location.path('/');
+          //$location.path('/');
           $modalInstance.dismiss('done');
-          //ENTER SUCCESS MESSAGE CODE HERE!!
-
-          //For example, redirect to a success page $location.path('/success');
-
+          
       }).error(function (response) {
           $scope.error = response.message;
           console.log($scope.error);

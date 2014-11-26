@@ -64,10 +64,13 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
     });
 
     modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-      $scope.openSuccess(); 
+        $scope.selected = selectedItem;
+        console.log('selected item' +   selectedItem);
+    }, function (message) {
+        console.log(message);
+        $log.info('Modal dismissed at: ' + new Date());
+        if(message == 'done')
+            $scope.openSuccess(); 
     });
   }
 
