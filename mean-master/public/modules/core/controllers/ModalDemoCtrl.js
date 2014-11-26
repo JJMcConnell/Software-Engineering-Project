@@ -37,7 +37,7 @@ $scope.buttonData = function (butId) {
     console.log('THIS SHOULD BE CORRECT: ' + newDateFormat);
     $scope.items[0] = newDateFormat.substring(0, 10);
     $scope.items[1] = butId;
-    $scope.open(butId);
+    $scope.open();
 
   }
 
