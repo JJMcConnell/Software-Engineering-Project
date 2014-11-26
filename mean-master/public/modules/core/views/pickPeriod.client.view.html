@@ -37,10 +37,268 @@
 </head>
 
 <body>
+  <!--<script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script>-->
+    <!-- Page Content -->
+    <div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl" style="margin-bottom:20px;">
+                    
+                    <a href="#!/pickRoom" class="btn btn-default" style="float: left;">Pick by Room<i class="fa fa-home"></i></a>
 
-<div class="col-lg-12">
-Hey Danny and I thought it might be cool if the home page were just a short description of the website and had just two buttons: one for requesting rooms by room and date (the current room page) and another for requessting by period and date, which will just bring up a list of rooms available which should be super easy.
+                    <h2 > School of Music Room Reservation </h2>
+   					
+                    <h3 style="color:black"> Step 1 - Choose a date! </h3>
+                     <!-- The Date Picker is injected into this div -->   
+                     <div id="datePicker"></div>
+                    <div id="selectedDate" hidden="hidden"></div>
+                    <div ng-init="dateSettings()">
+                        You may not request a day before {{ startDate.toDateString() }} or after {{ endDate.toDateString() }}
+                    </div>
+                    <br>
+
+    <!-- Request Button is here -->
+
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Request Form for Period {{ request.period }} on {{items}}</h3>
+            </div>
+            <div class="modal-body">
+                <ul>
+
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" ng-submit="ok()">
+
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Name*</label>
+                                <div class="col-sm-10">
+                                    <input type="text" data-ng-model="request.name" name="name" class="form-control" id="inputName" placeholder="Name" ng-required>
+                                </div>
+                            </div>
+
+
+                        <div class="form-group">
+                            <label for="inputRoom" class="col-sm-2 control-label">Room</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-addon">#</div>
+                                    <select class="form-control" name="roomNumber" ng-model="request.roomNumber" id="inputRoom" ng-required>
+                                        <!--<option> {{buttonId}} </option>-->
+                                        <option>106B</option>
+                                        <option>120</option>
+                                        <option>121</option>
+                                        <option>142</option>
+                                        <option>143</option>
+                                        <option>144</option>
+                                        <option>145</option>
+                                        <option>146</option>
+                                        <option>147</option>
+                                        <option>232</option>
+                                        <option>232A</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--
+                            <div class="form-group">
+                                <label for="inputPeriod" class="col-sm-2 control-label">Starting* Period</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">#</div>
+                                        <select class="form-control" ng-model="request.period" name="period" id="inputPeriod" ng-required>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option value="12">E1</option>
+                                            <option value="13">E2</option>
+                                            <option value="14">E3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+
+                            <div class="form-group">
+                                <label for="inputLength" class="col-sm-2 control-label">Length* (Periods)</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">#</div>
+                                        <select class="form-control" ng-model="request.length" name="length" id="inputLength" ng-required>
+                                            <option id='lOne'>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Email*</label>
+                                <div class="col-sm-10">
+                                    <input type="email" data-ng-model="request.email" name="email" class="form-control" id="inputEmail" placeholder="Email" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputNumber" class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" data-ng-model="request.telephone" name="telephone" class="form-control" id="inputNumber" placeholder="Phone Number" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputSponsor" class="col-sm-2 control-label">Sponsor*</label>
+                                <div class="col-sm-10">
+                                    <input type="text" data-ng-model="request.sponsor" name="sponsor" class="form-control" id="inputSponsor" placeholder="Sponsor Name" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputOrg" class="col-sm-2 control-label">Organization*</label>
+                                <div class="col-sm-10">
+                                    <input type="text" data-ng-model="request.organization" name="organization" class="form-control" id="inputOrg" placeholder="Organization Name" ng-required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputDesc" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" data-ng-model="request.description" name="description" id="inputDesc"  placeholder="Describe the reason for requesting a room." rows="2"></textarea>
+                                </div>
+                            </div>
+
+                            <div>* = required</div>
+
+                            <div class="form-group" hidden="hidden">
+                                <label for="inputDate" class="col-sm-2 control-label">Date</label>
+                                <div class="col-sm-10">
+                                    <!--input type="date" name="date" class="form-control" ng-model="request.date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" value="1222-12-12" ng-required -->
+                                    <input class="form-control" ng-init="request.date=items[0]" data-ng-model="request.date" name="date" id="inputDate">
+                                    <input class="form-control" ng-init="request.period=items[1]" data-ng-model="request.period" name="period" id="inputPeriod">
+
+                                </div>
+                            </div>
+
+                            <!--
+                        <div class="form-group">
+                            <label for="inputDate" class="col-sm-2 control-label"> TestDate</label>
+                            <div class="col-sm-10">
+                                <input type="text" data-ng-model="request.date" name="date" class="form-control" id="inputDate">
+
+                            </div>
+                        </div>
+                        -->
+
+
+
+
+                            <div data-ng-show="error" class="text-center text-danger">
+                                <strong data-ng-bind="error"></strong>
+                            </div>
+                            <br>
+                            <!-- Request Information module ends here -->
+                            <!-- On submitform have a success message, on cancel close the big modal-->
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+
+
+        </script>
+
+        <script type="text/ng-template" id="ModalSuccess.html">
+
+            <div class="modal-body">
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" ng-submit="ok()">
+                        <h3 class="text-center" style="color:black;"> Your request has been submitted. </h3>
+
+                            <div class="modal-footer" style="border-top:none;">
+                                <button class="btn btn-primary" ng-click="cancel()">Okay</button>
+                            </div>
+                        </form>
+                </div>
+
+
+        </script>
+
+
+        <!--Select Room Number and form pops up-->
+        <!--Should auto-populate form-->
+                <h3 style="color:black"> Step 2 - Pick a period! </h3>
+                <div class="btn-toolbar"  data-toggle="buttons">
+                    <button type="button" ng-attr-id="101" ng-click="isThisGoodDate()" id="101" class="btn btn-default">Is this good date?</button>
+                    <button type="button" ng-attr-id="1" ng-click="periodData(1)"  id="1" class="btn btn-default">1</button>
+                    <button type="button" ng-attr-id="2" ng-click="periodData(2)" id="2" class="btn btn-default">2</button>
+                    <button type="button" ng-attr-id="3" ng-click="periodData(3)" id="3" class="btn btn-default">3</button>
+                    <button type="button" ng-attr-id="4" ng-click="periodData(4)" id="4" class="btn btn-default">4</button>
+                    <button type="button" ng-attr-id="5" ng-click="periodData(5)" id="5" class="btn btn-default">5</button>
+                    <button type="button" ng-attr-id="6" ng-click="periodData(6)" id="6" class="btn btn-default">6</button>
+                    <button type="button" ng-attr-id="7" ng-click="periodData(7)" id="7" class="btn btn-default">7</button>
+                    <button type="button" ng-attr-id="8" ng-click="periodData(8)" id="8" class="btn btn-default">8</button>                                        
+                </div>
+                    <br>
+                <div class="btn-toolbar" data-toggle="buttons">
+                    <button type="button" ng-attr-id="9" ng-click="periodData(9)" id="9" class="btn btn-default">9</button>
+                    <button type="button" ng-attr-id="10" ng-click="periodData(10)" id="10" class="btn btn-default">10</button>
+                    <button type="button" ng-attr-id="11" ng-click="periodData(11)" id="11" class="btn btn-default">11</button>
+                    <button type="button" ng-attr-id="12" ng-click="periodData('12')" id="E1" class="btn btn-default">E1</button>
+                    <button type="button" ng-attr-id="13" ng-click="periodData('13')" id="E2" class="btn btn-default">E2</button>
+                    <button type="button" ng-attr-id="14" ng-click="periodData('14')" id="E3" class="btn btn-default">E3</button>
+                            
+                </div>
+                <br>
+
+            <!--<div ng-show="selected">Selection from a modal: {{ selected }}</div>-->
 </div>
+
+    <div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl">
+    <!-- Calendar for rooms buttons -->
+                <h3>Individual calendars for each room</h3>
+                <div class="btn-toolbar"  data-toggle="buttons">
+                      <a type="button" href="#!/calendarForRoom#101" class="btn btn-sm btn-default">Room 101</a>
+                      <a type="button" href="#!/calendarForRoom#106B" class="btn btn-sm btn-default">Room 106B</a>
+                      <a type="button" href="#!/calendarForRoom#120" class="btn btn-sm btn-default">Room 120</a>
+
+                      <a type="button" href="#!/calendarForRoom#121" class="btn btn-sm btn-default">Room 121</a>
+                      <a type="button" href="#!/calendarForRoom#142" class="btn btn-sm btn-default">Room 142</a>
+                      <a type="button" href="#!/calendarForRoom#143" class="btn btn-sm btn-default">Room 143</a> 
+
+                      <a type="button" href="#!/calendarForRoom#144" class="btn btn-sm btn-default">Room 144</a>
+                      <a type="button" href="#!/calendarForRoom#145" class="btn btn-sm btn-default">Room 145</a>
+                      <a type="button" href="#!/calendarForRoom#146" class="btn btn-sm btn-default">Room 146</a>
+
+                      <a type="button" href="#!/calendarForRoom#232" class="btn btn-sm btn-default">Room 232</a>
+                      <a type="button" href="#!/calendarForRoom#233A" class="btn btn-sm btn-default">Room 233A</a>
+                </div>
+
+
+<script type='text/javaScript'>
+    $('#datePicker').datepaginator();
+    console.log($('#datePicker').datepaginator());
+</script>
+
+ <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      altField: "#alternate",
+      altFormat: "DD, d MM, yy"
+    });
+  });
+  </script>
+<!--
+                      <div> <p>Date: <input type="text" id="datepicker">&nbsp;<input type="text" id="alternate" size="30"></p> </div>
+-->
+
 </body>
 
 </html>

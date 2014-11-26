@@ -42,7 +42,7 @@
     <div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl" style="margin-bottom:20px;">
                     
                     <h2 style="color:black"> School of Music Room Reservation </h2>
-
+                    <a href="#!/pickPeriod" class="btn btn-default" style="float: left;">Pick by Period<i class="fa fa-home"></i></a>
                     <h3 style="color:black"> Step 1 - Choose a date! </h3>
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
@@ -150,7 +150,9 @@
                                 <label for="inputDate" class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-10">
                                     <!--input type="date" name="date" class="form-control" ng-model="request.date" id="inputDate" ng-click="getUnavailablePeriods(121, date)" placeholder="Date" value="1222-12-12" ng-required -->
-                                    <input class="form-control" ng-init="request.date=items" data-ng-model="request.date" name="date" id="inputDate">
+                                    <input class="form-control" ng-init="request.date=items[0]" data-ng-model="request.date" name="date" id="inputDate">
+                                    //Trevor use this
+                                    //<input class="form-control" ng-init="request.roomNumber=items[1]" data-ng-model="request.roomNumber" name="roomNumber" id="inputRoom">                                    
                                 </div>
                             </div>
 

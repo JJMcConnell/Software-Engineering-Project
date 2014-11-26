@@ -1,11 +1,29 @@
 angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
-  $scope.items = 'DATE!!!';
+  $scope.items = [];
 
-  $scope.buttonData = function (butId) {
+$scope.buttonData = function (butId) {
+      $scope.buttonId = butId;
+      console.log($scope.buttonId);
+      var date = document.getElementById('selectedDate').innerHTML;
+      if (document.getElementById('selectedDate').innerHTML == '')
+          date = new Date().toDateString();
+      var day = date.substr(8, 2);
+      var year = date.substr(11, 4);
+      var month = date.substr(4, 3);
+      if (document.getElementById('selectedDate').innerHTML == '') {
+          console.log(new Date().toDateString());
+      }
+      var newDateFormat = new Date(month + ' ' + day + ', ' + year).toISOString(); // This sets it to mm/dd/yyyy
+      console.log('THIS SHOULD BE CORRECT: ' + newDateFormat);
+      $scope.items[0] = newDateFormat.substring(0, 10);
+      $scope.items[1] = butId;
+      $scope.open(butId);
+  }
+
+  $scope.periodData = function (butId) {
     $scope.buttonId = butId; 
     console.log($scope.buttonId);
-    $scope.items = document.getElementById('selectedDate').innerHTML;
     var date = document.getElementById('selectedDate').innerHTML;
     if (document.getElementById('selectedDate').innerHTML == '')
         date = new Date().toDateString();
@@ -17,8 +35,8 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
     }
     var newDateFormat = new Date(month + ' ' + day + ', ' + year).toISOString(); // This sets it to mm/dd/yyyy
     console.log('THIS SHOULD BE CORRECT: ' + newDateFormat);
-    $scope.items = newDateFormat.substring(0, 10);
-
+    $scope.items[0] = newDateFormat.substring(0, 10);
+    $scope.items[1] = butId;
     $scope.open(butId);
 
   }
