@@ -18,6 +18,7 @@ angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $lo
     var newDateFormat = new Date(month + ' ' + day + ', ' + year).toISOString(); // This sets it to mm/dd/yyyy
     console.log('THIS SHOULD BE CORRECT: ' + newDateFormat);
     $scope.items = newDateFormat.substring(0, 10);
+
     $scope.open(butId);
 
   }

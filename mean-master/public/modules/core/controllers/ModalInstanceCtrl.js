@@ -12,6 +12,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
   $scope.selected = {
     item: $scope.items[0]
   };
+
   $scope.getUnavailablePeriods = function (roomNumber, date) {
       $http.get('/test', {params: {roomNumber: roomNumber, date: date}}).success(function (response) {
           console.log(response);

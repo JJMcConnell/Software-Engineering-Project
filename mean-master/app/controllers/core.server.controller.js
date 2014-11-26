@@ -9,7 +9,8 @@ var _ = require('lodash'),
     EventSchema = require('./../models/article.server.model.js'),
     Event = mongoose.model('Event'),
     swig = require('swig'),
-    Settings = mongoose.model('AdminSetting');
+    Settings = mongoose.model('AdminSetting'),
+    User = mongoose.model('User');
 
 //EventSchema = require('./../models/article.server.model.js'),
 
@@ -36,6 +37,17 @@ var mailer = require("mailer")
  * {working on} show rooms available rather than rooms taken
  * {working on} displaying when rooms are not taken
  */
+
+exports.getDateSettings = function (req, res) {
+
+     Settings.find({}, function (err, events) {
+         console.log(events);
+         res.jsonp(events[0]);
+         
+     });
+};
+
+
  
 exports.available = function (req, res) {
     var periods = [false, false, false, false, false, false, false, false, false, false, false];
@@ -110,9 +122,7 @@ exports.generateAdmin = function (req, res) {
     // Then save the user 
     user.save(function (err) {
         if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
+            return err;
         } else {
             // Remove sensitive data before login
             user.password = undefined;

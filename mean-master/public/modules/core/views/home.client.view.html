@@ -47,6 +47,9 @@
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
                     <div id="selectedDate" hidden="hidden"></div>
+                    <div ng-init="dateSettings()">
+                        You may not request a day before {{ startDate.toDateString() }} or after {{ endDate.toDateString() }}
+                    </div>
                     <br>
 
     <!-- Request Button is here -->
@@ -226,7 +229,7 @@
         <!--Should auto-populate form-->
                 <h3 style="color:black"> Step 2 - Pick a room! </h3>
                 <div class="btn-toolbar"  data-toggle="buttons">
-
+                    <button type="button" ng-attr-id="101" ng-click="isThisGoodDate()" id="101" class="btn btn-default">Is this good date?</button>
                     <button type="button" ng-attr-id="101" ng-click="buttonData(101)"  id="101" class="btn btn-default">Room 101</button>
                     <button type="button" ng-attr-id="106B" ng-click="buttonData('106B')" id="106B" class="btn btn-default">Room 106B</button>
                     <button type="button" ng-attr-id="120" ng-click="buttonData(120)" id="120" class="btn btn-default">Room 120</button>
