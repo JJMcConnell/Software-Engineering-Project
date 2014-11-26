@@ -36,6 +36,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         state('event request', {
         	url: '/calendarRequest',
         	templateUrl: 'modules/core/views/requestCalendar.client.view.html'
+        }).
+        state('pickRoom', {
+        	url: '/pickRoom',
+        	templateUrl: 'modules/core/views/pickRoom.client.view.html'
+        }).
+        state('pickPeriod', {
+        	url: '/pickPeriod',
+        	templateUrl: 'modules/core/views/pickPeriod.client.view.html'
         });
 		// Home state routing
 	}
