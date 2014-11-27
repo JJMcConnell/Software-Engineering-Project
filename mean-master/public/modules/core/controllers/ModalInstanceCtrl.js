@@ -23,8 +23,26 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           $scope.error = response.message;
       });
   }
+  $scope.message = 'Loading request status...';
+  $scope.otherRequests = function (room) {
+      var date = items.date;
+      var requestYear = date.substring(0, 4);
+      var requestMonth = date.substring(5, 7);
+      var requestDay = date.substring(8, 10);
+      $http.get('/fetchRequestsForDayRoomAndPeriod?day='+requestDay+'&year='+requestYear+'&month='+requestMonth+'&room='+room+'&period='+items.period).success(function (response) {
+          $scope.message = 'No other requests have been made for this space.';
+          if(response.length == 1)
+              $scope.message = 'One other request has been made for this space.';
+          if (response.length > 1)
+              $scope.message = response.length + ' other requests have been made for this space.';
+      }).error(function (response) {
+          $scope.error = response.message;
+          $scope.message = 'Error';
+      });
+  }
   $scope.ok = function () {
-      
+      $scope.request.period = items.period;
+      $scope.request.length = 1;
       $scope.error = '';
       console.log($scope.request);
       console.log('This method?');
@@ -43,6 +61,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
 
   $scope.test = function () {
       console.log('TEST!!!!!');
+      return 'test';
   }
 
   $scope.deny = function (id, adminComment) {

@@ -179,11 +179,13 @@ exports.adminview = function(req,res) {
     })
 }
 
-exports.fetchRequestsForDay = function (req, res) {
+exports.fetchRequestsForDayRoomAndPeriod = function (req, res) {
     var day = req.query.day;
     var month = req.query.month;
     var year = req.query.year;
-    Event.find({ 'viewed': false, 'day': day, 'month': month, 'year': year }, function (err, events) {
+    var room = req.query.room;
+    var period = req.query.period;
+    Event.find({ 'viewed': false, 'day': day, 'month': month, 'year': year, 'room': room, 'period': period}, function (err, events) {
         if (err) {
             res.send('error!');
             return handleError(err);

@@ -65,7 +65,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 size: size,
                 resolve: {
                     items: function () {
-                        return new Date(event.start.toString()).toISOString().substring(0,10);
+                        return { date: new Date(event.start.toString()).toISOString().substring(0, 10), period: event.period };
                     },
                     buttonId: function () {
                         return currentRoom;
@@ -117,6 +117,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
 
         var currentRoom = '';
+        var currentPeriod = 0;
 
         var loaded = false;
         $scope.newRoomPage = function (tag) {
@@ -241,9 +242,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
               //  $scope.changeView('agendaDay', calendar);
         }
 
-        $scope.otherRequests = function () {
-            return 'No other requests have been made for this space.';
-        }
+       
 
         $scope.fetchUnEvents = function (day, month, year, room, requestLength) {
             // to show when OPEN periods are, rather than 
@@ -294,7 +293,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                                 // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
                                 start: new Date(response.year, response.month - 1, response.day, hour, minute),
                                 //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
-                                end: new Date(response.year, response.month - 1, response.day, hour + 1, minute - 10)
+                                end: new Date(response.year, response.month - 1, response.day, hour + 1, minute - 10),
+                                period: period
                             });
                         }
 
@@ -430,7 +430,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
           }
         };
     */
-        $scope.initRequest = function (day, month, year, room) {
+        $scope.initRequest = function (day, month, year, room, period) {
             currentRoom = room;
             console.log('INIT REQUEST');
             $scope.uiConfig = {
