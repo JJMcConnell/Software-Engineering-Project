@@ -293,7 +293,7 @@ exports.getAvailablePeriods = function (req, res) {
 
 
     Event.find({'month': month, 'day': day, 'year': year, 'room':room}, function (err, events){
-    var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true];  
+    var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true, true];  
     console.log("NUMBER OF EVENTS "+events.length);
     console.log(events);  
         // There it works.

@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', '$http',
-	function ($scope, $http) {
+angular.module('core').controller('HomeController', ['$scope', '$http', '$location',
+	function ($scope, $http, $location) {
 	    $scope.startDate = 'asdf';
 	    $scope.generateAdmin = function () {
 	        console.log("Trying to create admin ");
@@ -42,5 +42,9 @@ angular.module('core').controller('HomeController', ['$scope', '$http',
 	        var selectedDate = new Date(month + ' ' + day + ', ' + year);
 	        console.log((selectedDate.getTime() >= $scope.startDate.getTime()) && (selectedDate.getTime() <= $scope.endDate.getTime()));
 	        return (selectedDate.getTime() > $scope.startDate.getTime());
+	    }
+	    $scope.openRequestPage = function () {
+	        console.log('request page');
+	        $location.path('/calendarRequest');
 	    }
 	}]);
