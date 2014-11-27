@@ -292,7 +292,7 @@ exports.getAvailablePeriods = function (req, res) {
     console.log(day);
 
 
-    Event.find({'month': month, 'day': day, 'year': year, 'room':room}, function (err, events){
+    Event.find({'month': month, 'day': day, 'year': year, 'room':room, 'approved': true}, function (err, events){
     var periodsAvailable = [true, true, true, true, true, true, true, true, true, true, true, true, true, true];  
     console.log("NUMBER OF EVENTS "+events.length);
     console.log(events);  
@@ -315,7 +315,7 @@ exports.getAvailablePeriods = function (req, res) {
                 //nothing booked for periods i = add period to periodsAvailable
             }
         }
-        res.jsonp(periodsAvailable);
+        res.jsonp({ periods: periodsAvailable, day: day, month: month, year: year});
     })
 
 };

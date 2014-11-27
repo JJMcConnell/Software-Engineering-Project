@@ -245,44 +245,67 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             // to show when OPEN periods are, rather than 
             // TAKEN ones
 
-            var year = 2014;
-            var month = 11;
-            var day = 26;
+            var selectedDate = new Date(); // get current date
+            var room = 120;
+            var requestLength = 1;
 
-            $http.get('/getAvailablePeriods?year=2014&month=11&day=26&length=1&room=120').success(function (response) {
+            var year = selectedDate.getFullYear();
+            var month = selectedDate.getMonth() + 1;
+            var day = selectedDate.getDate();
 
-                console.log(response);
-                $scope.createPeriodOpenings();
-                for (var period = 1; period <= response.length; period++) {
-                    //console.log(response[event].year);
-                    //console.log(response[event].month);
-                    // console.log(m);
-                    var hour = 6;
-                    var minute = 20;
-                    if (period < 12) {
-                        hour += period;
-                        minute += period * 5;
-                    } else {
-                        hour = 7 + 12 + (period - 12);
-                        minute = 20;
+            var sunday = selectedDate.getDate() - selectedDate.getDay();
+            var saturday = sunday + 6;
+
+            var count = 0;
+            for (var dayOfWeek = sunday; dayOfWeek <= saturday; dayOfWeek++) {
+                var newDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), dayOfWeek);
+                var requestYear = newDate.getFullYear();
+                var requestMonth = newDate.getMonth() + 1;
+                var requestDay = newDate.getDate();
+                console.log(newDate.toDateString());
+                // just in case year or month changes.
+                $http.get('/getAvailablePeriods?year=' + requestYear + '&month=' + requestMonth + '&day=' + requestDay + '&length=1&room=120').success(function (response) {
+
+
+                    console.log(response);
+                    console.log('count' + count); // fixes asynchronous stuff
+                    for (var period = 1; period <= response.periods.length; period++) {
+                        //console.log(response[event].year);
+                        //console.log(response[event].month);
+                        // console.log(m);
+                        var hour = 6;
+                        var minute = 20;
+                        if (period < 12) {
+                            hour += period;
+                            minute += period * 5;
+                        } else {
+                            hour = 7 + 12 + (period - 12);
+                            minute = 20;
+                        }
+
+                        console.log(dayOfWeek);
+                        if (response.periods[period - 1]) {
+                            $scope.events.push({
+                                title: 'CLICK TO BOOK',
+                                // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                                start: new Date(response.year, response.month - 1, response.day, hour, minute),
+                                //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                                end: new Date(response.year, response.month - 1, response.day, hour + 1, minute - 10)
+                            });
+                        }
+
                     }
-                    if (response[period-1]) {
-                        $scope.events.push({
-                            title: 'CLICK TO BOOK',
-                            // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
-                            start: new Date(year, month - 1, day, hour, minute),
-                            //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
-                            end: new Date(year, month - 1, day, hour + 1, minute - 10)
-                        });
-                    }
-                }
 
-                // And redirect to the index page
-                //$location.path('');
-            }).error(function (response) {
-                $scope.error = response.message;
-            });
+                    count++;
+                    if (count == 7)
+                        document.getElementById('title').innerHTML = 'Available Periods';
 
+                    // And redirect to the index page
+                    //$location.path('');
+                }).error(function (response) {
+                    $scope.error = response.message;
+                });
+            }
         };
 
         $scope.createPeriodOpenings = function () {
