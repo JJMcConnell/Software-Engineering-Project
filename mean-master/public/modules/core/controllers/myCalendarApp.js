@@ -237,8 +237,12 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         };
 
         $scope.requestView = function (calendar) {
-            if(calendar)
-                $scope.changeView('agendaWeek', calendar);
+            //if(calendar)
+              //  $scope.changeView('agendaDay', calendar);
+        }
+
+        $scope.otherRequests = function () {
+            return 'No other requests have been made for this space.';
         }
 
         $scope.fetchUnEvents = function (day, month, year, room, requestLength) {
@@ -271,7 +275,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     console.log('count' + count); // fixes asynchronous stuff
                     for (var period = 1; period <= response.periods.length; period++) {
                         //console.log(response[event].year);
-                        //console.log(response[event].month);
+                        //console.log(response[event].month);   
                         // console.log(m);
                         var hour = 6;
                         var minute = 20;
@@ -436,12 +440,14 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     maxTime: '22:20:00',
                     height: 500,
                     editable: false,
-                    defaultDate: new Date(year, month-1, day),
+                    defaultDate: new Date(year, month - 1, day),
+                    defaultView: 'agendaDay',
                     header: {
                         left: 'title',
                         center: '',
                         right: 'today prev,next'
                     },
+                    hideButtons: true, // I made this option!!
                     eventClick: $scope.alertOnEventClick,
                     eventDrop: $scope.alertOnDrop,
                     eventResize: $scope.alertOnResize

@@ -179,6 +179,21 @@ exports.adminview = function(req,res) {
     })
 }
 
+exports.fetchRequestsForDay = function (req, res) {
+    var day = req.query.day;
+    var month = req.query.month;
+    var year = req.query.year;
+    Event.find({ 'viewed': false, 'day': day, 'month': month, 'year': year }, function (err, events) {
+        if (err) {
+            res.send('error!');
+            return handleError(err);
+        }
+        else {
+            res.jsonp(events);
+        }
+    });
+}
+
 exports.fetchRequests = function (req, res) {
     console.log("REQUESTS");
     /*passport.authenticate('local', function (err, user, info) {

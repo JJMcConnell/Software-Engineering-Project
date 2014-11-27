@@ -1163,9 +1163,9 @@
                                     tm + '-button',
                                     tm + '-state-default'
                                 ];
-
+                                var hideButtons = options.hideButtons ? 'hidden="hidden"' : '';//HACKED
                                 button = $( // type="button" so that it doesn't submit a form
-                                    '<button type="button" class="' + classes.join(' ') + '">' +
+                                    '<button type="button" '+hideButtons+' class="' + classes.join(' ') + '">' +
                                         innerHtml +
                                     '</button>'
                                     )

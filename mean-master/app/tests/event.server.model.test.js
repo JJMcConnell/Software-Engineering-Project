@@ -364,6 +364,14 @@ describe('Event Model Unit Tests:', function() {
 
 	});
 
+	describe('Finding requests', function () {
+	    it('Should find all requests', function (done) {
+
+	    });
+	    it('Should find requests for a given year, month, and day', function (done) {
+	    });
+	});
+
 	describe('Finding conflicting events', function () {
 	    it('Should find unavailable periods for length 1', function (done) {
 	        Event.find({ 'month': the_month, 'day': the_day, 'year': 2014, 'room': the_room }, function (err, events) {

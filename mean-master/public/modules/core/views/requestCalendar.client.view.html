@@ -42,7 +42,9 @@
             <div class="modal-header">
                 <h3 class="modal-title" id="modalTitle">Request Form for Room {{ request.roomNumber }} on {{items}}</h3>
             </div>
+            
             <div class="modal-body">
+                <h4 ng-controller="myCalendarApp">{{ otherRequests() }}</h4>
                 <ul>
 
                         <!-- Request Information is here -->
@@ -54,7 +56,7 @@
                                     <input type="text" data-ng-model="request.name" name="name" class="form-control" id="inputName" placeholder="Name" ng-required>
                                 </div>
                             </div>
-
+                            <!--
                             <div class="form-group">
                                 <label for="inputPeriod" class="col-sm-2 control-label">Starting* Period</label>
                                 <div class="col-sm-10">
@@ -92,7 +94,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group">
                                 <label for="inputEmail" class="col-sm-2 control-label">Email*</label>
                                 <div class="col-sm-10">
@@ -108,7 +110,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="inputSponsor" class="col-sm-2 control-label">Sponsor*</label>
+                                <label for="inputSponsor" class="col-sm-2 control-label">Faculty/Staff Sponsor*</label>
                                 <div class="col-sm-10">
                                     <input type="text" data-ng-model="request.sponsor" name="sponsor" class="form-control" id="inputSponsor" placeholder="Sponsor Name" ng-required>
                                 </div>
@@ -197,7 +199,14 @@
             <div class="row">
                 <div ng-controller="GetMyParameters" class="col-lg-12 text-center" ng-init="getSearchParameters()">
                     <h2 id="title">Loading Available Periods...</h2>
-
+                    
+                    <!-- Basic Calendar -->
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <button ng-controller="myCalendarApp" class="btn btn-success" ng-click="changeView('agendaDay', myCalendar)">Day</button>
+                            <button ng-controller="myCalendarApp" class="btn btn-success" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
+                        </div>
+                    </div>
 
                     <div class="span8 calendar" ng-init="fetchUnEvents(getSearchParameters().day, getSearchParameters().month, getSearchParameters().year, getSearchParameters().room, getSearchParameters().length)" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"><div ng-open="requestView(myCalendar)"></div></div>
                     <!--<script>

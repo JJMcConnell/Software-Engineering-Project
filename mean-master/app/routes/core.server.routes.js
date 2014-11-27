@@ -21,6 +21,7 @@ module.exports = function(app) {
 
     // ROOMS
     app.route('/fetchRequests').get(core.fetchRequests);
+    app.route('/fetchRequestsForDay').get(core.fetchRequestsForDay);
     app.route('/adminview').get(core.adminview);
     app.route('/adminview_room/?:room').get(core.AdminWithRoom);
     app.route('/room/?:tagId').get(core.ThisRoomApproved);
