@@ -56,7 +56,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         $scope.alertOnEventClick = function (event, allDay, jsEvent, view) {
             console.log('Clicked!!!');
             $scope.alertMessage = (event.title + ' was clicked ');
-
+            console.log(event.start);
             var size = 100;
             var butId = 100;
             var modalInstance = $modal.open({
@@ -65,10 +65,10 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 size: size,
                 resolve: {
                     items: function () {
-                        return event.start;
+                        return new Date(event.start.toString()).toISOString().substring(0,10);
                     },
                     buttonId: function () {
-                        return event.title;
+                        return currentRoom;
                     }
                 }
 
@@ -123,7 +123,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
             var roomNumber = window.location.href.substr(window.location.href.indexOf(tag) + tag.length);
             if (window.location.href.indexOf(tag) == -1) {
-                currentRoom = ")please select a room)"
+                currentRoom = ")please select a room)";
                 return "(please select a room)";
             }
 
@@ -238,21 +238,21 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
         $scope.requestView = function (calendar) {
             if(calendar)
-            $scope.changeView('agendaWeek', calendar);
+                $scope.changeView('agendaWeek', calendar);
         }
 
-        $scope.fetchUnEvents = function () {
+        $scope.fetchUnEvents = function (day, month, year, room, requestLength) {
             // to show when OPEN periods are, rather than 
             // TAKEN ones
 
-            var selectedDate = new Date(); // get current date
-            var room = 120;
+            var selectedDate = new Date(year, month - 1, day); // get current date
+            /*var room = 120;
             var requestLength = 1;
 
             var year = selectedDate.getFullYear();
             var month = selectedDate.getMonth() + 1;
             var day = selectedDate.getDate();
-
+            */
             var sunday = selectedDate.getDate() - selectedDate.getDay();
             var saturday = sunday + 6;
 
@@ -264,7 +264,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 var requestDay = newDate.getDate();
                 console.log(newDate.toDateString());
                 // just in case year or month changes.
-                $http.get('/getAvailablePeriods?year=' + requestYear + '&month=' + requestMonth + '&day=' + requestDay + '&length=1&room=120').success(function (response) {
+                $http.get('/getAvailablePeriods?year=' + requestYear + '&month=' + requestMonth + '&day=' + requestDay + '&length=1&room='+room).success(function (response) {
 
 
                     console.log(response);
@@ -426,7 +426,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
           }
         };
     */
-        $scope.initRequest = function () {
+        $scope.initRequest = function (day, month, year, room) {
+            currentRoom = room;
             console.log('INIT REQUEST');
             $scope.uiConfig = {
                 calendar: {
@@ -434,7 +435,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     minTime: '07:25:00',
                     maxTime: '22:20:00',
                     height: 500,
-                    editable: true,
+                    editable: false,
+                    defaultDate: new Date(year, month-1, day),
                     header: {
                         left: 'title',
                         center: '',
@@ -454,7 +456,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 minTime: '07:25:00',
                 maxTime: '22:20:00',
                 height: 500,
-                editable: true,
+                editable: false,
                 header: {
                     left: 'title',
                     center: '',

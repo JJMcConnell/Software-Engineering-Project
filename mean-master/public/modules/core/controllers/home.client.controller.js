@@ -43,8 +43,20 @@ angular.module('core').controller('HomeController', ['$scope', '$http', '$locati
 	        console.log((selectedDate.getTime() >= $scope.startDate.getTime()) && (selectedDate.getTime() <= $scope.endDate.getTime()));
 	        return (selectedDate.getTime() > $scope.startDate.getTime());
 	    }
-	    $scope.openRequestPage = function () {
+	    $scope.openRequestPage = function (room) {
+	        var date = document.getElementById('selectedDate').innerHTML;
+	        if (document.getElementById('selectedDate').innerHTML == '')
+	            date = new Date().toDateString();
+	        var day = date.substr(8, 2);
+	        var year = date.substr(11, 4);
+	        var month = date.substr(4, 3);
+	        if (document.getElementById('selectedDate').innerHTML == '') {
+	            console.log(new Date().toDateString());
+	        }
+	        var newDateFormat = new Date(month + ' ' + day + ', ' + year).toISOString(); // This sets it to mm/dd/yyyy
+	        month = newDateFormat.substring(5, 7);
+	        console.log('THIS SHOULD BE CORRECT: ' + newDateFormat);
 	        console.log('request page');
-	        $location.path('/calendarRequest');
+	        document.location = '#!/calendarRequest?day='+day+'&month='+month+'&year='+year+'&length=1&room='+room;
 	    }
 	}]);

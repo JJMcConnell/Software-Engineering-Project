@@ -24,7 +24,7 @@ angular.module('core').controller('GetMyParameters', ['$scope',
 	    $scope.getSearchParameters = function () {
 	        var prmstr =// window.location.search.substr(1);
 	        window.location.hash.substr(window.location.hash.indexOf('?')+1);
-	        console.log(prmstr);
+	        console.log($scope.transformToAssocArray(prmstr));
 	        return prmstr != null && prmstr != "" ? $scope.transformToAssocArray(prmstr) : {};
 	    }
 

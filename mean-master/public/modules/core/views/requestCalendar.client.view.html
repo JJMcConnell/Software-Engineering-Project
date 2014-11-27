@@ -193,40 +193,33 @@
 
         <!--  <script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script> -->
         <!-- Page Content -->
-        <div class="container" ng-init="initRequest()">
+        <div class="container" ng-init="initRequest(getSearchParameters().day, getSearchParameters().month, getSearchParameters().year, getSearchParameters().room)" ng-controller="GetMyParameters">
             <div class="row">
-                <div ng-controller="GetMyParameters" class="col-lg-12 text-center">
+                <div ng-controller="GetMyParameters" class="col-lg-12 text-center" ng-init="getSearchParameters()">
                     <h2 id="title">Loading Available Periods...</h2>
 
-                    <!-- Basic Calendar -->
-                    <div class="btn-toolbar">
-                        <div class="btn-group">
-                            <button class="btn btn-success" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
-                        </div>
-                    </div>
 
-                    
-                    <div class="span8 calendar" ng-init="fetchUnEvents()" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"><div ng-open="requestView(myCalendar)"></div></div>
+                    <div class="span8 calendar" ng-init="fetchUnEvents(getSearchParameters().day, getSearchParameters().month, getSearchParameters().year, getSearchParameters().room, getSearchParameters().length)" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"><div ng-open="requestView(myCalendar)"></div></div>
                     <!--<script>
-                        $(window).scroll(function () {
-                            //pos = window.pageYOffset;
-                        });
-                    </script>-->
+                    $(window).scroll(function () {
+                        //pos = window.pageYOffset;
+                    });
+                </script>-->
                     <!-- Alert Message
-        <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
-            <h4>{{alertMessage}}</h4>
-        </div>
-            -->
-                    <!-- List of task for Current Date
-        <ul class="unstyled">
-            <li ng-repeat="e in events | filter:currentDate">
-                <div class="alert alert-info">
-                    <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
-                    <b> {{e.title}}</b> - {{e.start | date:"MMM dd"}}
+                <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                    <h4>{{alertMessage}}</h4>
                 </div>
-            </li>
-        </ul>
-            -->
+                    -->
+                    <!-- List of task for Current Date
+                <ul class="unstyled">
+                    <li ng-repeat="e in events | filter:currentDate">
+                        <div class="alert alert-info">
+                            <a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>
+                            <b> {{e.title}}</b> - {{e.start | date:"MMM dd"}}
+                        </div>
+                    </li>
+                </ul>
+                    -->
 
 
                 </div>
