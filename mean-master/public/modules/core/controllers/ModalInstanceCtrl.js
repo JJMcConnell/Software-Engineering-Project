@@ -6,7 +6,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
   console.log(buttonId);
 
   $scope.request = {
-    roomNumber: buttonId //Results in extraneous autofill in pick by Period page
+    roomNumber: buttonId
   }
 
   $scope.selected = {
