@@ -3,14 +3,33 @@
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', '$window', 'Authentication',
 	function($scope, $http, $location, $window, Authentication) {
 		$scope.authentication = Authentication;
-		// YEAH!!!
+	    // YEAH!!!
+		$scope.path = '/adminview';
 		$scope.validateLogin = function () {
-		    //if ($scope.authentication.user) $location.path(path);
 		    if (!$scope.authentication.user) $location.path('/');
 		}
 
 		$scope.redirectIfLoggedIn = function () {
 		    if ($scope.authentication.user) $location.path('/adminview');
+		    if ($scope.getSearchParameters().path)
+		        if ($scope.authentication.user) $location.path($scope.getSearchParameters().path).search({});
+		}
+        //FROM GetMyParameters controller
+		$scope.getSearchParameters = function () {
+		    var prmstr =// window.location.search.substr(1);
+	        window.location.hash.substr(window.location.hash.indexOf('?') + 1);
+		    console.log($scope.transformToAssocArray(prmstr));
+		    return prmstr != null && prmstr != "" ? $scope.transformToAssocArray(prmstr) : {};
+		}
+
+		$scope.transformToAssocArray = function (prmstr) {
+		    var params = {};
+		    var prmarr = prmstr.split("&");
+		    for (var i = 0; i < prmarr.length; i++) {
+		        var tmparr = prmarr[i].split("=");
+		        params[tmparr[0]] = tmparr[1];
+		    }
+		    return params;
 		}
 
 		$scope.parseWeirdDate = function (weirdDate) {
@@ -58,7 +77,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			});
 		};
 
-		$scope.signin = function() {
+		$scope.signin = function () {
+		    $scope.path = '/';
 			$http.post('/auth/signin', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
@@ -83,14 +103,14 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		
 
         //ONLY FOR APPROVED (in ModalInstanceCtrl)
-
-		$scope.deny = function (id) {
+		$scope.deny = function (id, adminComment, path) {
 		    //$window.location.reload();
 		    var jsonParam = { 'id': 1 };
 		    jsonParam.id = id;
+		    jsonParam.adminComment = adminComment;
 		    console.log('DENIED!');
 		    $http.post('/denyroom', jsonParam).success(function (response) {
-		        $location.path('/signin');
+		        $location.path('/signin').search({ path: path });
 		        //$window.location.reload();
 		        //$scope.fetchRequests();
 		        //$scope.signin($scope.authentication.user);
@@ -98,8 +118,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		        //$scope.error = response.message;
 		        console.log('ERROR!');
 		    });
-		    //$modalInstance.dismiss('cancel');
 		};
-
 	}
 ]);

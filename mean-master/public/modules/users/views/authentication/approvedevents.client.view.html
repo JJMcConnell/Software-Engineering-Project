@@ -68,7 +68,7 @@
 
 
                 <td>
-                    <form ng-submit='deny(reservation._id)'>
+                    <form ng-submit='deny(reservation._id, "This event was canceled.", "approvedevents")'>
                         <input name='id' hidden="hidden" value="{{reservation._id}}">
                         <button type='submit' class='btn btn-danger center-block' value='deny'>
                             <span class="glyphicon glyphicon-remove"></span>

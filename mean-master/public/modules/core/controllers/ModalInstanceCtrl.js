@@ -64,16 +64,16 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
       return 'test';
   }
 
-  $scope.deny = function (id, adminComment) {
+  $scope.deny = function (id, adminComment, path) {
       //$window.location.reload();
       var jsonParam = { 'id': 1 };
       jsonParam.id = id;
       jsonParam.adminComment = adminComment;
       console.log('DENIED!');
       $http.post('/denyroom', jsonParam).success(function (response) {
-          $location.path('/signin');
+          $location.path('/signin').search({path:path});
           //$window.location.reload();
-          $scope.fetchRequests();
+          //$scope.fetchRequests();
           //$scope.signin($scope.authentication.user);
       }).error(function (response) {
           //$scope.error = response.message;
