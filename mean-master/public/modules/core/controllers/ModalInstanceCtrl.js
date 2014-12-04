@@ -40,6 +40,15 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           $scope.message = 'Error';
       });
   }
+ $scope.setInfo = function (myPeriod) {
+      if( myPeriod== 12)
+          myPeriod = 'E1'
+      if (myPeriod == 13)
+          myPeriod = 'E2'
+      if (myPeriod == 14)
+          myPeriod = 'E2'
+      return myPeriod;
+  }
   $scope.ok = function () {
       $scope.request.period = items.period;
       $scope.request.length = 1;

@@ -483,6 +483,15 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
 
         };
+
+          $scope.changeReqView = function (view, calendar) {
+            
+               calendar.fullCalendar('changeView', view);
+        
+
+
+        };
+
         /* Change View */
         $scope.renderCalender = function (calendar) {
             calendar.fullCalendar('render');

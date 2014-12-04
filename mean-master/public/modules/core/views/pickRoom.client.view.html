@@ -42,17 +42,17 @@
     <div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl" style="margin-bottom:20px;">
                     
                     <!--<a href="#!/period" class="btn btn-default" style="float: left;">Pick by Period<i class="fa fa-home"></i></a>-->
-                    
-                    <h2 style="clear:left"> School of Music Room Reservation </h2>                    
-                    <h3 style="color:black"> Step 1 - Choose a date! </h3>
+
+                    <h2 style="clear:left"> School of Music Room Reservation </h2>
+                    <hr>                    
+                    <h4 style="color:black">Select a Date</h4>
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
                     <div id="selectedDate" hidden="hidden"></div>
                     <div ng-init="dateSettings()">
                         You may not request a day before {{ startDate.toDateString() }} or after {{ endDate.toDateString() }}
                     </div>
-                    <br>
-
+                    <hr>
     <!-- Request Button is here -->
 
         <script type="text/ng-template" id="myModalContent.html">
@@ -240,9 +240,9 @@
 
         <!--Select Room Number and form pops up-->
         <!--Should auto-populate form-->
-                <h3 style="color:black"> Step 2 - Pick a room! </h3>
+                <h4 style="color:black"> Select a Room </h4>
                 <div class="btn-toolbar"  data-toggle="buttons" data-ng-controller="ModalDemoCtrl">
-                    <button type="button" ng-attr-id="101" ng-click="isThisGoodDate()" id="101" class="btn btn-default">Is this good date?</button>
+
                     <button type="button" ng-attr-id="101" ng-click="openRequestPage(101, isThisGoodDate())" id="101" class="btn btn-default">Room 101</button>
                     <button type="button" ng-attr-id="106B" ng-click="openRequestPage('106B', isThisGoodDate())" id="106B" class="btn btn-default">Room 106B</button>
                     <button type="button" ng-attr-id="120" ng-click="openRequestPage(120, isThisGoodDate())" id="120" class="btn btn-default">Room 120</button>

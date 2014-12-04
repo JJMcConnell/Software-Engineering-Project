@@ -44,21 +44,21 @@
                     <!--<a href="#!/room" class="btn btn-default" style="float: left;">Pick by Room<i class="fa fa-home"></i></a>-->
 
                     <h2 style="clear:left"> School of Music Room Reservation </h2>
-   					
-                    <h3 style="color:black"> Step 1 - Choose a date! </h3>
+   					<hr>
+                    <h4 style="color:black">Select a Date</h4>
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
                     <div id="selectedDate" hidden="hidden"></div>
                     <div ng-init="dateSettings()">
                         You may not request a day before {{ startDate.toDateString() }} or after {{ endDate.toDateString() }}
                     </div>
-                    <br>
+                    <hr>
 
     <!-- Request Button is here -->
 
         <script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Request Form for Period {{ request.period }} on {{items}}</h3>
+                <h3 class="modal-title" id="modalTitle">Request Form for Period {{ setInfo(request.period) }} on {{items[0].substring(5,7)+"-"+items[0].substring(8,10)+"-"+items[0].substring(0,4)}}</h3>
             </div>
             <div class="modal-body">
                 <ul>
@@ -250,9 +250,8 @@
 
         <!--Select Room Number and form pops up-->
         <!--Should auto-populate form-->
-                <h3 style="color:black"> Step 2 - Pick a period! </h3>
+                <h4 style="color:black">Select a Period</h4>
                 <div class="btn-toolbar"  data-toggle="buttons">
-                    <button type="button" ng-attr-id="101" ng-click="isThisGoodDate()" id="101" class="btn btn-default">Is this good date?</button>
                     <button type="button" ng-attr-id="1" ng-click="periodData(1, isThisGoodDate())"  id="1" class="btn btn-default">1</button>
                     <button type="button" ng-attr-id="2" ng-click="periodData(2, isThisGoodDate())" id="2" class="btn btn-default">2</button>
                     <button type="button" ng-attr-id="3" ng-click="periodData(3, isThisGoodDate())" id="3" class="btn btn-default">3</button>
