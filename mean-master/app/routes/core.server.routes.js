@@ -14,6 +14,7 @@ module.exports = function(app) {
 
     // UPDATE
     app.route('/approveroom').get(core.approveroom);
+    app.route('/approveroomAndDenyConflicting').post(core.approveAndDenyConflicting);
     app.route('/denyroom').post(core.denyroom);
     //testdates
     app.route('/changeDates').get(core.changeDates);
@@ -21,7 +22,7 @@ module.exports = function(app) {
 
     // ROOMS
     app.route('/fetchRequests').get(core.fetchRequests);
-    app.route('/fetchRequestsForDayRoomAndPeriod').get(core.fetchRequestsForDayRoomAndPeriod);
+    app.route('/fetchRequestsForDayRoomAndPeriod').post(core.fetchRequestsForDayRoomAndPeriod);
     app.route('/adminview').get(core.adminview);
     app.route('/adminview_room/?:room').get(core.AdminWithRoom);
     app.route('/room/?:tagId').get(core.ThisRoomApproved);

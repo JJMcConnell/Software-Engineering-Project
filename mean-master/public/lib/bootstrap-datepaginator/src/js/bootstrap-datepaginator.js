@@ -188,8 +188,12 @@
 			}
 		},
 
-		_setSelectedDate: function(selectedDate) {
-		    document.getElementById('selectedDate').innerHTML = selectedDate;
+		_setSelectedDate: function (selectedDate) {
+		    console.log(this._element.id + 'SelectedDate');
+		    if (this._element.id=="datePicker")
+		        document.getElementById('selectedDate').innerHTML = selectedDate;
+		    else
+		        document.getElementById(this._element.id + 'SelectedDate').innerHTML = selectedDate;
 		    //console.log(selectedDate);
 			if ((!selectedDate.isSame(this.options.selectedDate)) &&
 				(!selectedDate.isBefore(this.options.startDate)) &&

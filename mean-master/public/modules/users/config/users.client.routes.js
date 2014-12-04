@@ -48,6 +48,10 @@ angular.module('users').config(['$stateProvider',
         state('adminsettings', {
             url: '/adminsettings',
             templateUrl: 'modules/users/views/authentication/adminSettings.client.view.html'
-        });
+        }).
+        state('signup', {
+            url: '/signup',
+            templateUrl: 'modules/users/views/authentication/signup.client.view.html'
+        });;
 	}
 ]);

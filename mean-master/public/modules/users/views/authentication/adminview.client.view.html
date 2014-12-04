@@ -148,13 +148,35 @@
 
         </script>
 
+
+
+
+    <script type="text/ng-template" id="otherRequests.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modalTitle">Approve Event?</h3>
+        </div>
+        <div class="modal-body">
+            OTHER REQUESTS WERE MADE FOR THIS DATE/ROOM/PERIOD!!!!
+            Approving this will reject the others.
+            Are you sure you want to do this????????????????
+        </div>
+        <div ng-repeat="request in items">{{request.title}} (Sponsor is {{request.sponsor}})</div>
+        <form class="form-horizontal" role="form" ng-submit="approveAndDenyConflicting()">
+            <div class="modal-footer" style="border-top:none; padding-top: 50px;">
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </form>
+    </script>
+
+
         <script type="text/ng-template" id="myCommentContent.html">
             <div class="modal-header">
                 <h3 class="modal-title" id="modalTitle">Deny Event?</h3>
             </div>
             <div class="modal-body">
-                    
-                    <!-- Request Information is here -->
+
+                <!-- Request Information is here -->
                 <form class="form-horizontal" role="form" ng-submit="deny(items, comment, 'adminview')">
                     <label for="inputComment" class="col-sm-2 control-label">Comment:</label>
                     <label for="inputComment" class="col-sm-2 control-label" hidden="hidden">{{items}}</label>
@@ -177,8 +199,10 @@
 
         <button type="button" data-toggle="buttons" class="btn btn-default" style="float: right;" ng-click="open(147)">Custom Request</button>
 
-    <a href="#!/approvedevents" class="btn btn-default" style="float: left;">View Approved Events<i class="fa fa-home"></i></a>
-        <br><br>
+        <a href="#!/approvedevents" class="btn btn-default" style="float: left;">View Approved Events<i class="fa fa-home"></i></a>
+    <a href="#!/adminsettings" class="btn btn-default" style="float: left;">CLICK ON THIS PARTICULAR BUTTON IF YOU WOULD LIKE TO SEE SOME SETTINGS<i class="fa fa-home"></i></a>
+        <br>
+        <br>
         <table ng-init="validateLogin()" class="table table-striped">
             <thead>
                 <tr>
@@ -194,7 +218,7 @@
                 </tr>
             <tbody ng-init="fetchRequests()">
 
-                <tr ng-repeat="reservation in events.slice().reverse()" id="tbl" ng-init="res = reserva;">
+                <tr ng-repeat="reservation in events.slice()" id="tbl" ng-init="res = reserva;">
                     <td ng-show="reservation.room" style="padding-right:25px"> {{ reservation.room }} </td>
                     <td style="padding-right:25px"> {{ reservation.period }} </td>
                     <td style="padding-right:25px"> {{ reservation.month }}-{{ reservation.day }}-{{ reservation.year }}</td>
@@ -250,7 +274,7 @@
                         2. have hidden fields for the room id for each form
                         3. only submit the form whose button is pushed
                         -->
-                        <form ng-submit="approve(reservation._id)">
+                        <form ng-submit="approveReq(reservation._id, reservation.day, reservation.month, reservation.year, reservation.room, reservation.period)">
                             <input name='id' type="hidden" value="{{reservation._id}}">
                             <button type='submit' id='approve' class='btn btn-success center-block' value=''>
                                 <span class="glyphicon glyphicon-ok"></span>
@@ -268,4 +292,4 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+</div>

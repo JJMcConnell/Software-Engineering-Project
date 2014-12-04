@@ -1,4 +1,6 @@
-angular.module('core').controller('ModalDemoCtrl', function ($scope, $modal, $log) {
+angular.module('core').controller('ModalDemoCtrl', function ($http, $location, $scope, $modal, $log) {
+
+    // SO. MANY. MODALS.
 
   $scope.items = [];
 
@@ -54,6 +56,71 @@ $scope.buttonData = function (butId) {
   $scope.setDate = function () {
       console.log($scope.items);
   }
+
+
+  $scope.approveReq = function (id, day, month, year, room, period) {
+      
+      var params = { day: day, month: month, year: year, room: room, period: period };
+      console.log('PARAMS' + params.day);
+      var items = [];
+      $http.post('/fetchRequestsForDayRoomAndPeriod', params).success(function (response) {
+          //$location.path('/signin');
+        
+          console.log("RESPONSE " + response);
+          if (response.length > 1) {// One will be the request selected
+              for (var i = response.length - 1; i >= 0; i--) {
+                  //console.log(response[i]._id);
+                  console.log('my id' + id);
+                  console.log('other id' + response[i]._id);
+                  if (response[i]._id == id)
+                      response.splice(i, 1);
+
+              }
+              var modalInstance = $modal.open({
+                  templateUrl: 'otherRequests.html',
+                  controller: 'ModalInstanceCtrl',
+                  size: 100,
+                  resolve: {
+                      items: function () {
+                          return response;
+                      },
+                      buttonId: function () {
+                          return id;
+                      }
+                  }
+              });
+          }
+          else
+          {
+              $scope.approve(response[0]._id);
+          }
+      }).error(function (response) {
+          //$scope.error = response.message;
+
+      });
+
+      //fetchRequestsForDayRoomAndPeriod
+      /*
+      $http.get('/fetchEventByID?id=' + id).success(function (response) {
+          //$location.path('/signin');
+          console.log("RESPONSE " + response);
+      }).error(function (response) {
+          //$scope.error = response.message;
+          
+      });
+      */
+  };
+
+  $scope.approve = function (id) {
+      console.log('approved!!!');
+      console.log(id);
+      $http.get('/approveroom?id=' + id).success(function (response) {
+          $location.path('/signin');
+      }).error(function (response) {
+          //$scope.error = response.message;
+
+      });
+  };
 
   $scope.comment = function (id, size) {
       $scope.items = id;
