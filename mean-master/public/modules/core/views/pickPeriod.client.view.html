@@ -231,28 +231,45 @@
         </script>
 
 
+        <script type="text/ng-template" id="ModalDateError.html" >
+
+            <div class="modal-body" ng-init="dateSettings()">
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" ng-submit="ok()">
+                        <h3 class="text-center" style="color:black;"> You may not choose that date. </h3>
+
+                            <div class="modal-footer" style="border-top:none;">
+                                <button class="btn btn-warning" ng-click="cancel()">Okay</button>
+                            </div>
+                        </form>
+                </div>
+
+
+        </script>
+
+
         <!--Select Room Number and form pops up-->
         <!--Should auto-populate form-->
                 <h3 style="color:black"> Step 2 - Pick a period! </h3>
                 <div class="btn-toolbar"  data-toggle="buttons">
                     <button type="button" ng-attr-id="101" ng-click="isThisGoodDate()" id="101" class="btn btn-default">Is this good date?</button>
-                    <button type="button" ng-attr-id="1" ng-click="periodData(1)"  id="1" class="btn btn-default">1</button>
-                    <button type="button" ng-attr-id="2" ng-click="periodData(2)" id="2" class="btn btn-default">2</button>
-                    <button type="button" ng-attr-id="3" ng-click="periodData(3)" id="3" class="btn btn-default">3</button>
-                    <button type="button" ng-attr-id="4" ng-click="periodData(4)" id="4" class="btn btn-default">4</button>
-                    <button type="button" ng-attr-id="5" ng-click="periodData(5)" id="5" class="btn btn-default">5</button>
-                    <button type="button" ng-attr-id="6" ng-click="periodData(6)" id="6" class="btn btn-default">6</button>
-                    <button type="button" ng-attr-id="7" ng-click="periodData(7)" id="7" class="btn btn-default">7</button>
-                    <button type="button" ng-attr-id="8" ng-click="periodData(8)" id="8" class="btn btn-default">8</button>                                        
+                    <button type="button" ng-attr-id="1" ng-click="periodData(1, isThisGoodDate())"  id="1" class="btn btn-default">1</button>
+                    <button type="button" ng-attr-id="2" ng-click="periodData(2, isThisGoodDate())" id="2" class="btn btn-default">2</button>
+                    <button type="button" ng-attr-id="3" ng-click="periodData(3, isThisGoodDate())" id="3" class="btn btn-default">3</button>
+                    <button type="button" ng-attr-id="4" ng-click="periodData(4, isThisGoodDate())" id="4" class="btn btn-default">4</button>
+                    <button type="button" ng-attr-id="5" ng-click="periodData(5, isThisGoodDate())" id="5" class="btn btn-default">5</button>
+                    <button type="button" ng-attr-id="6" ng-click="periodData(6, isThisGoodDate())" id="6" class="btn btn-default">6</button>
+                    <button type="button" ng-attr-id="7" ng-click="periodData(7, isThisGoodDate())" id="7" class="btn btn-default">7</button>
+                    <button type="button" ng-attr-id="8" ng-click="periodData(8, isThisGoodDate())" id="8" class="btn btn-default">8</button>                                        
                 </div>
                     <br>
                 <div class="btn-toolbar" data-toggle="buttons">
-                    <button type="button" ng-attr-id="9" ng-click="periodData(9)" id="9" class="btn btn-default">9</button>
-                    <button type="button" ng-attr-id="10" ng-click="periodData(10)" id="10" class="btn btn-default">10</button>
-                    <button type="button" ng-attr-id="11" ng-click="periodData(11)" id="11" class="btn btn-default">11</button>
-                    <button type="button" ng-attr-id="12" ng-click="periodData('12')" id="E1" class="btn btn-default">E1</button>
-                    <button type="button" ng-attr-id="13" ng-click="periodData('13')" id="E2" class="btn btn-default">E2</button>
-                    <button type="button" ng-attr-id="14" ng-click="periodData('14')" id="E3" class="btn btn-default">E3</button>
+                    <button type="button" ng-attr-id="9" ng-click="periodData(9, isThisGoodDate())" id="9" class="btn btn-default">9</button>
+                    <button type="button" ng-attr-id="10" ng-click="periodData(10, isThisGoodDate())" id="10" class="btn btn-default">10</button>
+                    <button type="button" ng-attr-id="11" ng-click="periodData(11, isThisGoodDate())" id="11" class="btn btn-default">11</button>
+                    <button type="button" ng-attr-id="12" ng-click="periodData('12', isThisGoodDate())" id="E1" class="btn btn-default">E1</button>
+                    <button type="button" ng-attr-id="13" ng-click="periodData('13', isThisGoodDate())" id="E2" class="btn btn-default">E2</button>
+                    <button type="button" ng-attr-id="14" ng-click="periodData('14', isThisGoodDate())" id="E3" class="btn btn-default">E3</button>
                             
                 </div>
                 <br>
