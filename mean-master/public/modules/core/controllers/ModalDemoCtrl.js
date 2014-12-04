@@ -1,5 +1,7 @@
 angular.module('core').controller('ModalDemoCtrl', function ($http, $location, $scope, $modal, $log) {
 
+    // SO. MANY. MODALS.
+
   $scope.items = [];
 
 $scope.buttonData = function (butId) {

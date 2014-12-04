@@ -315,6 +315,10 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 var requestYear = newDate.getFullYear();
                 var requestMonth = newDate.getMonth() + 1;
                 var requestDay = newDate.getDate();
+                if (requestDay < 10)
+                    requestDay = "0" + requestDay;
+                if (requestMonth < 10)
+                    requestDay = "0" + requestMonth;
                 console.log(newDate.toDateString());
                 // just in case year or month changes.
                 $http.get('/getAvailablePeriods?year=' + requestYear + '&month=' + requestMonth + '&day=' + requestDay + '&length=1&room='+room).success(function (response) {
