@@ -180,11 +180,11 @@ exports.adminview = function(req,res) {
 }
 
 exports.fetchRequestsForDayRoomAndPeriod = function (req, res) {
-    var day = req.query.day;
-    var month = req.query.month;
-    var year = req.query.year;
-    var room = req.query.room;
-    var period = req.query.period;
+    var day = req.body.day;
+    var month = req.body.month;
+    var year = req.body.year;
+    var room = req.body.room;
+    var period = req.body.period;
     Event.find({ 'viewed': false, 'day': day, 'month': month, 'year': year, 'room': room, 'period': period}, function (err, events) {
         if (err) {
             res.send('error!');
@@ -399,6 +399,86 @@ exports.index = function (req, res) {
     });
 };
 var d;
+
+
+exports.approveAndDenyConflicting = function (req, res) {
+    var id = req.body.id;
+
+
+    Event.findByIdAndUpdate(id,
+        { 'viewed': true, 'approved': true },
+        function (err, events) {
+
+            Event.find({ 'viewed': false, 'day': events.day, 'month': events.month, 'year': events.year, 'room': events.room, 'period': events.period }, function (err, events) {
+                if (err) {
+                    res.send('error!');
+                    return handleError(err);
+                }
+                else {
+               
+                    for (var i = 0; i < events.length; i++) {
+                        Event.findByIdAndUpdate(events[i]._id,
+                            { 'viewed': true, 'approved': false },
+                            function (err, events) {
+
+
+                                mailer.send(
+                              {
+                                  host: "smtp.mandrillapp.com"
+                              , port: 587
+                              , to: events.contactEmail //WILL CHANGE THIS TO USERS EMAIL, BUT NOT NOW SO RANDOM PEOPLE DON'T GET EMAILS
+                              , from: "trevorkowens@gmail.com"
+                              , subject: "Event Denied/Conflict"
+                              , body: "Your request was denied, in favor of another request for the same day/period/room."
+                              , authentication: "login"
+                              , username: username
+                              , password: password
+                              }, function (err, result) {
+                                  if (err) {
+                                      console.log(err);
+                                  }
+                              }
+                            );
+                            }
+                        );
+                    }
+               
+                }
+            });
+
+            mailer.send(
+          {
+              host: "smtp.mandrillapp.com"
+          , port: 587
+          , to: events.contactEmail //WILL CHANGE THIS TO USERS EMAIL, BUT NOT NOW SO RANDOM PEOPLE DON'T GET EMAILS
+          , from: "trevorkowens@gmail.com"
+          , subject: "Event Approved"
+          , body: "Your event, " + events.title + ", has been approved."
+          , authentication: "login"
+          , username: username
+          , password: password
+          }, function (err, result) {
+              if (err) {
+                  console.log(err);
+              }
+          }
+        );
+        }
+
+
+
+    );
+
+
+
+
+
+
+    res.redirect('/#!/adminview');
+
+}
+
+
 exports.approveroom = function(req, res) {
     var id = req.query.id;
     console.log(id);

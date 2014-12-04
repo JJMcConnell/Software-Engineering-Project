@@ -29,7 +29,8 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
       var requestYear = date.substring(0, 4);
       var requestMonth = date.substring(5, 7);
       var requestDay = date.substring(8, 10);
-      $http.get('/fetchRequestsForDayRoomAndPeriod?day='+requestDay+'&year='+requestYear+'&month='+requestMonth+'&room='+room+'&period='+items.period).success(function (response) {
+      var params = { day: requestDay, month: requestMonth, year: requestYear, room: room, period: items.period};
+      $http.post('/fetchRequestsForDayRoomAndPeriod', params).success(function (response) {
           $scope.message = 'No other requests have been made for this space.';
           if(response.length == 1)
               $scope.message = 'One other request has been made for this space.';
@@ -40,6 +41,8 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           $scope.message = 'Error';
       });
   }
+    
+
   $scope.ok = function () {
       $scope.request.period = items.period;
       $scope.request.length = 1;
@@ -63,6 +66,19 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
       console.log('TEST!!!!!');
       return 'test';
   }
+
+
+  $scope.approveAndDenyConflicting = function () {
+      console.log(buttonId);
+      var params = {id: buttonId};
+      $http.post('/approveroomAndDenyConflicting', params).success(function (response) {
+          $location.path('/signin');
+      }).error(function (response) {
+          //$scope.error = response.message;
+
+      });
+      $modalInstance.dismiss('done');
+  };
 
   $scope.deny = function (id, adminComment, path) {
       //$window.location.reload();
