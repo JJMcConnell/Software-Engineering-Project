@@ -1,0 +1,115 @@
+<section data-ng-controller="HomeController">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+   
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title >App Template</title>
+
+    <!-- Custom CSS -->
+    <!-- added to custom.css
+    <style>
+    body {
+        padding-top: 40px;
+        padding-bottom:40px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>-->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+     
+
+</head>
+
+<body>
+  <!--<script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script>-->
+    <!-- Page Content -->
+    <div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl" style="margin-bottom:20px;" ng-init="dateSettings()">
+                    
+                    <h2 style="color:black;"> Admin Settings </h2>
+                    Restrict reservation requests from
+                    
+                    <!--<h4> From </h4>-->
+                     <!-- The Date Picker is injected into this div -->   
+                     <div id="datePicker"></div>
+                    <div id="selectedDate" hidden="hidden"></div>
+                    to
+                     <!-- The Date Picker is injected into this div -->   
+                     <div id="datePicker2"></div>
+                    <div id="selectedDate" hidden="hidden"></div>
+
+                    <br>
+
+                    <form class="form-horizontal" role="form" ng-submit="ok()">
+                        <h3 class="text-center" style="color:black;"> Reservations will be allowed between {{startDate.toDateString()}} and {{endDate.toDateString()}}. </h3>
+
+                            <div class="modal-footer" style="border-top:none;">
+                                <button class="btn btn-primary" ng-click="cancel()">Okay</button>
+                            </div>
+                        </form>
+
+    <!-- Request Button is here -->
+
+
+
+        <script type="text/ng-template" id="ModalSuccess.html">
+
+            <div class="modal-body" ng-init="dateSettings()">
+                        <!-- Request Information is here -->
+                        <form class="form-horizontal" role="form" ng-submit="ok()">
+                        <h3 class="text-center" style="color:black;"> Reservations are now allowed between {{startDate.toDateString()}} and {{endDate.toDateString()}}. </h3>
+
+                            <div class="modal-footer" style="border-top:none;">
+                                <button class="btn btn-primary" ng-click="cancel()">Okay</button>
+                            </div>
+                        </form>
+                </div>
+
+
+        </script>
+
+
+</div>
+
+
+
+
+<script type='text/javaScript'>
+    $('#datePicker').datepaginator();
+    $('#datePicker2').datepaginator();
+    console.log($('#datePicker').datepaginator());
+    console.log($('#datePicker2').datepaginator());
+</script>
+
+ <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      altField: "#alternate",
+      altFormat: "DD, d MM, yy"
+    });
+  });
+  </script>
+<!--
+                      <div> <p>Date: <input type="text" id="datepicker">&nbsp;<input type="text" id="alternate" size="30"></p> </div>
+-->
+
+</body>
+
+</html>
+
+</section>

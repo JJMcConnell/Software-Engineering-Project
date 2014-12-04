@@ -37,12 +37,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         	url: '/calendarRequest',
         	templateUrl: 'modules/core/views/requestCalendar.client.view.html'
         }).
-        state('pickRoom', {
-        	url: '/pickRoom',
+        state('room', {
+        	url: '/room',
         	templateUrl: 'modules/core/views/pickRoom.client.view.html'
         }).
-        state('pickPeriod', {
-        	url: '/pickPeriod',
+        state('period', {
+        	url: '/period',
         	templateUrl: 'modules/core/views/pickPeriod.client.view.html'
         });
 		// Home state routing
