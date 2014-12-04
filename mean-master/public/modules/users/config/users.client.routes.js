@@ -44,6 +44,10 @@ angular.module('users').config(['$stateProvider',
         state('adminapproved', {
 	        url: '/approvedevents',
 	        templateUrl: 'modules/users/views/authentication/approvedevents.client.view.html'
-	    });
+	    }).
+        state('adminsettings', {
+            url: '/adminsettings',
+            templateUrl: 'modules/users/views/authentication/adminSettings.client.view.html'
+        });
 	}
 ]);
