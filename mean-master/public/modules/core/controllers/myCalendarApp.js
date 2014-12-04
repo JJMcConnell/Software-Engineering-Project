@@ -236,34 +236,34 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     });
 
 
-                   
+
                     var extraEvents = 1;
                     var flagSecondEvent = false;
                     var secondEventNum = 0;
-                    if($scope.events.length>0)
-                    for (var i = $scope.events.length - 1; i--;) {
-                        console.log("DAY" + $scope.events[i].start.getDate() + " " + response[event].day);
-                        console.log("MONTH" + $scope.events[i].start.getMonth() + " " + (response[event].month - 1));
-                        console.log("YEAR" + $scope.events[i].start.getFullYear() + " " + response[event].year);
-                        if ($scope.events[i].start.getDate() == response[event].day && $scope.events[i].start.getMonth() == (response[event].month - 1) && $scope.events[i].start.getFullYear() == response[event].year) {
-                            extraEvents++;
-                            if ($scope.events[i].title == response[i].title) {
-                                //$scope.events[i].title = "2 events";
-                                flagSecondEvent = true;
-                                secondEventNum = i;
+                    if ($scope.events.length > 0)
+                        for (var i = $scope.events.length - 1; i--;) {
+                            console.log("DAY" + $scope.events[i].start.getDate() + " " + response[event].day);
+                            console.log("MONTH" + $scope.events[i].start.getMonth() + " " + (response[event].month - 1));
+                            console.log("YEAR" + $scope.events[i].start.getFullYear() + " " + response[event].year);
+                            if ($scope.events[i].start.getDate() == response[event].day && $scope.events[i].start.getMonth() == (response[event].month - 1) && $scope.events[i].start.getFullYear() == response[event].year) {
+                                extraEvents++;
+                                if ($scope.events[i].title == response[i].title) {
+                                    //$scope.events[i].title = "2 events";
+                                    flagSecondEvent = true;
+                                    secondEventNum = i;
+                                }
+                                else if ((parseInt($scope.events[i].title.substring(0, 1)) + 1) > 1) {
+                                    //$scope.monthEvents[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                                    $scope.monthEvents[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                                    $scope.events[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                                } else {
+                                    $scope.monthEvents[i].title = "2 events";
+                                    $scope.events[i].title = "2 events";
+                                }
                             }
-                            else if ((parseInt($scope.events[i].title.substring(0, 1)) + 1) > 1) {
-                                //$scope.monthEvents[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
-                                $scope.monthEvents[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
-                                $scope.events[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
-                            } else {
-                                $scope.monthEvents[i].title = "2 events";
-                                $scope.events[i].title = "2 events";
-                            }
+                            //$scope.monthEvents.splice(i, 1);
+                            //$scope.events.splice(i, 1);
                         }
-                        //$scope.monthEvents.splice(i, 1);
-                        //$scope.events.splice(i, 1);
-                    }
                     if (flagSecondEvent) {
                         $scope.events[secondEventNum].title = "2 events";
                         $scope.monthEvents[secondEventNum].title = "2 events";
@@ -286,10 +286,55 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                         });
 
                     }
+                
+                    
+                    var extraWeekEvents = 1;
+                    var flagSecondWeekEvent = false;
+                    var secondWeekEventNum = 0;
+                    if($scope.weekEvents.length>0)
+                        for (var i = $scope.weekEvents.length - 1; i--;) {
+                            console.log("DAY" + $scope.weekEvents[i].start.getDate() + " " + response[event].day);
+                            console.log("MONTH" + $scope.weekEvents[i].start.getMonth() + " " + (response[event].month - 1));
+                            console.log("YEAR" + $scope.weekEvents[i].start.getFullYear() + " " + response[event].year);
+                            if ($scope.weekEvents[i].start.getDate() == response[event].day && $scope.weekEvents[i].start.getMonth() == (response[event].month - 1) && $scope.weekEvents[i].start.getFullYear() == response[event].year && $scope.weekEvents[i].start.getHours() == hour) {
+                                extraWeekEvents++;
+                                if ($scope.weekEvents[i].title == response[i].title) {
+                                    //$scope.events[i].title = "2 events";
+                                    flagSecondWeekEvent = true;
+                                    secondWeekEventNum = i;
+                                }
+                                else if ((parseInt($scope.weekEvents[i].title.substring(0, 1)) + 1) > 1) {
+                                    //$scope.monthEvents[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                                    $scope.weekEvents[i].title = (parseInt($scope.weekEvents[i].title.substring(0, 1)) + 1) + " events";
+                                    //$scope.events[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                                } else {
+                                    //$scope.monthEvents[i].title = "2 events";
+                                    //$scope.events[i].title = "2 events";
+                                }
+                            }
+                            //$scope.monthEvents.splice(i, 1);
+                            //$scope.events.splice(i, 1);
+                        }
+                    if (flagSecondWeekEvent) {
+                        //$scope.events[secondEventNum].title = "2 events";
+                        $scope.weekEvents[secondWeekEventNum].title = "2 events";
+                    }
 
-                }
-                //$scope.eventSources = [$scope.monthEvents];
+                    
+                    if (extraWeekEvents == 1) {
 
+                        $scope.weekEvents.push({
+                            title: response[event].title,
+                            // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                            start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                            //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                            end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
+                        });
+
+                    }
+                        
+                        //$scope.eventSources = [$scope.monthEvents];
+                    }
                 // And redirect to the index page
                 //$location.path('');
             }).error(function (response) {
@@ -498,6 +543,18 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 var i = 0;
                 while ($scope.events.length < $scope.dayEvents.length) {
                     $scope.events.push($scope.dayEvents[i]);
+                    i++;
+                }
+
+            }
+            else if (view == 'agendaWeek' && currentView != 'agendaWeek')
+            {
+                while ($scope.events.length > 0) {
+                    $scope.events.pop();
+                }
+                var i = 0;
+                while ($scope.events.length < $scope.weekEvents.length) {
+                    $scope.events.push($scope.weekEvents[i]);
                     i++;
                 }
 
