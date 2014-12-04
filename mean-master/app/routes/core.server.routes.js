@@ -17,7 +17,7 @@ module.exports = function(app) {
     app.route('/approveroomAndDenyConflicting').post(core.approveAndDenyConflicting);
     app.route('/denyroom').post(core.denyroom);
     //testdates
-    app.route('/changeDates').get(core.changeDates);
+    app.route('/changeDates').post(core.changeDates);
     app.route('/getDateSettings').get(core.getDateSettings);
 
     // ROOMS

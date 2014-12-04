@@ -24,8 +24,8 @@ angular.module('core').controller('HomeController', ['$scope', '$http', '$locati
 	    $scope.dateSettings = function () {
 	        $http.get('/getDateSettings', $scope.credentials).success(function (response) {
 	            console.log(response);
-	            $scope.startDate = new Date(parseInt(response.startYear), parseInt(response.startMonth), parseInt(response.startDay));
-	            $scope.endDate = new Date(parseInt(response.endYear), parseInt(response.endMonth), parseInt(response.endDay));
+	            $scope.startDate = new Date(parseInt(response.startYear), parseInt(response.startMonth)-1, parseInt(response.startDay));
+	            $scope.endDate = new Date(parseInt(response.endYear), parseInt(response.endMonth)-1, parseInt(response.endDay));
 	        }).error(function (response) {
 	            $scope.error = 'error';
 	            console.log('error');

@@ -512,8 +512,8 @@ exports.approveroom = function(req, res) {
 exports.changeDates = function (req, res) {
     //var startDate = req.body.startDate;
     //var endDate = req.body.endDate;
-    var startDate = '2014-08-01';
-    var endDate =  '2015-08-01';
+    var startDate = req.body.startDate;
+    var endDate =  req.body.endDate;
 
      if(startDate != null){
         var startYear = startDate.substring(0, 4);

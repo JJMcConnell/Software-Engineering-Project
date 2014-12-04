@@ -169,6 +169,77 @@ $scope.buttonData = function (butId) {
     });
   }
 
+
+  $scope.openChangedDateSettings = function (startDate, endDate) {
+      
+      var date = document.getElementById('selectedDate').innerHTML;
+      if (document.getElementById('selectedDate').innerHTML == '')
+          date = new Date().toDateString();
+      var day = date.substr(8, 2);
+      var year = date.substr(11, 4);
+      var month = date.substr(4, 3);
+      var startDate = new Date(month + ' ' + day + ', ' + year);
+
+      
+      var date2 = document.getElementById('datePicker2SelectedDate').innerHTML;
+      if (document.getElementById('datePicker2SelectedDate').innerHTML == '')
+          date2 = new Date().toDateString();
+      var endDay = date2.substr(8, 2);
+      var endYear = date2.substr(11, 4);
+      var endMonth = date2.substr(4, 3);
+      var endDate = new Date(endMonth + ' ' + endDay + ', ' + endYear);
+
+
+      var startEndDates = [];
+      startEndDates[0] = startDate.toDateString();
+      startEndDates[1] = endDate.toDateString();
+      
+      var startDateParam = new Date(month + ' ' + day + ', ' + year).toISOString().substring(0, 10);
+      var endDateParam = new Date(endMonth + ' ' + endDay + ', ' + endYear).toISOString().substring(0, 10);
+
+      var params = { startDate: startDateParam, endDate: endDateParam };
+
+          if (startDate.getTime() < endDate.getTime()) {
+              var modalInstance = $modal.open({
+                  templateUrl: 'ModalDateSuccess.html',
+                  controller: 'ModalInstanceCtrl',
+                  size: 100,
+                  resolve: {
+                      items: function () {
+                          return startEndDates;
+
+                      },
+                      buttonId: function () {
+                          return "ONE HUNDRED!";
+                      }
+                  }
+              });
+              $http.post('/changeDates', params).success(function (response) {
+                  //$location.path('/signin');
+
+                  
+              }).error(function (response) {
+                  console.log('ERROR!');
+              });
+          }
+          else
+              var modalInstance = $modal.open({
+                  templateUrl: 'ModalDateFailure.html',
+                  controller: 'ModalInstanceCtrl',
+                  size: 100,
+                  resolve: {
+                      items: function () {
+                          return startEndDates;
+
+                      },
+                      buttonId: function () {
+                          return "ONE HUNDRED!";
+                      }
+                  }
+              });
+          
+  }
+
   $scope.openSuccess = function (){
     var modalInstance = $modal.open({
       templateUrl: 'ModalSuccess.html',
