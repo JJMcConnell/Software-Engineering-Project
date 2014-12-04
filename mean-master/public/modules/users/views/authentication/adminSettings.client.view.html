@@ -1,4 +1,4 @@
-<section data-ng-controller="HomeController">
+﻿<section data-ng-controller="AuthenticationController">
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +37,9 @@
 </head>
 
 <body>
+
+    <div id="selectedDate"></div>
+    <div id="date2"></div>
   <!--<script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script>-->
     <!-- Page Content -->
     <div class="col-lg-12 text-center" ng-controller="ModalDemoCtrl" style="margin-bottom:20px;" ng-init="dateSettings()">
@@ -47,11 +50,11 @@
                     <!--<h4> From </h4>-->
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker"></div>
-                    <div id="selectedDate" hidden="hidden"></div>
+                     <div id="datePickerSelectedDate"></div>
                     to
                      <!-- The Date Picker is injected into this div -->   
                      <div id="datePicker2"></div>
-                    <div id="selectedDate" hidden="hidden"></div>
+                    <div id="datePicker2SelectedDate"></div>
 
                     <br>
 
@@ -90,15 +93,22 @@
 
 
 <script type='text/javaScript'>
-    $('#datePicker').datepaginator();
-    $('#datePicker2').datepaginator();
+    var options1 = {
+        setID: "date1"
+    };
+    var options2 = {
+        setID: "date2"
+    };
+    $('#datePicker').datepaginator("date2");
+    $('#datePicker2').datepaginator(options2);
     console.log($('#datePicker').datepaginator());
     console.log($('#datePicker2').datepaginator());
 </script>
 
  <script>
   $(function() {
-    $( "#datepicker" ).datepicker({
+      $("#datepicker").datepicker({
+          setID: "selectedDasdf",
       altField: "#alternate",
       altFormat: "DD, d MM, yy"
     });
