@@ -25,7 +25,10 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         /* event source that contains custom events on the scope */
         // Reinitialize the events when the scope is changed
 
-        $scope.events = [];/*
+        $scope.events = [];
+        $scope.dayEvents = [];
+        $scope.weekEvents = [];
+        $scope.monthEvents = [];/*
       { title: 'All Day Event', start: new Date(y, m, 1) },
       { title: 'Long Event', start: new Date(y, m, d - 5), end: new Date(y, m, d - 2) },
       { id: 999, title: 'Repeating Event', start: new Date(y, m, d - 3, 16, 0), allDay: false },
@@ -156,6 +159,11 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
 
         $scope.fetchEvents = function () {
+            while ($scope.events.length > 0) {
+                $scope.events.pop();
+            }
+            //$scope.addRemoveEventSource($scope.eventSources, $scope.monthEvents);
+            //$scope.addRemoveEventSource($scope.eventSources, $scope.events);
             $http.get('/fetchEvents', $scope.credentials).success(function (response) {
                 /*$scope.createPeriodOpenings();
                 console.log("\n\n\nhello hello hello hello");
@@ -190,7 +198,6 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 */
 
                 console.log(response);
-                $scope.createPeriodOpenings();
 
 
                 // fill the calendar with dummy events
@@ -220,21 +227,64 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                         }
                     }
                     console.log(hour);
-                    $scope.events.push({
+                    $scope.dayEvents.push({
                         title: response[event].title,
                         // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
                         start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
                         //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
                         end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
                     });
+
+
+                   
+                    var extraEvents = 1;
+                    
+                    if($scope.events.length>0)
+                    for (var i = $scope.events.length - 1; i--;) {
+                        console.log("DAY" + $scope.events[i].start.getDate() + " " + response[event].day);
+                        console.log("MONTH" + $scope.events[i].start.getMonth() + " " + (response[event].month - 1));
+                        console.log("YEAR" + $scope.events[i].start.getFullYear() + " " + response[event].year);
+                        if ($scope.events[i].start.getDate() == response[event].day && $scope.events[i].start.getMonth() == (response[event].month - 1) && $scope.events[i].start.getFullYear() == response[event].year) {
+                            extraEvents++;
+                            $scope.monthEvents[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                            $scope.events[i].title = (parseInt($scope.events[i].title.substring(0, 1))+1) + " events";
+                        }
+                        //$scope.monthEvents.splice(i, 1);
+                        //$scope.events.splice(i, 1);
+                    }
+                    if (extraEvents == 1) {
+                        $scope.events.push({
+                            title: "1 event",
+                            // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                            start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                            //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                            end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
+                        });
+
+                        $scope.monthEvents.push({
+                            title: "1 event",
+                            // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                            start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                            //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                            end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
+                        });
+
+                    }
+
                 }
+                //$scope.eventSources = [$scope.monthEvents];
 
                 // And redirect to the index page
                 //$location.path('');
             }).error(function (response) {
                 $scope.error = response.message;
             });
-
+            monthEvents = [];
+            var i = 0;
+            while ($scope.monthEvents.length < $scope.events.length) {
+                $scope.monthEvents.push($scope.events[i]);
+                i++;
+            }
         };
 
         $scope.requestView = function (calendar) {
@@ -400,7 +450,36 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         };
         /* Change View */
         $scope.changeView = function (view, calendar) {
+            
+            //$scope.addEvent();
+            //$scope.addRemoveEventSource($scope.eventSources, $scope.monthEvents);
+            //$scope.addRemoveEventSource($scope.eventSources, $scope.events);
+            //console.log('CHANGED');
+            if (view == 'month') {
+                while ($scope.events.length > 0) {
+                    $scope.events.pop();
+                }
+                var i = 0;
+                while ($scope.events.length < $scope.monthEvents.length) {
+                    $scope.events.push($scope.monthEvents[i]);
+                    i++;
+                }
+            }
+            else
+            {
+                while ($scope.events.length > 0) {
+                    $scope.events.pop();
+                }
+                var i = 0;
+                while ($scope.events.length < $scope.dayEvents.length) {
+                    $scope.events.push($scope.dayEvents[i]);
+                    i++;
+                }
+
+            }
             calendar.fullCalendar('changeView', view);
+            
+            $location.path('calendar');
 
 
         };
@@ -486,6 +565,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         };
         /* event sources array*/
         $scope.eventSources = [$scope.events];
+
         //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
 
