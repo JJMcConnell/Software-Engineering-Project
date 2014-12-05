@@ -10,7 +10,7 @@ module.exports = function(app) {
     app.route('/requestevent').post(core.addevent);
     app.route('/requestAdminEvent').post(core.addAdminEvent);
     // Creating the admin when the website first starts.
-    app.route('/generateAdmin').get(core.generateAdmin);
+    app.route('/generateAdmin').post(core.generateAdmin);
 
     // UPDATE
     app.route('/approveroom').get(core.approveroom);
