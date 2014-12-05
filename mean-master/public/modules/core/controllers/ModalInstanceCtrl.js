@@ -61,7 +61,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
       $http.post('/requestevent', $scope.request).success(function (response) {
          
           // And redirect to the index page
-          //$location.path('/room');
+          $location.path('/room');
           $modalInstance.dismiss('done');
           
       }).error(function (response) {

@@ -78,7 +78,38 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
             });
 
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+                console.log('selected item' + selectedItem);
+            }, function (message) {
+                console.log(message);
+                //$log.info('Modal dismissed at: ' + new Date());
+                if (message == 'done')
+                    $scope.openSuccess();
+            });
+
+
         };
+
+
+        $scope.openSuccess = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'ModalSuccess.html',
+                controller: 'ModalInstanceCtrl',
+                size: 100,
+                resolve: {
+                    items: function () {
+                        return "Success!";
+
+                    },
+                    buttonId: function () {
+                        return "ONE HUNDRED!";
+                    }
+                }
+            });
+        }
+
         /* alert on Drop */
         $scope.alertOnDrop = function (event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) {
             $scope.alertMessage = ('Event Droped to make dayDelta ' + dayDelta);
