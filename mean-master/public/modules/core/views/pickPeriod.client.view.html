@@ -64,7 +64,7 @@
                 <ul>
 
                         <!-- Request Information is here -->
-                        <form class="form-horizontal" role="form" ng-submit="ok()">
+                        <form class="form-horizontal" role="form" ng-submit="requestByPeriod()">
 
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 control-label">Name*</label>
@@ -122,8 +122,7 @@
                                     </div>
                                 </div>
                             </div>
-                            -->
-
+                            
                             <div class="form-group">
                                 <label for="inputLength" class="col-sm-2 control-label">Length* (Periods)</label>
                                 <div class="col-sm-10">
@@ -138,6 +137,9 @@
                                     </div>
                                 </div>
                             </div>
+                            -->
+
+
                             <div class="form-group">
                                 <label for="inputEmail" class="col-sm-2 control-label">Email*</label>
                                 <div class="col-sm-10">
@@ -218,13 +220,13 @@
 
             <div class="modal-body">
                         <!-- Request Information is here -->
-                        <form class="form-horizontal" role="form" ng-submit="ok()">
-                        <h3 class="text-center" style="color:black;"> Your request has been submitted. </h3>
+                <form class="form-horizontal" role="form">
+                    <h3 class="text-center" style="color:black;"> Your request has been submitted. </h3>
 
-                            <div class="modal-footer" style="border-top:none;">
-                                <button class="btn btn-primary" ng-click="cancel()">Okay</button>
-                            </div>
-                        </form>
+                    <div class="modal-footer" style="border-top:none;">
+                        <button class="btn btn-primary" ng-click="cancel()">Okay</button>
+                    </div>
+                </form>
                 </div>
 
 
@@ -235,7 +237,7 @@
 
             <div class="modal-body" ng-init="dateSettings()">
                         <!-- Request Information is here -->
-                        <form class="form-horizontal" role="form" ng-submit="ok()">
+                        <form class="form-horizontal" role="form">
                         <h3 class="text-center" style="color:black;"> You may not choose that date. </h3>
 
                             <div class="modal-footer" style="border-top:none;">

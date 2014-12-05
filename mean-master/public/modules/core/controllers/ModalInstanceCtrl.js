@@ -61,7 +61,7 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
       $http.post('/requestevent', $scope.request).success(function (response) {
          
           // And redirect to the index page
-          $location.path('/');
+          //$location.path('/room');
           $modalInstance.dismiss('done');
           
       }).error(function (response) {
@@ -69,6 +69,25 @@ angular.module('core').controller('ModalInstanceCtrl', function ($scope, $modalI
           console.log($scope.error);
       });
       
+  };
+
+
+  $scope.requestByPeriod = function () {
+      $scope.error = '';
+      $scope.request.length = 1;
+      console.log($scope.request);
+      console.log('This method?');
+      $http.post('/requestevent', $scope.request).success(function (response) {
+
+          // And redirect to the index page
+          //$location.path('/');
+          $modalInstance.dismiss('done');
+
+      }).error(function (response) {
+          $scope.error = response.message;
+          console.log($scope.error);
+      });
+
   };
 
   $scope.test = function () {
