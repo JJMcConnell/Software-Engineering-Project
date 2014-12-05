@@ -388,13 +388,29 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
               //  $scope.changeView('agendaDay', calendar);
         }
 
-       
-
+        
         $scope.fetchUnEvents = function (day, month, year, room, requestLength) {
             // to show when OPEN periods are, rather than 
             // TAKEN ones
-
             var selectedDate = new Date(year, month - 1, day); // get current date
+
+            $http.get('/getDateSettings', $scope.credentials).success(function (response) {
+                console.log(response);
+                var startDate = new Date(parseInt(response.startYear), parseInt(response.startMonth) - 1, parseInt(response.startDay));
+                var endDate = new Date(parseInt(response.endYear), parseInt(response.endMonth) - 1, parseInt(response.endDay));
+                console.log('START ' + startDate);
+                console.log('END' + endDate);
+                if (selectedDate.getTime() < startDate.getTime() || selectedDate.getTime() > endDate.getTime())
+                    $location.path('/room');
+            }).error(function (response) {
+                $scope.error = 'error';
+                console.log('error');
+            });
+
+
+            
+            
+
             /*var room = 120;
             var requestLength = 1;
 
@@ -414,7 +430,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 if (requestDay < 10)
                     requestDay = "0" + requestDay;
                 if (requestMonth < 10)
-                    requestDay = "0" + requestMonth;
+                    requestMonth = "0" + requestMonth;
                 console.log(newDate.toDateString());
                 // just in case year or month changes.
                 $http.get('/getAvailablePeriods?year=' + requestYear + '&month=' + requestMonth + '&day=' + requestDay + '&length=1&room='+room).success(function (response) {
