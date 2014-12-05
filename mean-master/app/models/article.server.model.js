@@ -10,6 +10,15 @@ var mongoose = require('mongoose'),
  * Article Schema
  */
 var ArticleSchema = new Schema({}); // temporary
+
+var RoomSchema = new Schema({
+    roomNumber: {
+        type: String,
+        default: '',
+        required: 'Must have a room number.'
+    }
+}); // temporary
+
 var EventSchema = new Schema({
     created: {
         type: Date,
@@ -120,3 +129,4 @@ var AdminSettings = new Schema({
 mongoose.model('Event', EventSchema);
 mongoose.model('Article', ArticleSchema);
 mongoose.model('AdminSetting', AdminSettings);
+mongoose.model('Room', RoomSchema);

@@ -5174,7 +5174,8 @@
             var event = seg.event;
             var isDraggable = view.isEventDraggable(event);
             var isResizable = !disableResizing && event.allDay && seg.isEnd && view.isEventResizable(event);
-            var classes = this.getSegClasses(seg, isDraggable, isResizable);
+            //var classes = this.getSegClasses(seg, isDraggable, isResizable);
+            var classes = this.getSegClasses(seg, true, false);//HACKED!!!!!
             var skinCss = this.getEventSkinCss(event);
             var timeHtml = '';
             var titleHtml;
@@ -6383,7 +6384,8 @@
             var event = seg.event;
             var isDraggable = view.isEventDraggable(event);
             var isResizable = !disableResizing && seg.isEnd && view.isEventResizable(event);
-            var classes = this.getSegClasses(seg, isDraggable, isResizable);
+            //var classes = this.getSegClasses(seg, isDraggable, isResizable);
+            var classes = this.getSegClasses(seg, true, false);//HACKED!!!!!
             var skinCss = this.getEventSkinCss(event);
             var timeText;
             var fullTimeText; // more verbose time text. for the print stylesheet

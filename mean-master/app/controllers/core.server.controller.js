@@ -10,7 +10,8 @@ var _ = require('lodash'),
     Event = mongoose.model('Event'),
     swig = require('swig'),
     Settings = mongoose.model('AdminSetting'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    Room = mongoose.model('Room');
 
 //EventSchema = require('./../models/article.server.model.js'),
 
@@ -108,6 +109,19 @@ exports.generateAdmin = function (req, res) {
                     console.log("Successfully created admin settings.");
                 }
             });
+        }
+    });
+
+    var myRoom = new Room({
+        roomNumber: '123'
+    });
+
+
+    myRoom.save(function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Successfully created room.");
         }
     });
 
