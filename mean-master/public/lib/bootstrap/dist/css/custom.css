@@ -21,9 +21,18 @@
 	background-image: none; /*Remove gradient*/
 	/*ackground-color: teal; /*Navbar color*/
 	text-shadow:none;
-	/*background: linear-gradient(red, blue);*/
+	/*background: #4682B4;*/
 
 	/*color: orangered !important;*/
+}
+
+.in {
+	background: #4682B4;
+	border: 2px solid #022f5a;
+}
+
+.dark-blue {
+	background: #022f5a;
 }
 
 .col-lg-12{
