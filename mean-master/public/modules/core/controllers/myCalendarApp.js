@@ -469,50 +469,154 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
             console.log("NEW ROOM!!!!!!!!");
             console.log(roomNumber);
+              
+
+
+                while ($scope.events.length > 0) {
+                    $scope.events.pop();
+                }
+                //$scope.addRemoveEventSource($scope.eventSources, $scope.monthEvents);
+                //$scope.addRemoveEventSource($scope.eventSources, $scope.events);
             $http.get('/fetchEventsFromRoom?room=' + roomNumber).success(function (response) {
-                // If successful we assign the response to the global user model
-                console.log(response[0]);
-
-                for (var event in response) {
-                    console.log(response[event].year);
-                    console.log(response[event].month);
-                    console.log(m);
-                    var hour = 6;
-                    var minute = 20;
-                    var period = response[event].period;
-                    if (period < 12) {
-                        hour += period;
-                        minute += period * 5;
-                    } else {
-                        hour = 7 + (period - 12);
-                        minute = 20;
-                    }
-
-                    var endHour = hour + 1;
-                    var endMinute = minute - 10;
-                    if (response[event].length) {
-                        if (response[event].length > 1) {
-                            endHour = endHour + (response[event].length - 1);
-                            endMinute = endMinute + (response[event].length - 1) * 5;
+                /*$scope.createPeriodOpenings();
+                    console.log("\n\n\nhello hello hello hello");
+                        // first we should store all the events that we have
+                    var startTime = new Date().getTime();
+                    // LOOP for days
+                    for (var day = 14; day < 15; day++) {
+                        // LOOP for periods
+                        for(var period = 1; period < 2; period++) {
+                            var hour = 6;
+                            var minute = 20;
+                            if (period < 12) {
+                                hour += period;
+                                minute += period * 5;
+                            } 
+                            else {
+                                hour = 7 + (period - 12);
+                                minute = 20;
+                            }
+                            var endHour = hour + 1;
+                            var endMinute = minute - 10;
+                            $scope.events.push({
+                                title: "event",
+                                // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                                start: new Date(2014, 10, day, hour, minute),
+                                end: new Date(2014, 10, day, endHour, endMinute)
+                            });
+                            var endTime = new Date().getTime();
+                            console.log("\n\nTime taken is "+(endTime-startTime)+" milliseconds");
                         }
                     }
-                    $scope.events.push({
-                        title: response[event].title,
-                        // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
-                        start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
-                        //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
-                        end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
-                    });
+                    */
 
+                    console.log(response);
+
+
+                    // fill the calendar with dummy events
+
+                    for (var event in response) {
+                        //console.log(response[event].year);
+                        //console.log(response[event].month);
+                        //console.log(m);
+
+                        // first we should store all the events that we have
+                        var hour = 6;
+                        var minute = 20;
+                        var period = parseInt(response[event].period);
+                        if (period < 12) {
+                            hour += period;
+                            minute += period * 5;
+                        } else {
+                            hour = 7 + (period - 12);
+                            minute = 20;
+                        }
+                        var endHour = hour + 1;
+                        var endMinute = minute - 10;
+                        if (response[event].length) {
+                            if (response[event].length > 1) {
+                                endHour = endHour + (response[event].length - 1);
+                                endMinute = endMinute + (response[event].length - 1) * 5;
+                            }
+                        }
+                        console.log(hour);
+                        $scope.dayEvents.push({
+                            title: response[event].title,
+                            // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                            start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                            //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                            end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
+                        });
+
+
+
+                        var extraEvents = 1;
+                        var flagSecondEvent = false;
+                        var secondEventNum = 0;
+                        if ($scope.events.length > 0)
+                            for (var i = $scope.events.length - 1; i--;) {
+                                console.log("DAY" + $scope.events[i].start.getDate() + " " + response[event].day);
+                                console.log("MONTH" + $scope.events[i].start.getMonth() + " " + (response[event].month - 1));
+                                console.log("YEAR" + $scope.events[i].start.getFullYear() + " " + response[event].year);
+                                if ($scope.events[i].start.getDate() == response[event].day && $scope.events[i].start.getMonth() == (response[event].month - 1) && $scope.events[i].start.getFullYear() == response[event].year) {
+                                    extraEvents++;
+                                    if ($scope.events[i].title == response[i].title) {
+                                        //$scope.events[i].title = "2 events";
+                                        flagSecondEvent = true;
+                                        secondEventNum = i;
+                                    }
+                                    else if ((parseInt($scope.events[i].title.substring(0, 1)) + 1) > 1) {
+                                        //$scope.monthEvents[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                                        $scope.monthEvents[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                                        $scope.events[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
+                                    } else {
+                                        $scope.monthEvents[i].title = "2 events";
+                                        $scope.events[i].title = "2 events";
+                                    }
+                                }
+                                //$scope.monthEvents.splice(i, 1);
+                                //$scope.events.splice(i, 1);
+                            }
+                        if (flagSecondEvent) {
+                            $scope.events[secondEventNum].title = "2 events";
+                            $scope.monthEvents[secondEventNum].title = "2 events";
+                        }
+                        if (extraEvents == 1) {
+                            $scope.events.push({
+                                title: response[event].title,
+                                // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                                start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                                //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                                end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
+                            });
+
+                            $scope.monthEvents.push({
+                                title: response[event].title,
+                                // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                                start: new Date(response[event].year, response[event].month - 1, response[event].day, hour, minute),
+                                //It's smart enough to react when minutes are negative. THANK YOU JAVASCRIPT!!
+                                end: new Date(response[event].year, response[event].month - 1, response[event].day, endHour, endMinute)
+                            });
+
+                        }
+                
+                        
+                        //$scope.eventSources = [$scope.monthEvents];
+                    }
+                    // And redirect to the index page
+                    //$location.path('');
+                }).error(function (response) {
+                    $scope.error = response.message;
+                });
+                monthEvents = [];
+                var i = 0;
+                while ($scope.monthEvents.length < $scope.events.length) {
+                    $scope.monthEvents.push($scope.events[i]);
+
+                    i++;
                 }
 
-                // And redirect to the index page
-                //$location.path('/');
-            }).error(function (response) {
-
-                $scope.error = response.message;
-                $location.path('/roomCalendar');
-            });
+            
         };
 
         /* remove event */
@@ -622,7 +726,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             }
             calendar.fullCalendar('changeView', view);
             
-            $location.path('calendar');
+            //$location.path('calendar');
             currentView = view;
 
         };
