@@ -156,9 +156,7 @@
             <h3 class="modal-title" id="modalTitle">Approve Event?</h3>
         </div>
         <div class="modal-body">
-            OTHER REQUESTS WERE MADE FOR THIS DATE/ROOM/PERIOD!!!!
-            Approving this will reject the others.
-            Are you sure you want to do this????????????????
+            Other requests have been made for this same date, room, and period. Accepting this request will automatically reject the others. Are you sure you want to continue?
         </div>
         <div ng-repeat="request in items">{{request.title}} (Sponsor is {{request.sponsor}})</div>
         <form class="form-horizontal" role="form" ng-submit="approveAndDenyConflicting()">
@@ -200,7 +198,7 @@
         <button type="button" data-toggle="buttons" class="btn btn-default" style="float: right;" ng-click="open(147)">Custom Request</button>
 
         <a href="#!/approvedevents" class="btn btn-default" style="float: left;">View Approved Events<i class="fa fa-home"></i></a>
-    <a href="#!/adminsettings" class="btn btn-default" style="float: left;">CLICK ON THIS PARTICULAR BUTTON IF YOU WOULD LIKE TO SEE SOME SETTINGS<i class="fa fa-home"></i></a>
+    <a href="#!/adminsettings" class="btn btn-default" style="float: left;">Admin Settings<i class="fa fa-home"></i></a>
         <br>
         <br>
         <table ng-init="validateLogin()" class="table table-striped">
