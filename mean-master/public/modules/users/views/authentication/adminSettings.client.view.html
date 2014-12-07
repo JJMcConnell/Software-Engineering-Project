@@ -78,8 +78,8 @@
                 <!-- Request Information is here -->
                 <form class="form-horizontal" role="form" ng-submit="cancel()">
                     <h3 class="text-center" style="color:black;"></h3>
-                    YAY!!! YOU CHANGED THE DATES!!! NOW PEOPLE CAN ONLY REQUEST THINGS BETWEEN
-                    {{items[0]}} and {{items[1]}}
+                    
+                    Great! Reservations can now only be made between {{items[0]}} and {{items[1]}}
 
                     <div class="modal-footer" style="border-top:none;">
                         <button class="btn btn-primary" type="submit">Okay</button>
@@ -97,7 +97,7 @@
             <div class="modal-body" ng-init="dateSettings()">
                 <!-- Request Information is here -->
                 <form class="form-horizontal" role="form" ng-submit="cancel()">
-                    <div>These dates suck. The start date needs to come before the end date.</div>
+                    <div>The start date must be before the end date.</div>
                     <div class="modal-footer" style="border-top:none;">
                         <button class="btn btn-primary" type="submit">Okay</button>
                     </div>
