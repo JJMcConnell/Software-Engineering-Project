@@ -339,7 +339,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                                     $scope.weekEvents[i].title = (parseInt($scope.weekEvents[i].title.substring(0, 1)) + 1) + " events";
                                     //$scope.events[i].title = (parseInt($scope.events[i].title.substring(0, 1)) + 1) + " events";
                                 } else {
-                                    //$scope.monthEvents[i].title = "2 events";
+                                    $scope.weekEvents[i].title = "2 events";
                                     //$scope.events[i].title = "2 events";
                                 }
                             }
@@ -568,11 +568,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         /* Change View */
         $scope.changeView = function (view, calendar) {
             
-            //$scope.addEvent();
-            //$scope.addRemoveEventSource($scope.eventSources, $scope.monthEvents);
-            //$scope.addRemoveEventSource($scope.eventSources, $scope.events);
-            //console.log('CHANGED');
-            if (view != 'agendaDay' && currentView == 'agendaDay') {
+            if (view == 'month' && currentView != 'month') {
                 while ($scope.events.length > 0) {
                     $scope.events.pop();
                 }
