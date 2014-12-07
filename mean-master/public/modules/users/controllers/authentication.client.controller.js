@@ -9,6 +9,14 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		    if (!$scope.authentication.user) $location.path('/');
 		}
 
+		$scope.checkForAdmin = function () {
+		    $http.post('/isThereAdmin').success(function (response) {
+		        console.log(response);
+		        if (response == '"Admin Found!"')
+		            $location.path('/');
+		    });
+		}
+
 		$scope.redirectIfLoggedIn = function () {
 		    if ($scope.authentication.user) $location.path('/adminview');
 		    if ($scope.getSearchParameters().path)

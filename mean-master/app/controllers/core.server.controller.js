@@ -81,6 +81,8 @@ exports.available = function (req, res) {
         });
     })
 }
+
+
 exports.generateAdmin = function (req, res) {
     //res.jsonp('created admin');
     console.log('Trying to create admin.');

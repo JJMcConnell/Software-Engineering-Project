@@ -11,7 +11,16 @@ var _ = require('lodash'),
 
 
 
+exports.isThereAdmin = function (req, res) {
+    User.findOne({
+    }).exec(function (err, user) {
+        if (err) res.send('error');
+        if (user) res.jsonp('Admin Found!')
 
+        console.log(user);
+    });
+
+}
 
 /**
  * Signup
@@ -25,28 +34,37 @@ exports.signup = function(req, res) {
 	var user = new User(req.body);
 	var message = null;
 
-	// Add missing user fields
-	user.provider = 'local';
-	user.displayName = user.firstName + ' ' + user.lastName;
-	// Then save the user 
-	user.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			// Remove sensitive data before login
-			user.password = undefined;
-			user.salt = undefined;
+	User.findOne({
+	}).exec(function (err, admin) {
+	    if (err) res.send('error');
+	    if (admin) user = null;
 
-			req.login(user, function(err) {
-				if (err) {
-					res.status(400).send(err);
-				} else {
-					res.jsonp(user);
-				}
-			});
-		}
+	
+	    if (user) {
+	        // Add missing user fields
+	        user.provider = 'local';
+	        user.displayName = user.firstName + ' ' + user.lastName;
+	        // Then save the user 
+	        user.save(function (err) {
+	            if (err) {
+	                return res.status(400).send({
+	                    message: errorHandler.getErrorMessage(err)
+	                });
+	            } else {
+	                // Remove sensitive data before login
+	                user.password = undefined;
+	                user.salt = undefined;
+
+	                req.login(user, function (err) {
+	                    if (err) {
+	                        res.status(400).send(err);
+	                    } else {
+	                        res.jsonp(user);
+	                    }
+	                });
+	            }
+	        });
+	    }
 	});
 };
 
