@@ -140,8 +140,6 @@ $scope.buttonData = function (butId) {
   }
 
   $scope.open = function (butId, size) {
-
-
     var modalInstance = $modal.open({
       templateUrl: 'myModalContent.html',
       controller: 'ModalInstanceCtrl',
@@ -154,8 +152,6 @@ $scope.buttonData = function (butId) {
           return butId;
         }
       }
-     
-
     });
 
     modalInstance.result.then(function (selectedItem) {
@@ -168,6 +164,33 @@ $scope.buttonData = function (butId) {
             $scope.openSuccess(); 
     });
   }
+
+  $scope.openClass = function (butId, size) {
+    var modalInstance = $modal.open({
+      templateUrl: 'myClassModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        items: function () {
+          return $scope.items;
+        },
+         buttonId: function() {
+          return butId;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+        console.log('selected item' +   selectedItem);
+    }, function (message) {
+        console.log(message);
+        $log.info('Modal dismissed at: ' + new Date());
+        if(message == 'done')
+            $scope.openSuccess(); 
+    });
+  }
+
 
 
   $scope.openChangedDateSettings = function (startDate, endDate) {

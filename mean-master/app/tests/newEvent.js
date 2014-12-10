@@ -28,7 +28,7 @@ var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
 
 	var the_day = Math.floor((Math.random() * 30) + 1);
 		// between 1 and 30
-	var the_month = 11 + Math.floor((Math.random() * 2));
+	var the_month = 1 + Math.floor((Math.random() * 2));
 		// between 11 and 12
 	var the_period = Math.floor((Math.random() * 7) + 1);
 		// between 1 and 7
@@ -59,7 +59,7 @@ var names = ['Joey', 'Trevor', 'Yana', 'McGill', 'Rob', 'Danny', 'John',
 		        room: the_room,
 	            day: the_day,
 	            month: the_month,
-	            year: 2014,
+	            year: 2015,
 		        period: the_period,
 		        approved: true,
 		        viewed: true,
