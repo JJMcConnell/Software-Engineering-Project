@@ -51,17 +51,17 @@
                     View Room Calendars <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#!/calendarForRoom#101">101</a></li>
-                        <li><a href="#!/calendarForRoom#106B">106B</a></li>
-                        <li><a href="#!/calendarForRoom#120">120</a></li>
-                        <li><a href="#!/calendarForRoom#121">121</a></li>
-                        <li><a href="#!/calendarForRoom#142">142</a></li>
-                        <li><a href="#!/calendarForRoom#143">143</a></li>
-                        <li><a href="#!/calendarForRoom#144">144</a></li>
-                        <li><a href="#!/calendarForRoom#145">145</a></li>
-                        <li><a href="#!/calendarForRoom#146">146</a></li>
-                        <li><a href="#!/calendarForRoom#232">232</a></li>
-                        <li><a href="#!/calendarForRoom#233A">233A</a></li>
+                        <li><a ng-click="fetchRoomEvents(101)" href="#!/calendarForRoom#101">101</a></li>
+                        <li><a ng-click="fetchRoomEvents('106B')" href="#!/calendarForRoom#106B">106B</a></li>
+                        <li><a ng-click="fetchRoomEvents(120)" href="#!/calendarForRoom#120">120</a></li>
+                        <li><a ng-click="fetchRoomEvents(121)" href="#!/calendarForRoom#121">121</a></li>
+                        <li><a ng-click="fetchRoomEvents(142)" href="#!/calendarForRoom#142">142</a></li>
+                        <li><a ng-click="fetchRoomEvents(143)" href="#!/calendarForRoom#143">143</a></li>
+                        <li><a ng-click="fetchRoomEvents(144)" href="#!/calendarForRoom#144">144</a></li>
+                        <li><a ng-click="fetchRoomEvents(145)" href="#!/calendarForRoom#145">145</a></li>
+                        <li><a ng-click="fetchRoomEvents(146)" href="#!/calendarForRoom#146">146</a></li>
+                        <li><a ng-click="fetchRoomEvents(232)" href="#!/calendarForRoom#232">232</a></li>
+                        <li><a ng-click="fetchRoomEvents('233A')" href="#!/calendarForRoom#233A">233A</a></li>
 
                      </ul>
                     </div>
@@ -77,8 +77,12 @@
 
                     <br>
 
+
+
                     <div class="span8 calendar" ng-init="fetchRoomEvents(newRoomPage('calendarForRoom#'))" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
-                    <!--<script>
+                    <!--
+                         
+                        <script>
                         $(window).scroll(function () {
                             //pos = window.pageYOffset;
                         });

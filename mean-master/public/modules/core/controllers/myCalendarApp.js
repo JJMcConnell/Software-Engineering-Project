@@ -154,26 +154,30 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         var currentPeriod = 0;
 
         var loaded = false;
+       
         $scope.newRoomPage = function (tag) {
 
+            
+            
+            if (tag != currentRoom && currentRoom!= ")please select a room)") {
+
+                //$scope.fetchRoomEvents(roomNum);
+                //currentRoom = tag;
+                //$location.
+
+            } 
+
             var roomNumber = window.location.href.substr(window.location.href.indexOf(tag) + tag.length);
-            if (window.location.href.indexOf(tag) == -1) {
+            /*if (window.location.href.indexOf(tag) == -1) {
                 currentRoom = ")please select a room)";
                 return "(please select a room)";
             }
-
+            
 
             console.log("SOMETHING CHANGED!!!!!!!!!");
             console.log("ROOM IS NOW SET TO " + roomNumber);
             console.log(window.location.href);
-
-            //$scope.fetchRoomEvents(roomNum);
-            if (tag != currentRoom) {
-
-                //$scope.fetchRoomEvents(roomNum);
-                //currentRoom = tag;
-
-            } console.log("STUFF!!!!!!");
+            console.log("STUFF!!!!!!");
             if (currentRoom != '' && currentRoom != roomNumber) {
                 while ($scope.events.length > 0) {
                     $scope.events.pop();
@@ -183,8 +187,10 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             }
             loaded = true;
             currentRoom = roomNumber;
+            */
             //I LOVE MAKESHIFT SOLUTIONS!!!!!!!!!!!!!!!!
             return roomNumber;
+
         }
 
 
@@ -467,9 +473,10 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
         $scope.fetchRoomEvents = function (roomNumber) {
 
-            console.log("NEW ROOM!!!!!!!!");
-            console.log(roomNumber);
-              
+            //if (currentRoom != '' && currentRoom != roomNumber) {
+                console.log("NEW ROOM!!!!!!!!");
+                console.log(roomNumber);
+
 
 
                 while ($scope.events.length > 0) {
@@ -477,38 +484,38 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                 }
                 //$scope.addRemoveEventSource($scope.eventSources, $scope.monthEvents);
                 //$scope.addRemoveEventSource($scope.eventSources, $scope.events);
-            $http.get('/fetchEventsFromRoom?room=' + roomNumber).success(function (response) {
-                /*$scope.createPeriodOpenings();
-                    console.log("\n\n\nhello hello hello hello");
-                        // first we should store all the events that we have
-                    var startTime = new Date().getTime();
-                    // LOOP for days
-                    for (var day = 14; day < 15; day++) {
-                        // LOOP for periods
-                        for(var period = 1; period < 2; period++) {
-                            var hour = 6;
-                            var minute = 20;
-                            if (period < 12) {
-                                hour += period;
-                                minute += period * 5;
-                            } 
-                            else {
-                                hour = 7 + (period - 12);
-                                minute = 20;
+                $http.get('/fetchEventsFromRoom?room=' + roomNumber).success(function (response) {
+                    /*$scope.createPeriodOpenings();
+                        console.log("\n\n\nhello hello hello hello");
+                            // first we should store all the events that we have
+                        var startTime = new Date().getTime();
+                        // LOOP for days
+                        for (var day = 14; day < 15; day++) {
+                            // LOOP for periods
+                            for(var period = 1; period < 2; period++) {
+                                var hour = 6;
+                                var minute = 20;
+                                if (period < 12) {
+                                    hour += period;
+                                    minute += period * 5;
+                                } 
+                                else {
+                                    hour = 7 + (period - 12);
+                                    minute = 20;
+                                }
+                                var endHour = hour + 1;
+                                var endMinute = minute - 10;
+                                $scope.events.push({
+                                    title: "event",
+                                    // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
+                                    start: new Date(2014, 10, day, hour, minute),
+                                    end: new Date(2014, 10, day, endHour, endMinute)
+                                });
+                                var endTime = new Date().getTime();
+                                console.log("\n\nTime taken is "+(endTime-startTime)+" milliseconds");
                             }
-                            var endHour = hour + 1;
-                            var endMinute = minute - 10;
-                            $scope.events.push({
-                                title: "event",
-                                // Minus one because apperently January is the 0th month these days. I freakin hate programming. Well, sometimes.
-                                start: new Date(2014, 10, day, hour, minute),
-                                end: new Date(2014, 10, day, endHour, endMinute)
-                            });
-                            var endTime = new Date().getTime();
-                            console.log("\n\nTime taken is "+(endTime-startTime)+" milliseconds");
                         }
-                    }
-                    */
+                        */
 
                     console.log(response);
 
@@ -599,8 +606,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                             });
 
                         }
-                
-                        
+
+
                         //$scope.eventSources = [$scope.monthEvents];
                     }
                     // And redirect to the index page
@@ -616,7 +623,10 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     i++;
                 }
 
-            
+            //}
+
+            currentRoom = roomNumber;
+
         };
 
         /* remove event */
