@@ -4,7 +4,7 @@
 angular.module('core').controller('HomeController', ['$scope', '$http', '$location',
 	function ($scope, $http, $location) {
 	    $scope.startDate = 'asdf';
-	    $scope.generateAdmin = function () {
+	    $scope.generateAdmin = function () { /*
 	        console.log("Trying to create admin ");
 	        $http.post('/generateAdmin').success(function (response) {
 	            console.log("Creating Admin");
@@ -19,7 +19,7 @@ angular.module('core').controller('HomeController', ['$scope', '$http', '$locati
 	            $scope.error = "Error creating admin";
 	            return $scope.error;
 	        });
-	        console.log('done');
+	        console.log('done');*/
 	    };
 	    $scope.dateSettings = function () {
 	        $http.get('/getDateSettings', $scope.credentials).success(function (response) {
