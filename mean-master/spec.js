@@ -160,6 +160,7 @@ describe('angularjs homepage', function() {
 
 	 }); 
 
+/*
 	it('should go to a specific room calendar ', function() {
 
 		browser.get('http://localhost:3000/#!/period');
@@ -169,7 +170,7 @@ describe('angularjs homepage', function() {
 		expect(element(by.id("p101")).isPresent()).toBeFalsy();
 
 	});
-
+*/
 
 
 });
