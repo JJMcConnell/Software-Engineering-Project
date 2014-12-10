@@ -139,11 +139,11 @@ describe('angularjs homepage', function() {
 
 	 	element(by.id('pending')).click();
 
-	 	element(by.id('adsettings')).click();
+	 	//element(by.id('adsettings')).click();
 
-	 	element(by.id('back')).click();
+	 	//element(by.id('back')).click();
 
-	 	element(by.id('pending')).click();
+	 	//element(by.id('pending')).click();
 
 	 	element(by.id('deny')).click();
 
