@@ -190,6 +190,8 @@
         </script>
 
 
+<script src="js/bootstrap.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
 
         <!--  <script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script> -->
         <!-- Page Content -->
@@ -197,6 +199,27 @@
             <div class="row">
                 <div ng-controller="GetMyParameters" class="col-lg-12 text-center">
                     <h2>Calendar View</h2>
+                    <h4>All Rooms</h4>
+
+                    <div class="btn-group dropdown" style="float:right;">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    View Room Calendars <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#!/calendarForRoom#101">101</a></li>
+                        <li><a href="#!/calendarForRoom#106B">106B</a></li>
+                        <li><a href="#!/calendarForRoom#120">120</a></li>
+                        <li><a href="#!/calendarForRoom#121">121</a></li>
+                        <li><a href="#!/calendarForRoom#142">142</a></li>
+                        <li><a href="#!/calendarForRoom#143">143</a></li>
+                        <li><a href="#!/calendarForRoom#144">144</a></li>
+                        <li><a href="#!/calendarForRoom#145">145</a></li>
+                        <li><a href="#!/calendarForRoom#146">146</a></li>
+                        <li><a href="#!/calendarForRoom#232">232</a></li>
+                        <li><a href="#!/calendarForRoom#233A">233A</a></li>
+
+                     </ul>
+                    </div>
 
                     <!-- Basic Calendar -->
                     <div class="btn-toolbar">
@@ -207,6 +230,7 @@
                         </div>
                     </div>
 
+                    <br>
                     
                     <div class="span8 calendar" ng-init="fetchEvents()" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
                     <!--<script>
