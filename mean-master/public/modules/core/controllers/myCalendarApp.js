@@ -196,6 +196,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
 
         $scope.fetchEvents = function () {
+            document.getElementById("loadingModal").hidden = false;
             while ($scope.events.length > 0) {
                 $scope.events.pop();
             }
@@ -323,10 +324,12 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                         });
 
                     }
-                
-                        
+                    
+                    document.getElementById("loadingModal").hidden = true;
+                    
                         //$scope.eventSources = [$scope.monthEvents];
-                    }
+                }
+                
                 // And redirect to the index page
                 //$location.path('');
             }).error(function (response) {
@@ -429,7 +432,9 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
 
                     count++;
                     if (count == 7)
-                        document.getElementById('title').innerHTML = 'Available Periods';
+                        document.getElementById("loadingModal").hidden = true;
+                        //document.getElementById('loadingModal').class = "modal hide fade";
+                    document.getElementById('title').innerHTML = 'Available Periods';
 
                     // And redirect to the index page
                     //$location.path('');
@@ -476,7 +481,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             //if (currentRoom != '' && currentRoom != roomNumber) {
                 console.log("NEW ROOM!!!!!!!!");
                 console.log(roomNumber);
-
+                document.getElementById("loadingModal").hidden = false;
 
 
                 while ($scope.events.length > 0) {
@@ -606,7 +611,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                             });
 
                         }
-
+                        
+                        document.getElementById("loadingModal").hidden = true;
 
                         //$scope.eventSources = [$scope.monthEvents];
                     }
@@ -637,6 +643,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
         /* Change View */
         $scope.changeView = function (view, calendar) {
             
+            document.getElementById("loadingModal").hidden = false;
+
             if (view == 'month' && currentView != 'month') {
                 while ($scope.events.length > 0) {
                     $scope.events.pop();
@@ -657,7 +665,7 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
                     $scope.events.push($scope.dayEvents[i]);
                     i++;
                 }
-
+               
             }
             else if (view == 'agendaWeek' && currentView != 'agendaWeek')
             {
@@ -738,6 +746,8 @@ angular.module('core').controller('myCalendarApp', ['$scope', '$stateParams', '$
             
             //$location.path('calendar');
             currentView = view;
+
+            document.getElementById("loadingModal").hidden = true;
 
         };
 

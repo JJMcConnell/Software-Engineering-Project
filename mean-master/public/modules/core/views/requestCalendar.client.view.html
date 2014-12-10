@@ -33,18 +33,42 @@
         <script src='lib/jquery.min.js'></script>
         <script src='lib/moment.min.js'></script>
         <script src='fullcalendar/fullcalendar.js'></script>
+        <script src='lib/spinner/spinner.js'></script>
 
     </head>
 
     <body  ng-controller="ModalDemoCtrl">
+        
+        
+        <div>
+            <div id="loadingModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+                
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="text-align: center">
+                            <h3 id="loadtext">Loading</h3>
 
-        <script type="text/ng-template" id="myModalContent.html">
+                        </div>
+                        <div class="modal-body">
+                            <br>
+                            <br>
+                            <br>
+                            <div id="searching_spinner_center"></div>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="modal-footer" style="text-align: center"></div>
+                    </div>
+                </div>
+            </div>
+        </div><script type="text/ng-template" id="myModalContent.html">
             <div class="modal-header">
                 <h3 class="modal-title" id="modalTitle">Request Form for Room {{ request.roomNumber }} on {{items.date}}</h3>
             </div>
             
             <div class="modal-body">
-                <h4 ng-init=" otherRequests(request.roomNumber)">{{ message }}</h4>
+                <h4 ng-init="otherRequests(request.roomNumber)">{{ message }}</h4>
                 <ul>
 
                         <!-- Request Information is here -->
@@ -251,6 +275,19 @@
 
         </div>
         <!-- /.container -->
+
+        <script type="text/javascript">
+            //document.getElementById("loadtext").innerHTML = "modal hide";
+            function myFunction() {
+                document.getElementById("loadingModal").hidden = true;
+                $("#loadingModal").hide();
+                $(".modal-backdrop").hide();
+                document.getElementById("loadingModal").class = "modal hide";
+                //loadingModal.on('hidden', function () {
+                //    $(this).css("display", "none")
+                //})
+            }
+                </script>
 
         <br>
         <br>
