@@ -192,9 +192,34 @@
 
 <script src="js/bootstrap.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src='lib/spinner/spinner.js'></script>
 
         <!--  <script type="text/JavaScript" src="../../lib/jquery/dist/jquery.js"></script> -->
         <!-- Page Content -->
+
+    <div>
+    <div id="loadingModal" class="modal show" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center">
+                 <h3>Loading...</h3>
+
+            </div>
+            <div class="modal-body">
+                <br>
+                <br>
+                <br>
+                <div id="searching_spinner_center"></div>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div class="modal-footer" style="text-align: center"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
         <div class="container">
             <div class="row">
                 <div ng-controller="GetMyParameters" class="col-lg-12 text-center">
