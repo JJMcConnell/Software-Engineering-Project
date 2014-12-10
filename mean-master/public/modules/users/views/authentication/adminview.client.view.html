@@ -197,8 +197,8 @@
 
         <button type="button" data-toggle="buttons" class="btn btn-default" style="float: right;" ng-click="open(147)">Custom Request</button>
 
-        <a href="#!/approvedevents" class="btn btn-default" style="float: left;">View Approved Events<i class="fa fa-home"></i></a>
-    <a href="#!/adminsettings" class="btn btn-default" style="float: left;">Admin Settings<i class="fa fa-home"></i></a>
+        <a href="#!/approvedevents" id="approved" class="btn btn-default" style="float: left;">View Approved Events<i class="fa fa-home"></i></a>
+    <a href="#!/adminsettings" id="adsettings" class="btn btn-default" style="float: left;">Admin Settings<i class="fa fa-home"></i></a>
         <br>
         <br>
         <table ng-init="validateLogin()" class="table table-striped">
@@ -257,7 +257,7 @@
 
 
 
-                            <button ng-click="open()" class='btn btn-info center-block'>
+                            <button ng-click="open()" id="infor" class='btn btn-info center-block'>
                                 <span class="glyphicon glyphicon-info-sign"></span>
                             </button>
 
@@ -282,7 +282,7 @@
                     <td>
                         <form ng-submit="comment(reservation._id)">
                             <input type='hidden' name='id' value="{{reservation._id}}">
-                            <button type='submit' class='btn btn-danger center-block' value='deny'>
+                            <button type='submit' id='deny' class='btn btn-danger center-block' value='deny'>
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </form>
